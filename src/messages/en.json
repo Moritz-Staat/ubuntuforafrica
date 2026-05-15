@@ -1,0 +1,41 @@
+{
+  "nav": {
+    "home": "Home",
+    "about": "About Us",
+    "projects": "Projects",
+    "donate": "Donate",
+    "volunteers": "Volunteers",
+    "blog": "Blog",
+    "contact": "Contact",
+    "sponsorship": "Sponsorships"
+  },
+  "hero": {
+    "headline": "Umuntu Ngumntu Ngabantu",
+    "subheadline": "I am because we are.",
+    "description": "Ubuntu for Africa supports children, youth and families in Imizamo Yethu, Hout Bay, Cape Town.",
+    "cta_donate": "Donate now",
+    "cta_learn": "Learn more"
+  },
+  "impact": {
+    "title": "Our Impact",
+    "children": "Children supported",
+    "emergency": "€ Emergency aid",
+    "years": "Years active"
+  },
+  "donate": {
+    "title": "Donate now",
+    "subtitle": "Every contribution makes a difference",
+    "10": "Covers one week of aftercare materials",
+    "25": "Enables 1 month school sponsorship",
+    "50": "Funds a yoga/therapy program",
+    "100": "Contributes to container construction",
+    "custom": "Enter custom amount",
+    "btn": "Donate"
+  },
+  "footer": {
+    "tagline": "Together for children in South Africa.",
+    "contact": "Contact",
+    "legal": "Imprint",
+    "privacy": "Privacy Policy"
+  }
+}

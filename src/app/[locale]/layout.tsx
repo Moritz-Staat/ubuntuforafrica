@@ -1,0 +1,45 @@
+import type { Metadata } from 'next';
+import { Geist } from 'next/font/google';
+import { NextIntlClientProvider } from 'next-intl';
+import { getMessages } from 'next-intl/server';
+import { notFound } from 'next/navigation';
+import { routing } from '@/i18n/routing';
+import Navbar from '@/components/layout/Navbar';
+import Footer from '@/components/layout/Footer';
+import '../globals.css';
+
+const geist = Geist({ subsets: ['latin'] });
+
+export const metadata: Metadata = {
+  title: 'Ubuntu for Africa – Kinder, Jugend- und Familienhilfe e.V.',
+  description: 'Ubuntu for Africa unterstützt Kinder, Jugendliche und Familien in Imizamo Yethu, Hout Bay, Kapstadt, Südafrika.',
+};
+
+type Props = {
+  children: React.ReactNode;
+  params: Promise<{ locale: string }>;
+};
+
+export default async function LocaleLayout({ children, params }: Props) {
+  const { locale } = await params;
+
+  if (!routing.locales.includes(locale as 'de' | 'en')) {
+    notFound();
+  }
+
+  const messages = await getMessages();
+
+  return (
+    <html lang={locale}>
+      <body className={geist.className}>
+        <NextIntlClientProvider messages={messages}>
+          <Navbar />
+          <main className="pt-16">
+            {children}
+          </main>
+          <Footer />
+        </NextIntlClientProvider>
+      </body>
+    </html>
+  );
+}
