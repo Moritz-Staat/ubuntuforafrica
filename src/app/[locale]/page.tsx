@@ -1,4 +1,3 @@
-import Image from 'next/image';
 import { useTranslations } from 'next-intl';
 import { Link } from '@/i18n/routing';
 
@@ -40,13 +39,7 @@ export default function HomePage() {
     <>
       {/* Hero Section */}
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-        <Image
-          src="/images/123123.jpeg"
-          alt="Kinder in Hout Bay, Südafrika"
-          fill
-          priority
-          className="object-cover"
-        />
+        <div className="absolute inset-0 bg-gradient-to-br from-[#212529] via-[#1a3a4a] to-[#11aed1]/40" />
         <div className="absolute inset-0 bg-gradient-to-b from-[#212529]/70 via-[#212529]/50 to-[#212529]/80" />
         <div className="relative z-10 mx-auto max-w-4xl px-6 text-center text-white">
           <p className="mb-3 text-[#f7a900] text-sm font-semibold uppercase tracking-widest">
@@ -111,12 +104,12 @@ export default function HomePage() {
         <div className="mx-auto max-w-7xl px-6">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div className="relative rounded-2xl overflow-hidden aspect-[4/3]">
-              <Image
-                src="/images/WhatsApp_Image_2026-05-14_at_00.39.16.jpeg"
-                alt="Unsere Arbeit in Südafrika"
-                fill
-                className="object-cover"
-              />
+              <div className="absolute inset-0 bg-gradient-to-br from-[#11aed1]/20 to-[#ae64fd]/20 flex items-center justify-center">
+                <div className="text-center text-[#11aed1]/60">
+                  <svg xmlns="http://www.w3.org/2000/svg" className="mx-auto mb-3 h-16 w-16" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>
+                  <p className="text-sm font-medium">Foto folgt</p>
+                </div>
+              </div>
             </div>
             <div>
               <p className="text-[#11aed1] text-sm font-semibold uppercase tracking-widest mb-3">

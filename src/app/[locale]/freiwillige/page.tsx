@@ -117,12 +117,7 @@ export default async function FreiwilligePage({ params }: { params: Promise<{ lo
   return (
     <>
       <section className="relative py-32 overflow-hidden">
-        <Image
-          src="/images/WhatsApp_Image_2026-05-14_at_00.39.16.jpeg"
-          alt={t('Freiwillige in Südafrika', 'Volunteers in South Africa')}
-          fill
-          className="object-cover"
-        />
+        <div className="absolute inset-0 bg-gradient-to-br from-[#212529] via-[#1a3a4a] to-[#ae64fd]/40" />
         <div className="absolute inset-0 bg-gradient-to-b from-[#212529]/80 to-[#212529]/60" />
         <div className="relative z-10 mx-auto max-w-4xl px-6 text-center text-white">
           <p className="text-[#f7a900] text-sm font-semibold uppercase tracking-widest mb-4">

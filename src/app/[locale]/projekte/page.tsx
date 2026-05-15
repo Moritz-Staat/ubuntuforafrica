@@ -38,7 +38,7 @@ const hardcodedProjects = [
       'Creative activities and art projects',
       'Emotional support and relationship building',
     ],
-    image: '/images/WhatsApp_Image_2026-05-14_at_00.39.16.jpeg',
+    image: null,
     color: '#11aed1',
     icon: '🏠',
   },
@@ -64,7 +64,7 @@ const hardcodedProjects = [
       'Close collaboration with school staff',
       'Regular exchanges and training',
     ],
-    image: '/images/WhatsApp_Image_2026-05-14_at_00.39.17.jpeg',
+    image: null,
     color: '#ae64fd',
     icon: '📚',
   },
@@ -90,7 +90,7 @@ const hardcodedProjects = [
       'Language courses and cultural orientation',
       'Networking with volunteers worldwide',
     ],
-    image: '/images/123123.jpeg',
+    image: null,
     color: '#f7a900',
     icon: '🤝',
   },
@@ -200,7 +200,9 @@ export default async function ProjektePage({ params }: { params: Promise<{ local
                       )}
                     </div>
                     <div className={`relative rounded-2xl overflow-hidden aspect-[4/3] ${i % 2 === 1 ? 'lg:order-1' : ''}`}>
-                      <Image src={project.image} alt={title} fill className="object-cover" />
+                      <div className="absolute inset-0 flex items-center justify-center text-white/30">
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-16 w-16" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>
+                  </div>
                     </div>
                   </div>
                 </div>
