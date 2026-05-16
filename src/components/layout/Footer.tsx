@@ -4,6 +4,7 @@ import { useTranslations } from 'next-intl';
 
 export default function Footer() {
   const t = useTranslations('footer');
+  const nav = useTranslations('nav');
 
   return (
     <footer className="bg-[#212529] text-gray-300">
@@ -29,13 +30,13 @@ export default function Footer() {
 
           {/* Navigation */}
           <div>
-            <h3 className="font-semibold text-white mb-4 text-sm uppercase tracking-wider">Navigation</h3>
+            <h3 className="font-semibold text-white mb-4 text-sm uppercase tracking-wider">{nav('navigation')}</h3>
             <ul className="space-y-2.5">
               {[
-                { href: '/', label: 'Startseite' },
-                { href: '/ueber-uns', label: 'Über uns' },
-                { href: '/projekte', label: 'Projekte' },
-                { href: '/freiwillige', label: 'Freiwillige' },
+                { href: '/' as const, label: nav('home') },
+                { href: '/ueber-uns' as const, label: nav('about') },
+                { href: '/projekte' as const, label: nav('projects') },
+                { href: '/freiwillige' as const, label: nav('volunteers') },
               ].map((link) => (
                 <li key={link.href}>
                   <Link href={link.href} className="text-sm hover:text-[#11aed1] transition-colors">
@@ -48,14 +49,14 @@ export default function Footer() {
 
           {/* Mitmachen */}
           <div>
-            <h3 className="font-semibold text-white mb-4 text-sm uppercase tracking-wider">Mitmachen</h3>
+            <h3 className="font-semibold text-white mb-4 text-sm uppercase tracking-wider">{t('participate')}</h3>
             <ul className="space-y-2.5">
               {[
-                { href: '/spenden', label: 'Spenden' },
-                { href: '/patenschaften', label: 'Patenschaft übernehmen' },
-                { href: '/transparenz', label: 'Transparenz' },
-                { href: '/freiwillige', label: 'Freiwillig engagieren' },
-                { href: '/kontakt', label: 'Kontakt' },
+                { href: '/spenden' as const, label: nav('donate') },
+                { href: '/patenschaften' as const, label: t('sponsorship_link') },
+                { href: '/transparenz' as const, label: t('transparency') },
+                { href: '/freiwillige' as const, label: t('engage') },
+                { href: '/kontakt' as const, label: nav('contact') },
               ].map((link) => (
                 <li key={link.href}>
                   <Link href={link.href} className="text-sm hover:text-[#11aed1] transition-colors">

@@ -7,7 +7,8 @@
     "volunteers": "Volunteers",
     "blog": "Blog",
     "contact": "Contact",
-    "sponsorship": "Sponsorships"
+    "sponsorship": "Sponsorships",
+    "navigation": "Navigation"
   },
   "hero": {
     "headline": "Umuntu Ngumntu Ngabantu",
@@ -36,6 +37,10 @@
     "tagline": "Together for children in South Africa.",
     "contact": "Contact",
     "legal": "Imprint",
-    "privacy": "Privacy Policy"
+    "privacy": "Privacy Policy",
+    "participate": "Get Involved",
+    "sponsorship_link": "Become a Sponsor",
+    "transparency": "Transparency",
+    "engage": "Volunteer with us"
   }
 }

@@ -7,7 +7,8 @@
     "volunteers": "Freiwillige",
     "blog": "Blog",
     "contact": "Kontakt",
-    "sponsorship": "Patenschaften"
+    "sponsorship": "Patenschaften",
+    "navigation": "Navigation"
   },
   "hero": {
     "headline": "Umuntu Ngumntu Ngabantu",
@@ -36,6 +37,10 @@
     "tagline": "Gemeinsam stark für Kinder in Südafrika.",
     "contact": "Kontakt",
     "legal": "Impressum",
-    "privacy": "Datenschutz"
+    "privacy": "Datenschutz",
+    "participate": "Mitmachen",
+    "sponsorship_link": "Patenschaft übernehmen",
+    "transparency": "Transparenz",
+    "engage": "Freiwillig engagieren"
   }
 }
