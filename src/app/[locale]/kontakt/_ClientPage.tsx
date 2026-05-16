@@ -277,7 +277,10 @@ export default function KontaktClientPage() {
                   ].map((faq) => (
                     <div key={faq.q}>
                       <p className="font-semibold text-[#212529] text-sm mb-1">{faq.q}</p>
-                      <p className="text-gray-600 text-sm">{faq.a}</p>
+                      <p className="text-sm" style={{ backgroundColor: '#fef9c3', borderLeft: '4px solid #f59e0b', borderRadius: '4px', padding: '4px 8px' }}>
+                        <span style={{ display: 'block', color: '#92400e', fontSize: '10px', fontWeight: 700, letterSpacing: '0.05em', marginBottom: '2px' }}>&#9888; PLACEHOLDER – BITTE PRÜFEN</span>
+                        {faq.a}
+                      </p>
                     </div>
                   ))}
                 </div>

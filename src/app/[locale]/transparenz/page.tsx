@@ -1,5 +1,19 @@
 import { Link } from '@/i18n/routing';
 
+const PH: React.CSSProperties = {
+  backgroundColor: '#fef9c3',
+  borderLeft: '4px solid #f59e0b',
+  borderRadius: '4px',
+  padding: '6px 10px',
+  display: 'block',
+}
+
+const PHLabel = () => (
+  <span style={{ display: 'block', color: '#92400e', fontSize: '11px', fontWeight: 700, letterSpacing: '0.05em', marginBottom: '4px' }}>
+    ⚠ PLACEHOLDER – BITTE PRÜFEN / ERSETZEN
+  </span>
+)
+
 export default async function TransparenzPage({
   params,
 }: {
@@ -17,10 +31,13 @@ export default async function TransparenzPage({
             {t('Transparenz', 'Transparency')}
           </h1>
           <p className="text-xl text-gray-300 max-w-2xl mx-auto">
-            {t(
-              'Wir zeigen offen, wie jeder Euro eingesetzt wird.',
-              'We openly show how every euro is used.'
-            )}
+            <span style={{ ...PH, display: 'inline-block', color: '#212529' }} title="⚠ Placeholder – bitte prüfen">
+              <PHLabel />
+              {t(
+                'Wir zeigen offen, wie jeder Euro eingesetzt wird.',
+                'We openly show how every euro is used.'
+              )}
+            </span>
           </p>
         </div>
       </section>
@@ -89,10 +106,13 @@ export default async function TransparenzPage({
                 {t('Aftercare-Programm', 'Aftercare Programme')}
               </h3>
               <p className="text-gray-600 leading-relaxed">
-                {t(
-                  'Täglich frische Mahlzeiten, Lernmaterial, Hausaufgabenbetreuung und qualifiziertes Personal, das die Kinder nach der Schule begleitet und fördert.',
-                  'Daily fresh meals, learning materials, homework support and qualified staff who accompany and nurture children after school.'
-                )}
+                <span style={PH} title="⚠ Placeholder – durch echte Projektbeschreibung ersetzen">
+                  <PHLabel />
+                  {t(
+                    'Täglich frische Mahlzeiten, Lernmaterial, Hausaufgabenbetreuung und qualifiziertes Personal, das die Kinder nach der Schule begleitet und fördert.',
+                    'Daily fresh meals, learning materials, homework support and qualified staff who accompany and nurture children after school.'
+                  )}
+                </span>
               </p>
             </div>
             <div className="bg-white rounded-2xl p-8 shadow-sm border border-gray-100">
@@ -106,10 +126,13 @@ export default async function TransparenzPage({
                 {t('Schulkooperationen', 'School Partnerships')}
               </h3>
               <p className="text-gray-600 leading-relaxed">
-                {t(
-                  'Enge Zusammenarbeit mit der Hout Bay Primary und Kronendal Primary: Unterrichtsprojekte, Freiwilligeneinsätze und Unterstützung der Schulgemeinschaft.',
-                  'Close cooperation with Hout Bay Primary and Kronendal Primary: classroom projects, volunteer placements and support for the school community.'
-                )}
+                <span style={PH} title="⚠ Placeholder – durch echte Projektbeschreibung ersetzen">
+                  <PHLabel />
+                  {t(
+                    'Enge Zusammenarbeit mit der Hout Bay Primary und Kronendal Primary: Unterrichtsprojekte, Freiwilligeneinsätze und Unterstützung der Schulgemeinschaft.',
+                    'Close cooperation with Hout Bay Primary and Kronendal Primary: classroom projects, volunteer placements and support for the school community.'
+                  )}
+                </span>
               </p>
             </div>
             <div className="bg-white rounded-2xl p-8 shadow-sm border border-gray-100">
@@ -123,10 +146,13 @@ export default async function TransparenzPage({
                 {t('Ferienfreizeiten und Camps', 'Holiday Camps')}
               </h3>
               <p className="text-gray-600 leading-relaxed">
-                {t(
-                  'In den Schulferien organisieren wir Freizeiten und Camps, die Kindern neue Erfahrungen, Sport, Kreativität und Gemeinschaft ermöglichen.',
-                  'During school holidays we organise camps and holiday programmes that give children new experiences, sport, creativity and community.'
-                )}
+                <span style={PH} title="⚠ Placeholder – durch echte Projektbeschreibung ersetzen">
+                  <PHLabel />
+                  {t(
+                    'In den Schulferien organisieren wir Freizeiten und Camps, die Kindern neue Erfahrungen, Sport, Kreativität und Gemeinschaft ermöglichen.',
+                    'During school holidays we organise camps and holiday programmes that give children new experiences, sport, creativity and community.'
+                  )}
+                </span>
               </p>
             </div>
             <div className="bg-white rounded-2xl p-8 shadow-sm border border-gray-100">
@@ -143,10 +169,13 @@ export default async function TransparenzPage({
                 )}
               </h3>
               <p className="text-gray-600 leading-relaxed">
-                {t(
-                  'Wenn Familien in akute Krisen geraten – durch Krankheit, Jobverlust oder andere Notlagen – helfen wir schnell und unbürokratisch mit gezielter Nothilfe.',
-                  'When families face acute crises – through illness, job loss or other emergencies – we respond quickly and without red tape with targeted emergency aid.'
-                )}
+                <span style={PH} title="⚠ Placeholder – durch echte Projektbeschreibung ersetzen">
+                  <PHLabel />
+                  {t(
+                    'Wenn Familien in akute Krisen geraten – durch Krankheit, Jobverlust oder andere Notlagen – helfen wir schnell und unbürokratisch mit gezielter Nothilfe.',
+                    'When families face acute crises – through illness, job loss or other emergencies – we respond quickly and without red tape with targeted emergency aid.'
+                  )}
+                </span>
               </p>
             </div>
           </div>
@@ -185,10 +214,13 @@ export default async function TransparenzPage({
           </div>
           <div className="mt-10 bg-gray-50 rounded-2xl p-8 text-center">
             <p className="text-gray-700 leading-relaxed max-w-2xl mx-auto">
-              {t(
-                'Dieses Modell stellt sicher, dass Spendengelder dort ankommen, wo sie gebraucht werden – direkt bei den Menschen in Hout Bay.',
-                'This model ensures that donations reach where they are needed – directly with the people in Hout Bay.'
-              )}
+              <span style={PH} title="⚠ Placeholder – formulierung bitte bestätigen">
+                <PHLabel />
+                {t(
+                  'Dieses Modell stellt sicher, dass Spendengelder dort ankommen, wo sie gebraucht werden – direkt bei den Menschen in Hout Bay.',
+                  'This model ensures that donations reach where they are needed – directly with the people in Hout Bay.'
+                )}
+              </span>
             </p>
           </div>
         </div>

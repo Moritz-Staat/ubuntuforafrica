@@ -1,5 +1,26 @@
 import { Link } from '@/i18n/routing';
 
+const PH: React.CSSProperties = {
+  backgroundColor: '#fef9c3',
+  borderLeft: '4px solid #f59e0b',
+  borderRadius: '4px',
+  padding: '6px 10px',
+  display: 'block',
+}
+
+const PHInline: React.CSSProperties = {
+  backgroundColor: '#fef9c3',
+  borderBottom: '2px solid #f59e0b',
+  padding: '0 3px',
+  borderRadius: '2px',
+}
+
+const PHLabel = () => (
+  <span style={{ display: 'block', color: '#92400e', fontSize: '11px', fontWeight: 700, letterSpacing: '0.05em', marginBottom: '4px' }}>
+    ⚠ PLACEHOLDER – BITTE PRÜFEN / ERSETZEN
+  </span>
+)
+
 export default async function PatenschaftenPage({
   params,
 }: {
@@ -17,10 +38,13 @@ export default async function PatenschaftenPage({
             {t('Patenschaften', 'Sponsorships')}
           </h1>
           <p className="text-xl text-gray-300 max-w-2xl mx-auto">
-            {t(
-              'Werde Pate und ermögliche Bildung.',
-              'Become a sponsor and enable education.'
-            )}
+            <span style={{ ...PH, display: 'inline-block', color: '#212529' }} title="⚠ Placeholder">
+              <PHLabel />
+              {t(
+                'Werde Pate und ermögliche Bildung.',
+                'Become a sponsor and enable education.'
+              )}
+            </span>
           </p>
         </div>
       </section>
@@ -62,7 +86,7 @@ export default async function PatenschaftenPage({
                     <span className="mt-1 w-5 h-5 rounded-full bg-[#11aed1] flex-shrink-0 flex items-center justify-center text-white text-xs font-bold">
                       ✓
                     </span>
-                    <span className="text-gray-700">{item}</span>
+                    <span style={PHInline} title="⚠ Placeholder – bitte prüfen" className="text-gray-700">{item}</span>
                   </li>
                 ))}
               </ul>
@@ -73,10 +97,13 @@ export default async function PatenschaftenPage({
                 {t('pro Monat', 'per month')}
               </div>
               <p className="text-white/80 text-sm leading-relaxed">
-                {t(
-                  'Das entspricht weniger als einem Euro pro Tag – und verändert die Bildungschancen eines Kindes nachhaltig.',
-                  'That is less than one euro per day – and sustainably changes a child\'s educational opportunities.'
-                )}
+                <span style={{ ...PH, color: '#212529', display: 'inline-block' }} title="⚠ Placeholder – bitte prüfen">
+                  <PHLabel />
+                  {t(
+                    'Das entspricht weniger als einem Euro pro Tag – und verändert die Bildungschancen eines Kindes nachhaltig.',
+                    "That is less than one euro per day – and sustainably changes a child's educational opportunities."
+                  )}
+                </span>
               </p>
             </div>
           </div>
@@ -104,10 +131,13 @@ export default async function PatenschaftenPage({
                 {t('Kontakt aufnehmen', 'Get in touch')}
               </h3>
               <p className="text-gray-600 text-sm leading-relaxed">
-                {t(
-                  'Schreib uns über unser Kontaktformular oder per E-Mail. Kurz erklären, dass du Interesse an einer Patenschaft hast – fertig.',
-                  'Write to us via our contact form or by email. Briefly explain that you are interested in a sponsorship – that\'s it.'
-                )}
+                <span style={PH} title="⚠ Placeholder – bitte prüfen">
+                  <PHLabel />
+                  {t(
+                    'Schreib uns über unser Kontaktformular oder per E-Mail. Kurz erklären, dass du Interesse an einer Patenschaft hast – fertig.',
+                    "Write to us via our contact form or by email. Briefly explain that you are interested in a sponsorship – that's it."
+                  )}
+                </span>
               </p>
             </div>
             <div className="bg-white rounded-2xl p-8 shadow-sm border border-gray-100 text-center">
@@ -118,10 +148,13 @@ export default async function PatenschaftenPage({
                 {t('Wir stellen die Verbindung her', 'We make the connection')}
               </h3>
               <p className="text-gray-600 text-sm leading-relaxed">
-                {t(
-                  'Unser Team in Deutschland koordiniert die Patenschaft und richtet den monatlichen Dauerauftrag ein. Du erhältst alle nötigen Bankdaten.',
-                  'Our team in Germany coordinates the sponsorship and sets up the monthly standing order. You receive all the necessary bank details.'
-                )}
+                <span style={PH} title="⚠ Placeholder – bitte prüfen">
+                  <PHLabel />
+                  {t(
+                    'Unser Team in Deutschland koordiniert die Patenschaft und richtet den monatlichen Dauerauftrag ein. Du erhältst alle nötigen Bankdaten.',
+                    'Our team in Germany coordinates the sponsorship and sets up the monthly standing order. You receive all the necessary bank details.'
+                  )}
+                </span>
               </p>
             </div>
             <div className="bg-white rounded-2xl p-8 shadow-sm border border-gray-100 text-center">
@@ -132,10 +165,13 @@ export default async function PatenschaftenPage({
                 {t('Regelmäßige Updates', 'Regular updates')}
               </h3>
               <p className="text-gray-600 text-sm leading-relaxed">
-                {t(
-                  'Du bekommst regelmäßig Berichte über die Projektarbeit – was deine Unterstützung bewirkt und wie sich das Programm entwickelt.',
-                  'You will regularly receive reports about the project work – what your support achieves and how the programme is developing.'
-                )}
+                <span style={PH} title="⚠ Placeholder – bitte prüfen">
+                  <PHLabel />
+                  {t(
+                    'Du bekommst regelmäßig Berichte über die Projektarbeit – was deine Unterstützung bewirkt und wie sich das Programm entwickelt.',
+                    'You will regularly receive reports about the project work – what your support achieves and how the programme is developing.'
+                  )}
+                </span>
               </p>
             </div>
           </div>
@@ -249,10 +285,13 @@ export default async function PatenschaftenPage({
             {t('Interesse an einer Patenschaft?', 'Interested in a sponsorship?')}
           </h2>
           <p className="text-white/80 text-lg mb-10 max-w-xl mx-auto">
-            {t(
-              'Schreib uns – wir melden uns innerhalb weniger Tage bei dir und erklären alle Details persönlich.',
-              'Write to us – we will get back to you within a few days and explain all the details personally.'
-            )}
+            <span style={{ ...PH, color: '#212529', display: 'inline-block' }} title="⚠ Placeholder – Reaktionszeit bitte bestätigen">
+              <PHLabel />
+              {t(
+                'Schreib uns – wir melden uns innerhalb weniger Tage bei dir und erklären alle Details persönlich.',
+                'Write to us – we will get back to you within a few days and explain all the details personally.'
+              )}
+            </span>
           </p>
           <Link
             href="/kontakt?subject=patenschaft"
