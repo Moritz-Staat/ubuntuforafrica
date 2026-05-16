@@ -1,3 +1,23 @@
+import type { Metadata } from 'next'
+import { setRequestLocale } from 'next-intl/server'
+
+export async function generateMetadata(
+  { params }: { params: Promise<{ locale: string }> }
+): Promise<Metadata> {
+  const { locale } = await params
+  const isEn = locale === 'en'
+  return {
+    title: isEn ? 'Sponsorships | Ubuntu for Africa' : 'Patenschaften | Ubuntu for Africa',
+    description: isEn
+      ? 'Become a school sponsor for 25 per month and give a child in Imizamo Yethu access to education.'
+      : 'Werde Schulpate fuer 25 im Monat und ermoeglche einem Kind in Imizamo Yethu Zugang zu Bildung.',
+    openGraph: {
+      title: isEn ? 'Sponsorships | Ubuntu for Africa' : 'Patenschaften | Ubuntu for Africa',
+      images: [{ url: 'https://ubuntuforafrica.com/images/Ubuntu_Logo.png' }],
+    },
+  }
+}
+
 import { Link } from '@/i18n/routing';
 
 const PH: React.CSSProperties = {

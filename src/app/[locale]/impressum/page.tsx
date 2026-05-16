@@ -1,3 +1,18 @@
+import type { Metadata } from 'next'
+
+export async function generateMetadata(
+  { params }: { params: Promise<{ locale: string }> }
+): Promise<Metadata> {
+  const { locale } = await params
+  const isEn = locale === 'en'
+  return {
+    title: isEn ? 'Legal Notice | Ubuntu for Africa' : 'Impressum | Ubuntu for Africa',
+    description: isEn
+      ? 'Legal notice for Ubuntu for Africa Kinder, Jugend- und Familienhilfe e.V.'
+      : 'Impressum von Ubuntu for Africa Kinder, Jugend- und Familienhilfe e.V.',
+  }
+}
+
 export default async function ImpressumPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params
   const t = (de: string, en: string) => locale === 'en' ? en : de

@@ -1,3 +1,23 @@
+import type { Metadata } from 'next'
+import { setRequestLocale } from 'next-intl/server'
+
+export async function generateMetadata(
+  { params }: { params: Promise<{ locale: string }> }
+): Promise<Metadata> {
+  const { locale } = await params
+  const isEn = locale === 'en'
+  return {
+    title: isEn ? 'Transparency | Ubuntu for Africa' : 'Transparenz | Ubuntu for Africa',
+    description: isEn
+      ? '100% of donations go directly to projects on the ground. Learn how Ubuntu for Africa uses your support.'
+      : '100% der Spenden fließen direkt in Projekte vor Ort. Erfahre, wie Ubuntu for Africa deine Unterstützung einsetzt.',
+    openGraph: {
+      title: isEn ? 'Transparency | Ubuntu for Africa' : 'Transparenz | Ubuntu for Africa',
+      images: [{ url: 'https://ubuntuforafrica.com/images/Ubuntu_Logo.png' }],
+    },
+  }
+}
+
 import { Link } from '@/i18n/routing';
 
 const PH: React.CSSProperties = {
@@ -239,7 +259,7 @@ export default async function TransparenzPage({
             )}
           </p>
           <a
-            href="mailto:pauline.schmiel@gmail.com?subject=Spendenquittung"
+            href="mailto:pauline.schmiel@gmail.com?subject=${locale === 'en' ? 'Donation+Receipt' : 'Spendenquittung'}"
             className="inline-block bg-[#212529] text-white font-semibold px-8 py-4 rounded-full hover:bg-[#11aed1] transition-colors duration-200"
           >
             pauline.schmiel@gmail.com

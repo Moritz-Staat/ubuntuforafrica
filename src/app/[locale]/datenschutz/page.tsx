@@ -1,3 +1,18 @@
+import type { Metadata } from 'next'
+
+export async function generateMetadata(
+  { params }: { params: Promise<{ locale: string }> }
+): Promise<Metadata> {
+  const { locale } = await params
+  const isEn = locale === 'en'
+  return {
+    title: isEn ? 'Privacy Policy | Ubuntu for Africa' : 'Datenschutz | Ubuntu for Africa',
+    description: isEn
+      ? 'Privacy policy for the Ubuntu for Africa website - GDPR compliant.'
+      : 'Datenschutzerklaerung der Ubuntu for Africa Website - DSGVO-konform.',
+  }
+}
+
 export default async function DatenschutzPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params
   const t = (de: string, en: string) => locale === 'en' ? en : de
