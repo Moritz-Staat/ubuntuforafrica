@@ -52,6 +52,8 @@ export default function Footer() {
             <ul className="space-y-2.5">
               {[
                 { href: '/spenden', label: 'Spenden' },
+                { href: '/patenschaften', label: 'Patenschaft übernehmen' },
+                { href: '/transparenz', label: 'Transparenz' },
                 { href: '/freiwillige', label: 'Freiwillig engagieren' },
                 { href: '/kontakt', label: 'Kontakt' },
               ].map((link) => (

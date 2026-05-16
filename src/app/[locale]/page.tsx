@@ -1,5 +1,34 @@
+import type { Metadata } from 'next'
 import { useTranslations } from 'next-intl';
 import { Link } from '@/i18n/routing';
+
+// generateMetadata requires params – homepage gets locale from the [locale] segment.
+// next-intl server components get locale via getLocale() or via params.
+// We use the params approach to stay consistent with all other pages.
+export async function generateMetadata(
+  { params }: { params: Promise<{ locale: string }> }
+): Promise<Metadata> {
+  const { locale } = await params
+  const isEn = locale === 'en'
+  return {
+    title: isEn
+      ? 'Ubuntu for Africa – Children, Youth & Family Support | Cape Town, South Africa'
+      : 'Ubuntu for Africa – Kinder, Jugend- und Familienhilfe | Kapstadt, Südafrika',
+    description: isEn
+      ? 'Ubuntu for Africa supports children, young people and families in Imizamo Yethu, Hout Bay, Cape Town. On the ground since 2008.'
+      : 'Ubuntu for Africa unterstützt Kinder, Jugendliche und Familien in Imizamo Yethu, Hout Bay, Kapstadt. Seit 2008 vor Ort.',
+    openGraph: {
+      title: isEn
+        ? 'Ubuntu for Africa – Children, Youth & Family Support | Cape Town, South Africa'
+        : 'Ubuntu for Africa – Kinder, Jugend- und Familienhilfe | Kapstadt, Südafrika',
+      description: isEn
+        ? 'Ubuntu for Africa supports children, young people and families in Imizamo Yethu, Hout Bay, Cape Town. On the ground since 2008.'
+        : 'Ubuntu for Africa unterstützt Kinder, Jugendliche und Familien in Imizamo Yethu, Hout Bay, Kapstadt. Seit 2008 vor Ort.',
+      images: [{ url: 'https://ubuntuforafrica.com/images/Ubuntu_Logo.png' }],
+      locale: isEn ? 'en_GB' : 'de_DE',
+    },
+  }
+}
 
 export default function HomePage() {
   const t = useTranslations();

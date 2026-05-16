@@ -1,3 +1,4 @@
+import type { Metadata } from 'next'
 import Image from 'next/image'
 import { Link } from '@/i18n/routing'
 import { client } from '@/sanity/lib/client'
@@ -95,6 +96,27 @@ const hardcodedProjects = [
     icon: '🤝',
   },
 ]
+
+export async function generateMetadata(
+  { params }: { params: Promise<{ locale: string }> }
+): Promise<Metadata> {
+  const { locale } = await params
+  const isEn = locale === 'en'
+  return {
+    title: isEn ? 'Our Projects | Ubuntu for Africa' : 'Unsere Projekte | Ubuntu for Africa',
+    description: isEn
+      ? 'Ubuntu Kids Aftercare, school partnership, volunteer programme – our projects in Imizamo Yethu, Hout Bay.'
+      : 'Ubuntu Kids Aftercare, Schulkooperation, Freiwilligenprogramm – unsere Projekte in Imizamo Yethu, Hout Bay.',
+    openGraph: {
+      title: isEn ? 'Our Projects | Ubuntu for Africa' : 'Unsere Projekte | Ubuntu for Africa',
+      description: isEn
+        ? 'Ubuntu Kids Aftercare, school partnership, volunteer programme – our projects in Imizamo Yethu, Hout Bay.'
+        : 'Ubuntu Kids Aftercare, Schulkooperation, Freiwilligenprogramm – unsere Projekte in Imizamo Yethu, Hout Bay.',
+      images: [{ url: 'https://ubuntuforafrica.com/images/Ubuntu_Logo.png' }],
+      locale: isEn ? 'en_GB' : 'de_DE',
+    },
+  }
+}
 
 export default async function ProjektePage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params

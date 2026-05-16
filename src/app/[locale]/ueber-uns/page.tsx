@@ -1,4 +1,4 @@
-import Image from 'next/image'
+import type { Metadata } from 'next'
 import { Link } from '@/i18n/routing'
 import { client } from '@/sanity/lib/client'
 import { teamMembersQuery, pageQuery } from '@/sanity/lib/queries'
@@ -68,6 +68,37 @@ const hardcodedTeamDE = [
   },
 ]
 
+const hardcodedBridge = [
+  {
+    name: 'Marina Vucurevic',
+    role: 'Leiterin vor Ort / Verbindung DE–SA',
+    role_en: 'On-site Lead / DE–SA Bridge',
+    description: 'Marina lebt in Hout Bay und verbindet das deutsche und südafrikanische Team. Seit 2025 übernimmt sie die operative Leitung vor Ort in Kapstadt.',
+    description_en: 'Marina lives in Hout Bay and bridges the German and South African teams. Since 2025 she leads operations on the ground in Cape Town.',
+  },
+]
+
+export async function generateMetadata(
+  { params }: { params: Promise<{ locale: string }> }
+): Promise<Metadata> {
+  const { locale } = await params
+  const isEn = locale === 'en'
+  return {
+    title: isEn ? 'About Us & Team | Ubuntu for Africa' : 'Über uns & Team | Ubuntu for Africa',
+    description: isEn
+      ? 'Meet the Ubuntu for Africa team – active in Hout Bay, Cape Town since 2008. Founded by Sylke Funk, driven by volunteers.'
+      : 'Lerne das Team von Ubuntu for Africa kennen – seit 2008 in Hout Bay, Kapstadt aktiv. Gegründet von Sylke Funk, getragen von Ehrenamtlichen.',
+    openGraph: {
+      title: isEn ? 'About Us & Team | Ubuntu for Africa' : 'Über uns & Team | Ubuntu for Africa',
+      description: isEn
+        ? 'Meet the Ubuntu for Africa team – active in Hout Bay, Cape Town since 2008. Founded by Sylke Funk, driven by volunteers.'
+        : 'Lerne das Team von Ubuntu for Africa kennen – seit 2008 in Hout Bay, Kapstadt aktiv. Gegründet von Sylke Funk, getragen von Ehrenamtlichen.',
+      images: [{ url: 'https://ubuntuforafrica.com/images/Ubuntu_Logo.png' }],
+      locale: isEn ? 'en_GB' : 'de_DE',
+    },
+  }
+}
+
 export default async function UeberUnsPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params
   const t = (de: string, en: string) => locale === 'en' ? en : de
@@ -108,6 +139,14 @@ export default async function UeberUnsPage({ params }: { params: Promise<{ local
         role: locale === 'en' ? m.role_en : m.role,
         description: locale === 'en' ? m.description_en : m.description,
       }))
+
+  // Marina is shown from hardcoded data when Sanity is unavailable.
+  // If you add Marina to Sanity, assign her team: 'bridge' or similar and filter here.
+  const displayBridge = hardcodedBridge.map((m) => ({
+    name: m.name,
+    role: locale === 'en' ? m.role_en : m.role,
+    description: locale === 'en' ? m.description_en : m.description,
+  }))
 
   const pageTitle = pageContent
     ? (locale === 'en' ? pageContent.title_en : pageContent.title_de) ?? t('Über uns', 'About Us')
@@ -243,6 +282,32 @@ export default async function UeberUnsPage({ params }: { params: Promise<{ local
                 </div>
                 <h3 className="text-xl font-bold text-[#212529] mb-3">{item.title}</h3>
                 <p className="text-gray-600 leading-relaxed">{item.text}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Bridge person: Marina Vucurevic */}
+      <section className="py-16 bg-white">
+        <div className="mx-auto max-w-3xl px-6">
+          <div className="text-center mb-10">
+            <p className="text-[#f7a900] text-sm font-semibold uppercase tracking-widest mb-3">
+              {t('Verbindung DE & SA', 'Bridging DE & SA')}
+            </p>
+            <h2 className="text-3xl font-bold text-[#212529]">
+              {t('Operative Leitung vor Ort', 'On-site Leadership')}
+            </h2>
+          </div>
+          <div className="flex flex-col items-center gap-6 sm:flex-row sm:items-start">
+            {displayBridge.map((member) => (
+              <div key={member.name} className="bg-gray-50 rounded-2xl p-8 text-center flex-1">
+                <div className="w-20 h-20 rounded-full bg-[#f7a900]/10 flex items-center justify-center mx-auto mb-4 text-3xl">
+                  👤
+                </div>
+                <h3 className="font-bold text-[#212529] text-xl mb-1">{member.name}</h3>
+                <p className="text-[#f7a900] text-sm font-semibold mb-4">{member.role}</p>
+                <p className="text-gray-600 text-sm leading-relaxed">{member.description}</p>
               </div>
             ))}
           </div>

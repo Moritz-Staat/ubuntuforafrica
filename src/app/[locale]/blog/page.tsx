@@ -1,3 +1,4 @@
+import type { Metadata } from 'next'
 import { client } from '@/sanity/lib/client'
 import { postsQuery } from '@/sanity/lib/queries'
 import { Link } from '@/i18n/routing'
@@ -11,6 +12,27 @@ interface Post {
   excerpt?: string
   excerpt_en?: string
   categories?: string[]
+}
+
+export async function generateMetadata(
+  { params }: { params: Promise<{ locale: string }> }
+): Promise<Metadata> {
+  const { locale } = await params
+  const isEn = locale === 'en'
+  return {
+    title: isEn ? 'Blog & News | Ubuntu for Africa' : 'Blog & Neuigkeiten | Ubuntu for Africa',
+    description: isEn
+      ? 'News from Hout Bay, volunteer reports and updates from the Ubuntu for Africa association.'
+      : 'Neuigkeiten aus Hout Bay, Berichte von Freiwilligen und Updates aus dem Ubuntu for Africa Verein.',
+    openGraph: {
+      title: isEn ? 'Blog & News | Ubuntu for Africa' : 'Blog & Neuigkeiten | Ubuntu for Africa',
+      description: isEn
+        ? 'News from Hout Bay, volunteer reports and updates from the Ubuntu for Africa association.'
+        : 'Neuigkeiten aus Hout Bay, Berichte von Freiwilligen und Updates aus dem Ubuntu for Africa Verein.',
+      images: [{ url: 'https://ubuntuforafrica.com/images/Ubuntu_Logo.png' }],
+      locale: isEn ? 'en_GB' : 'de_DE',
+    },
+  }
 }
 
 export default async function BlogPage({ params }: { params: Promise<{ locale: string }> }) {

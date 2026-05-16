@@ -1,5 +1,5 @@
+import type { Metadata } from 'next'
 import { Link } from '@/i18n/routing'
-import Image from 'next/image'
 import { client } from '@/sanity/lib/client'
 import { pageQuery } from '@/sanity/lib/queries'
 
@@ -8,6 +8,31 @@ interface PageContent {
   title_en?: string
   hero_subtitle_de?: string
   hero_subtitle_en?: string
+}
+
+export async function generateMetadata(
+  { params }: { params: Promise<{ locale: string }> }
+): Promise<Metadata> {
+  const { locale } = await params
+  const isEn = locale === 'en'
+  return {
+    title: isEn
+      ? 'Volunteer Programme | Ubuntu for Africa'
+      : 'Freiwilligenprogramm | Ubuntu for Africa',
+    description: isEn
+      ? 'Become a volunteer with Ubuntu for Africa in Cape Town. Minimum 3 months, €995/month including accommodation.'
+      : 'Werde Freiwillige:r bei Ubuntu for Africa in Kapstadt. Mindestens 3 Monate, 995 €/Monat inkl. Unterkunft.',
+    openGraph: {
+      title: isEn
+        ? 'Volunteer Programme | Ubuntu for Africa'
+        : 'Freiwilligenprogramm | Ubuntu for Africa',
+      description: isEn
+        ? 'Become a volunteer with Ubuntu for Africa in Cape Town. Minimum 3 months, €995/month including accommodation.'
+        : 'Werde Freiwillige:r bei Ubuntu for Africa in Kapstadt. Mindestens 3 Monate, 995 €/Monat inkl. Unterkunft.',
+      images: [{ url: 'https://ubuntuforafrica.com/images/Ubuntu_Logo.png' }],
+      locale: isEn ? 'en_GB' : 'de_DE',
+    },
+  }
 }
 
 export default async function FreiwilligePage({ params }: { params: Promise<{ locale: string }> }) {
@@ -125,12 +150,12 @@ export default async function FreiwilligePage({ params }: { params: Promise<{ lo
           </p>
           <h1 className="text-5xl font-bold mb-6 md:text-6xl">{pageTitle}</h1>
           <p className="text-xl text-gray-200 leading-relaxed max-w-2xl mx-auto mb-8">{pageSubtitle}</p>
-          <Link
-            href="/kontakt"
+          <a
+            href="mailto:volunteers.ubuntuforafrica@gmx.de"
             className="inline-flex items-center gap-2 rounded-full bg-[#f7a900] text-[#212529] px-8 py-4 text-lg font-bold hover:bg-[#e09800] transition-colors"
           >
             {t('Jetzt bewerben', 'Apply now')}
-          </Link>
+          </a>
         </div>
       </section>
 
@@ -237,17 +262,29 @@ export default async function FreiwilligePage({ params }: { params: Promise<{ lo
           <h2 className="text-4xl font-bold mb-4">
             {t('Bereit für das Abenteuer?', 'Ready for the adventure?')}
           </h2>
-          <p className="text-xl text-white/90 mb-10 leading-relaxed">
+          <p className="text-xl text-white/90 mb-6 leading-relaxed">
             {t(
-              'Schreib uns – wir melden uns zeitnah und klären alle offenen Fragen. Der nächste Schritt ist einfach: eine kurze Nachricht.',
-              'Write to us – we will get back to you promptly and answer all open questions. The next step is easy: just a short message.'
+              'Schreib uns – wir melden uns zeitnah und klären alle offenen Fragen. Der nächste Schritt ist einfach: eine kurze E-Mail.',
+              'Write to us – we will get back to you promptly and answer all open questions. The next step is easy: just a short email.'
+            )}
+          </p>
+          <a
+            href="mailto:volunteers.ubuntuforafrica@gmx.de"
+            className="inline-flex items-center justify-center gap-2 rounded-full bg-white text-[#ae64fd] px-10 py-4 text-lg font-bold hover:bg-white/90 transition-colors mb-4"
+          >
+            volunteers.ubuntuforafrica@gmx.de
+          </a>
+          <p className="text-white/70 text-sm">
+            {t(
+              'Oder nutze unser Kontaktformular:',
+              'Or use our contact form:'
             )}
           </p>
           <Link
             href="/kontakt"
-            className="inline-flex items-center justify-center gap-2 rounded-full bg-white text-[#ae64fd] px-10 py-4 text-lg font-bold hover:bg-white/90 transition-colors"
+            className="inline-flex items-center justify-center gap-2 rounded-full border-2 border-white text-white px-8 py-3 text-base font-semibold hover:bg-white/10 transition-colors mt-3"
           >
-            {t('Jetzt Kontakt aufnehmen', 'Get in touch now')}
+            {t('Zum Kontaktformular', 'Contact form')}
           </Link>
         </div>
       </section>
