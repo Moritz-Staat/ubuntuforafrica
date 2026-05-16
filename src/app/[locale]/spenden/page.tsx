@@ -1,25 +1,18 @@
+'use client'
+
+import { useState } from 'react'
+import { useLocale } from 'next-intl'
 import { Link } from '@/i18n/routing'
-import { client } from '@/sanity/lib/client'
-import { siteSettingsQuery } from '@/sanity/lib/queries'
 
-interface SiteSettings {
-  donationIban?: string
-  contactEmail?: string
-}
+type LoadingKey = number | 'custom' | null
 
-export default async function SpendenPage({ params }: { params: Promise<{ locale: string }> }) {
-  const { locale } = await params
+export default function SpendenPage() {
+  const locale = useLocale()
   const t = (de: string, en: string) => locale === 'en' ? en : de
 
-  let settings: SiteSettings | null = null
-  try {
-    settings = await client.fetch(siteSettingsQuery)
-  } catch {
-    // Sanity unavailable
-  }
-
-  const iban = settings?.donationIban ?? 'DE__ ____ ____ ____ ____ __ (folgt)'
-  const contactEmail = settings?.contactEmail ?? 'pauline.schmiel@gmail.com'
+  const [loadingKey, setLoadingKey] = useState<LoadingKey>(null)
+  const [customAmount, setCustomAmount] = useState('')
+  const [error, setError] = useState('')
 
   const amounts = [
     {
@@ -48,6 +41,41 @@ export default async function SpendenPage({ params }: { params: Promise<{ locale
     },
   ]
 
+  async function startCheckout(amountEur: number, key: LoadingKey) {
+    setLoadingKey(key)
+    setError('')
+    try {
+      const res = await fetch('/api/donate', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ amount: amountEur * 100, locale }),
+      })
+      const data = await res.json() as { url?: string; error?: string }
+      if (!res.ok || !data.url) {
+        throw new Error(data.error ?? 'Stripe not configured')
+      }
+      window.location.href = data.url
+    } catch (err) {
+      console.error(err)
+      setError(
+        t(
+          'Online-Zahlung aktuell nicht verfügbar. Bitte nutze die Banküberweisung.',
+          'Online payment currently unavailable. Please use bank transfer.'
+        )
+      )
+      setLoadingKey(null)
+    }
+  }
+
+  function handleCustomDonate() {
+    const val = parseFloat(customAmount.replace(',', '.'))
+    if (!val || val < 1) {
+      setError(t('Bitte gib einen Betrag von mindestens 1 € ein.', 'Please enter an amount of at least €1.'))
+      return
+    }
+    startCheckout(Math.round(val), 'custom')
+  }
+
   return (
     <>
       <section className="py-32 bg-[#11aed1] text-white">
@@ -71,26 +99,69 @@ export default async function SpendenPage({ params }: { params: Promise<{ locale
             <h2 className="text-4xl font-bold text-[#212529] mb-6">
               {t('Was deine Spende bewirkt', 'What your donation achieves')}
             </h2>
-            <p className="text-gray-600 leading-relaxed text-lg max-w-2xl mx-auto">
-              {t(
-                'Mit Empathie, Engagement und Einfallsreichtum lässt sich viel bewegen – aber fast immer braucht es auch finanzielle Unterstützung. Dein Beitrag macht einen echten, messbaren Unterschied.',
-                'With empathy, commitment and creativity a lot can be achieved – but financial support is almost always needed too. Your contribution makes a real, measurable difference.'
-              )}
-            </p>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
             {amounts.map((item) => (
               <div
                 key={item.amount}
-                className="rounded-2xl border-2 p-8 hover:shadow-lg transition-all hover:-translate-y-1"
+                className="rounded-2xl border-2 p-8 hover:shadow-lg transition-all hover:-translate-y-1 flex flex-col"
                 style={{ borderColor: item.color + '30' }}
               >
                 <p className="text-4xl font-bold mb-3" style={{ color: item.color }}>
                   {item.label}
                 </p>
-                <p className="text-gray-700 leading-relaxed">{item.impact}</p>
+                <p className="text-gray-700 leading-relaxed flex-1">{item.impact}</p>
+                <button
+                  onClick={() => startCheckout(item.amount, item.amount)}
+                  disabled={loadingKey !== null}
+                  className="mt-6 w-full rounded-full py-3 font-semibold text-white transition-all disabled:opacity-60 disabled:cursor-not-allowed hover:opacity-90"
+                  style={{ backgroundColor: item.color }}
+                >
+                  {loadingKey === item.amount
+                    ? t('Weiterleitung...', 'Redirecting...')
+                    : t(`${item.label} spenden`, `Donate ${item.label}`)}
+                </button>
               </div>
             ))}
+          </div>
+
+          {/* Custom amount */}
+          <div className="mt-10 bg-gray-50 rounded-2xl p-8 border border-gray-100">
+            <h3 className="text-xl font-bold text-[#212529] mb-4">
+              {t('Anderen Betrag eingeben', 'Enter a different amount')}
+            </h3>
+            <div className="flex gap-3">
+              <div className="relative flex-1">
+                <span className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 font-semibold">€</span>
+                <input
+                  type="number"
+                  min="1"
+                  step="1"
+                  value={customAmount}
+                  onChange={(e) => setCustomAmount(e.target.value)}
+                  placeholder="25"
+                  className="w-full rounded-xl border border-gray-200 pl-9 pr-4 py-3 text-[#212529] focus:border-[#11aed1] focus:outline-none focus:ring-2 focus:ring-[#11aed1]/20 transition-all"
+                />
+              </div>
+              <button
+                onClick={handleCustomDonate}
+                disabled={loadingKey !== null}
+                className="rounded-full bg-[#11aed1] px-8 py-3 font-semibold text-white hover:bg-[#0e8fb5] transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
+              >
+                {loadingKey === 'custom'
+                  ? t('Weiterleitung...', 'Redirecting...')
+                  : t('Spenden', 'Donate')}
+              </button>
+            </div>
+            {error && (
+              <p className="mt-3 text-sm text-red-600 bg-red-50 rounded-lg px-4 py-2">{error}</p>
+            )}
+            <p className="mt-3 text-xs text-gray-400">
+              {t(
+                'Zahlung per Kreditkarte, PayPal oder SEPA-Lastschrift über Stripe.',
+                'Payment by credit card, PayPal or SEPA direct debit via Stripe.'
+              )}
+            </p>
           </div>
         </div>
       </section>
@@ -113,12 +184,9 @@ export default async function SpendenPage({ params }: { params: Promise<{ locale
               </div>
               <div className="border-b border-gray-100 pb-5">
                 <p className="text-sm text-gray-500 mb-1">IBAN</p>
-                <p className="font-mono font-semibold text-[#212529] text-lg tracking-wider">{iban}</p>
-                {iban.includes('folgt') && (
-                  <p className="text-xs text-gray-400 mt-1">
-                    {t('Bankverbindung wird in Kürze veröffentlicht', 'Bank details will be published shortly')}
-                  </p>
-                )}
+                <p className="font-mono font-semibold text-[#212529] text-lg tracking-wider">
+                  {t('wird in Kürze veröffentlicht', 'to be published shortly')}
+                </p>
               </div>
               <div>
                 <p className="text-sm text-gray-500 mb-1">{t('Verwendungszweck', 'Reference')}</p>
@@ -134,8 +202,8 @@ export default async function SpendenPage({ params }: { params: Promise<{ locale
                   'Als gemeinnütziger Verein stellen wir gerne Spendenquittungen aus. Bitte sende uns dazu eine E-Mail an',
                   'As a registered non-profit we are happy to issue donation receipts. Please send an email to'
                 )}{' '}
-                <a href={`mailto:${contactEmail}`} className="text-[#11aed1] hover:underline font-medium">
-                  {contactEmail}
+                <a href="mailto:pauline.schmiel@gmail.com" className="text-[#11aed1] hover:underline font-medium">
+                  pauline.schmiel@gmail.com
                 </a>{' '}
                 {t('mit deiner Postadresse.', 'with your postal address.')}
               </p>

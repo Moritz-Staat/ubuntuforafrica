@@ -3,6 +3,8 @@
 import { useState } from 'react'
 import { useLocale } from 'next-intl'
 
+type Status = 'idle' | 'loading' | 'success' | 'error'
+
 export default function KontaktPage() {
   const locale = useLocale()
   const t = (de: string, en: string) => locale === 'en' ? en : de
@@ -13,15 +15,41 @@ export default function KontaktPage() {
     subject: '',
     message: '',
   })
-  const [submitted, setSubmitted] = useState(false)
+  const [status, setStatus] = useState<Status>('idle')
+  const [errorMsg, setErrorMsg] = useState('')
 
   function handleChange(e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) {
     setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }))
   }
 
-  function handleSubmit(e: React.FormEvent) {
+  async function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
-    setSubmitted(true)
+    setStatus('loading')
+    setErrorMsg('')
+
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData),
+      })
+
+      if (!res.ok) {
+        const data = await res.json() as { error?: string }
+        throw new Error(data.error ?? 'Unknown error')
+      }
+
+      setStatus('success')
+    } catch (err) {
+      console.error(err)
+      setErrorMsg(
+        t(
+          'Deine Nachricht konnte nicht gesendet werden. Bitte versuche es später erneut.',
+          'Your message could not be sent. Please try again later.'
+        )
+      )
+      setStatus('error')
+    }
   }
 
   const subjectOptions = locale === 'en'
@@ -64,7 +92,7 @@ export default function KontaktPage() {
               <h2 className="text-2xl font-bold text-[#212529] mb-8">
                 {t('Nachricht senden', 'Send a message')}
               </h2>
-              {submitted ? (
+              {status === 'success' ? (
                 <div className="text-center py-12">
                   <div className="w-16 h-16 rounded-full bg-[#11aed1]/10 flex items-center justify-center mx-auto mb-6 text-3xl">
                     ✅
@@ -91,7 +119,8 @@ export default function KontaktPage() {
                         required
                         value={formData.name}
                         onChange={handleChange}
-                        className="w-full rounded-xl border border-gray-200 px-4 py-3 text-[#212529] focus:border-[#11aed1] focus:outline-none focus:ring-2 focus:ring-[#11aed1]/20 transition-all"
+                        disabled={status === 'loading'}
+                        className="w-full rounded-xl border border-gray-200 px-4 py-3 text-[#212529] focus:border-[#11aed1] focus:outline-none focus:ring-2 focus:ring-[#11aed1]/20 transition-all disabled:opacity-60"
                         placeholder={t('Dein Name', 'Your name')}
                       />
                     </div>
@@ -106,7 +135,8 @@ export default function KontaktPage() {
                         required
                         value={formData.email}
                         onChange={handleChange}
-                        className="w-full rounded-xl border border-gray-200 px-4 py-3 text-[#212529] focus:border-[#11aed1] focus:outline-none focus:ring-2 focus:ring-[#11aed1]/20 transition-all"
+                        disabled={status === 'loading'}
+                        className="w-full rounded-xl border border-gray-200 px-4 py-3 text-[#212529] focus:border-[#11aed1] focus:outline-none focus:ring-2 focus:ring-[#11aed1]/20 transition-all disabled:opacity-60"
                         placeholder="your@email.com"
                       />
                     </div>
@@ -120,7 +150,8 @@ export default function KontaktPage() {
                       name="subject"
                       value={formData.subject}
                       onChange={handleChange}
-                      className="w-full rounded-xl border border-gray-200 px-4 py-3 text-[#212529] focus:border-[#11aed1] focus:outline-none focus:ring-2 focus:ring-[#11aed1]/20 transition-all bg-white"
+                      disabled={status === 'loading'}
+                      className="w-full rounded-xl border border-gray-200 px-4 py-3 text-[#212529] focus:border-[#11aed1] focus:outline-none focus:ring-2 focus:ring-[#11aed1]/20 transition-all bg-white disabled:opacity-60"
                     >
                       <option value="">{t('Bitte wählen...', 'Please select...')}</option>
                       {subjectOptions.map((opt) => (
@@ -139,15 +170,22 @@ export default function KontaktPage() {
                       rows={6}
                       value={formData.message}
                       onChange={handleChange}
-                      className="w-full rounded-xl border border-gray-200 px-4 py-3 text-[#212529] focus:border-[#11aed1] focus:outline-none focus:ring-2 focus:ring-[#11aed1]/20 transition-all resize-none"
+                      disabled={status === 'loading'}
+                      className="w-full rounded-xl border border-gray-200 px-4 py-3 text-[#212529] focus:border-[#11aed1] focus:outline-none focus:ring-2 focus:ring-[#11aed1]/20 transition-all resize-none disabled:opacity-60"
                       placeholder={t('Deine Nachricht...', 'Your message...')}
                     />
                   </div>
+                  {status === 'error' && (
+                    <p className="text-red-600 text-sm rounded-lg bg-red-50 px-4 py-3">{errorMsg}</p>
+                  )}
                   <button
                     type="submit"
-                    className="w-full rounded-full bg-[#11aed1] py-4 font-semibold text-white hover:bg-[#0e8fb5] transition-colors shadow-lg"
+                    disabled={status === 'loading'}
+                    className="w-full rounded-full bg-[#11aed1] py-4 font-semibold text-white hover:bg-[#0e8fb5] transition-colors shadow-lg disabled:opacity-60 disabled:cursor-not-allowed"
                   >
-                    {t('Nachricht senden', 'Send message')}
+                    {status === 'loading'
+                      ? t('Wird gesendet...', 'Sending...')
+                      : t('Nachricht senden', 'Send message')}
                   </button>
                   <p className="text-xs text-gray-400 text-center">
                     {t(
