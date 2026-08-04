@@ -55,6 +55,7 @@ export default function Footer() {
               {[
                 { href: '/spenden' as const, label: nav('donate') },
                 { href: '/patenschaften' as const, label: t('sponsorship_link') },
+                { href: '/foerderpartner' as const, label: t('supporter_link') },
                 { href: '/transparenz' as const, label: t('transparency') },
                 { href: '/freiwillige' as const, label: t('engage') },
                 { href: '/kontakt' as const, label: nav('contact') },
