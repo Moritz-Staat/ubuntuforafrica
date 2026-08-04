@@ -8,6 +8,7 @@
 import { useState } from 'react'
 import { useLocale } from 'next-intl'
 import { Link } from '@/i18n/routing'
+import { CONTACT_EMAIL, mailto } from '@/lib/site-config'
 
 type LoadingKey = number | 'custom' | null
 
@@ -207,8 +208,8 @@ export default function SpendenClientPage() {
                   'Als gemeinnütziger Verein stellen wir gerne Spendenquittungen aus. Bitte sende uns dazu eine E-Mail an',
                   'As a registered non-profit we are happy to issue donation receipts. Please send an email to'
                 )}{' '}
-                <a href="mailto:pauline.schmiel@gmail.com" className="text-[#11aed1] hover:underline font-medium">
-                  pauline.schmiel@gmail.com
+                <a href={mailto(CONTACT_EMAIL)} className="text-[#11aed1] hover:underline font-medium">
+                  {CONTACT_EMAIL}
                 </a>{' '}
                 {t('mit deiner Postadresse.', 'with your postal address.')}
               </p>

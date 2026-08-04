@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import { Link } from '@/i18n/routing'
 import { client } from '@/sanity/lib/client'
 import { pageQuery } from '@/sanity/lib/queries'
+import { VOLUNTEER_EMAIL, mailto } from '@/lib/site-config'
 
 interface PageContent {
   title_de?: string
@@ -151,7 +152,7 @@ export default async function FreiwilligePage({ params }: { params: Promise<{ lo
           <h1 className="text-5xl font-bold mb-6 md:text-6xl">{pageTitle}</h1>
           <p className="text-xl text-gray-200 leading-relaxed max-w-2xl mx-auto mb-8">{pageSubtitle}</p>
           <a
-            href="mailto:volunteers.ubuntuforafrica@gmx.de"
+            href={mailto(VOLUNTEER_EMAIL)}
             className="inline-flex items-center gap-2 rounded-full bg-[#f7a900] text-[#212529] px-8 py-4 text-lg font-bold hover:bg-[#e09800] transition-colors"
           >
             {t('Jetzt bewerben', 'Apply now')}
@@ -269,10 +270,10 @@ export default async function FreiwilligePage({ params }: { params: Promise<{ lo
             )}
           </p>
           <a
-            href="mailto:volunteers.ubuntuforafrica@gmx.de"
+            href={mailto(VOLUNTEER_EMAIL)}
             className="inline-flex items-center justify-center gap-2 rounded-full bg-white text-[#ae64fd] px-10 py-4 text-lg font-bold hover:bg-white/90 transition-colors mb-4"
           >
-            volunteers.ubuntuforafrica@gmx.de
+            {VOLUNTEER_EMAIL}
           </a>
           <p className="text-white/70 text-sm">
             {t(

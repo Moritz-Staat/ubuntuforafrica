@@ -19,6 +19,7 @@ export async function generateMetadata(
 }
 
 import { Link } from '@/i18n/routing';
+import { CONTACT_EMAIL, mailto } from '@/lib/site-config'
 
 const PH: React.CSSProperties = {
   backgroundColor: '#fef9c3',
@@ -259,10 +260,10 @@ export default async function TransparenzPage({
             )}
           </p>
           <a
-            href="mailto:pauline.schmiel@gmail.com?subject=${locale === 'en' ? 'Donation+Receipt' : 'Spendenquittung'}"
+            href={mailto(CONTACT_EMAIL, locale === 'en' ? 'Donation Receipt' : 'Spendenquittung')}
             className="inline-block bg-[#212529] text-white font-semibold px-8 py-4 rounded-full hover:bg-[#11aed1] transition-colors duration-200"
           >
-            pauline.schmiel@gmail.com
+            {CONTACT_EMAIL}
           </a>
         </div>
       </section>

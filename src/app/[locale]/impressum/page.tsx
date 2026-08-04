@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { CONTACT_EMAIL, mailto } from '@/lib/site-config'
 
 export async function generateMetadata(
   { params }: { params: Promise<{ locale: string }> }
@@ -73,8 +74,8 @@ export default async function ImpressumPage({ params }: { params: Promise<{ loca
               <div className="text-gray-700 space-y-1">
                 <p>
                   E-Mail:{' '}
-                  <a href="mailto:pauline.schmiel@gmail.com" className="text-[#11aed1] hover:underline">
-                    pauline.schmiel@gmail.com
+                  <a href={mailto(CONTACT_EMAIL)} className="text-[#11aed1] hover:underline">
+                    {CONTACT_EMAIL}
                   </a>
                 </p>
               </div>

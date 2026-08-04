@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { Resend } from 'resend'
 import { z } from 'zod'
+import { CONTACT_EMAIL } from '@/lib/site-config'
 
 const schema = z.object({
   name: z.string().min(2).max(100),
@@ -9,7 +10,7 @@ const schema = z.object({
   message: z.string().min(10).max(5000),
 })
 
-const RECIPIENT = process.env.CONTACT_EMAIL ?? 'pauline.schmiel@gmail.com'
+const RECIPIENT = process.env.CONTACT_EMAIL ?? CONTACT_EMAIL
 
 export async function POST(req: NextRequest) {
   let body: unknown

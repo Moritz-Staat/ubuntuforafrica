@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { CONTACT_EMAIL, mailto } from '@/lib/site-config'
 
 export async function generateMetadata(
   { params }: { params: Promise<{ locale: string }> }
@@ -47,8 +48,8 @@ export default async function DatenschutzPage({ params }: { params: Promise<{ lo
               <p>1. Vorsitzende: Birgitta Latz</p>
               <p>
                 E-Mail:{' '}
-                <a href="mailto:pauline.schmiel@gmail.com" className="text-[#11aed1] hover:underline">
-                  pauline.schmiel@gmail.com
+                <a href={mailto(CONTACT_EMAIL)} className="text-[#11aed1] hover:underline">
+                  {CONTACT_EMAIL}
                 </a>
               </p>
             </div>
@@ -227,8 +228,8 @@ export default async function DatenschutzPage({ params }: { params: Promise<{ lo
                 'Zur Ausübung deiner Rechte wende dich bitte an: ',
                 'To exercise your rights, please contact: '
               )}
-              <a href="mailto:pauline.schmiel@gmail.com" className="text-[#11aed1] hover:underline">
-                pauline.schmiel@gmail.com
+              <a href={mailto(CONTACT_EMAIL)} className="text-[#11aed1] hover:underline">
+                {CONTACT_EMAIL}
               </a>
             </p>
           </div>

@@ -7,6 +7,7 @@
 
 import { useState } from 'react'
 import { useLocale } from 'next-intl'
+import { CONTACT_EMAIL, VOLUNTEER_EMAIL, mailto } from '@/lib/site-config'
 
 type Status = 'idle' | 'loading' | 'success' | 'error'
 
@@ -215,14 +216,14 @@ export default function KontaktClientPage() {
                     {
                       icon: '📧',
                       label: t('E-Mail (Allgemein)', 'Email (General)'),
-                      value: 'pauline.schmiel@gmail.com',
-                      href: 'mailto:pauline.schmiel@gmail.com',
+                      value: CONTACT_EMAIL,
+                      href: mailto(CONTACT_EMAIL),
                     },
                     {
                       icon: '📧',
                       label: t('E-Mail (Freiwillige)', 'Email (Volunteers)'),
-                      value: 'volunteers.ubuntuforafrica@gmx.de',
-                      href: 'mailto:volunteers.ubuntuforafrica@gmx.de',
+                      value: VOLUNTEER_EMAIL,
+                      href: mailto(VOLUNTEER_EMAIL),
                     },
                     {
                       icon: '📍',

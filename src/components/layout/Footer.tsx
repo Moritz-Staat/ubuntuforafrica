@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import { Link } from '@/i18n/routing';
 import { useTranslations } from 'next-intl';
+import { CONTACT_EMAIL, mailto } from '@/lib/site-config'
 
 export default function Footer() {
   const t = useTranslations('footer');
@@ -74,8 +75,8 @@ export default function Footer() {
               <p>UBUNTU for Africa</p>
               <p>Kinder, Jugend- und Familienhilfe e.V.</p>
               <p className="mt-3">
-                <a href="mailto:pauline.schmiel@gmail.com" className="hover:text-[#11aed1] transition-colors">
-                  pauline.schmiel@gmail.com
+                <a href={mailto(CONTACT_EMAIL)} className="hover:text-[#11aed1] transition-colors">
+                  {CONTACT_EMAIL}
                 </a>
               </p>
             </address>
