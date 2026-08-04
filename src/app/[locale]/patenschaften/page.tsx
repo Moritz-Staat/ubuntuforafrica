@@ -19,27 +19,7 @@ export async function generateMetadata(
 }
 
 import { Link } from '@/i18n/routing';
-
-const PH: React.CSSProperties = {
-  backgroundColor: '#fef9c3',
-  borderLeft: '4px solid #f59e0b',
-  borderRadius: '4px',
-  padding: '6px 10px',
-  display: 'block',
-}
-
-const PHInline: React.CSSProperties = {
-  backgroundColor: '#fef9c3',
-  borderBottom: '2px solid #f59e0b',
-  padding: '0 3px',
-  borderRadius: '2px',
-}
-
-const PHLabel = () => (
-  <span style={{ display: 'block', color: '#92400e', fontSize: '11px', fontWeight: 700, letterSpacing: '0.05em', marginBottom: '4px' }}>
-    ⚠ PLACEHOLDER – BITTE PRÜFEN / ERSETZEN
-  </span>
-)
+import { PH, PHInline, PHLabel } from '@/components/Placeholder'
 
 export default async function PatenschaftenPage({
   params,
