@@ -237,7 +237,7 @@ export default async function ProjektePage({ params }: { params: Promise<{ local
           <h2 className="text-4xl font-bold mb-4">{t('Unterstütze unsere Projekte', 'Support our projects')}</h2>
           <p className="text-xl text-white/90 mb-10">
             {t(
-              'Jede Spende, jeder Einsatz als Freiwilliger trägt dazu bei, dass wir unsere Arbeit fortführen und ausbauen können.',
+              'Jede Spende, jeder Einsatz als Freiwillige:r trägt dazu bei, dass wir unsere Arbeit fortführen und ausbauen können.',
               'Every donation, every volunteer commitment helps us continue and expand our work.'
             )}
           </p>
@@ -252,7 +252,7 @@ export default async function ProjektePage({ params }: { params: Promise<{ local
               href="/freiwillige"
               className="inline-flex items-center justify-center rounded-full border-2 border-white text-white px-8 py-4 text-lg font-semibold hover:bg-white/10 transition-colors"
             >
-              {t('Als Freiwilliger engagieren', 'Volunteer with us')}
+              {t('Als Freiwillige:r engagieren', 'Volunteer with us')}
             </Link>
           </div>
         </div>

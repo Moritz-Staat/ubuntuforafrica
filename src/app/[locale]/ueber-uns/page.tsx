@@ -379,7 +379,7 @@ export default async function UeberUnsPage({ params }: { params: Promise<{ local
           </h2>
           <p className="text-gray-400 mb-8">
             {t(
-              'Unterstütze unsere Arbeit – durch eine Spende, als Freiwilliger oder einfach durch das Teilen unserer Geschichte.',
+              'Unterstütze unsere Arbeit – durch eine Spende, als Freiwillige:r oder einfach durch das Teilen unserer Geschichte.',
               'Support our work – through a donation, as a volunteer or simply by sharing our story.'
             )}
           </p>

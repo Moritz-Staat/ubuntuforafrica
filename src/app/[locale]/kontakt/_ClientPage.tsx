@@ -269,7 +269,7 @@ export default function KontaktClientPage() {
                       a: t('In der Regel innerhalb von 3–5 Werktagen.', 'Usually within 3–5 working days.'),
                     },
                     {
-                      q: t('Wann kann ich als Freiwilliger starten?', 'When can I start as a volunteer?'),
+                      q: t('Wann kann ich als Freiwillige:r starten?', 'When can I start as a volunteer?'),
                       a: t(
                         'Zu Beginn jedes Quartals – nach individueller Absprache.',
                         'At the start of each quarter – after individual consultation.'

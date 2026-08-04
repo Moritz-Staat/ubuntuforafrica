@@ -169,7 +169,7 @@ export default async function FreiwilligePage({ params }: { params: Promise<{ lo
             <h2 className="text-4xl font-bold text-[#212529]">{t('Was du machst', 'What you do')}</h2>
             <p className="text-gray-600 mt-4 max-w-xl mx-auto">
               {t(
-                'Als Freiwilliger arbeitest du 30–35 Stunden pro Woche, Montag bis Freitag, in einem oder mehreren unserer Projekte.',
+                'Als Freiwillige:r arbeitest du 30–35 Stunden pro Woche, Montag bis Freitag, in einem oder mehreren unserer Projekte.',
                 'As a volunteer you work 30–35 hours per week, Monday to Friday, in one or more of our projects.'
               )}
             </p>

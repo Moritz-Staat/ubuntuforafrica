@@ -61,7 +61,7 @@ export default async function PatenschaftenPage({
             <span style={{ ...PH, display: 'inline-block', color: '#212529' }} title="⚠ Placeholder">
               <PHLabel />
               {t(
-                'Werde Pate und ermögliche Bildung.',
+                'Werde Pat:in und ermögliche Bildung.',
                 'Become a sponsor and enable education.'
               )}
             </span>
