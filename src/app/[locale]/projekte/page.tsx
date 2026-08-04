@@ -75,8 +75,8 @@ const hardcodedProjects = [
     title_en: 'Volunteer Programme',
     subtitle: 'Internationaler Einsatz in Hout Bay',
     subtitle_en: 'International commitment in Hout Bay',
-    description: 'Unser Freiwilligenprogramm ermöglicht es Menschen aus aller Welt, aktiv in unseren Projekten mitzuwirken. Mindestens drei Monate, 30–35 Stunden pro Woche, mit persönlicher Betreuung vor, während und nach dem Aufenthalt.',
-    description_en: 'Our volunteer programme enables people from all over the world to actively participate in our projects. At least three months, 30–35 hours per week, with personal support before, during and after the stay.',
+    description: 'Unser Freiwilligenprogramm ermöglicht es Menschen aus aller Welt, aktiv in unseren Projekten mitzuwirken – mit persönlicher Betreuung vor, während und nach dem Aufenthalt. Mindestdauer und Stundenumfang werden noch festgelegt.',
+    description_en: 'Our volunteer programme enables people from all over the world to actively participate in our projects, with personal support before, during and after the stay. Minimum duration and weekly hours are still to be confirmed.',
     details: [
       'Einsatz in Schule und Aftercare',
       'Persönliche Begleitung durch das lokale Team',

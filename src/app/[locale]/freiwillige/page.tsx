@@ -3,6 +3,7 @@ import { Link } from '@/i18n/routing'
 import { client } from '@/sanity/lib/client'
 import { pageQuery } from '@/sanity/lib/queries'
 import { VOLUNTEER_EMAIL, mailto } from '@/lib/site-config'
+import { PH, PHLabel } from '@/components/Placeholder'
 
 interface PageContent {
   title_de?: string
@@ -21,15 +22,15 @@ export async function generateMetadata(
       ? 'Volunteer Programme | Ubuntu for Africa'
       : 'Freiwilligenprogramm | Ubuntu for Africa',
     description: isEn
-      ? 'Become a volunteer with Ubuntu for Africa in Cape Town. Minimum 3 months, €995/month including accommodation.'
-      : 'Werde Freiwillige:r bei Ubuntu for Africa in Kapstadt. Mindestens 3 Monate, 995 €/Monat inkl. Unterkunft.',
+      ? 'Become a volunteer with Ubuntu for Africa in Cape Town. Full-time placement with personal support.'
+      : 'Werde Freiwillige:r bei Ubuntu for Africa in Kapstadt. Vollzeit-Einsatz mit persönlicher Begleitung.',
     openGraph: {
       title: isEn
         ? 'Volunteer Programme | Ubuntu for Africa'
         : 'Freiwilligenprogramm | Ubuntu for Africa',
       description: isEn
-        ? 'Become a volunteer with Ubuntu for Africa in Cape Town. Minimum 3 months, €995/month including accommodation.'
-        : 'Werde Freiwillige:r bei Ubuntu for Africa in Kapstadt. Mindestens 3 Monate, 995 €/Monat inkl. Unterkunft.',
+        ? 'Become a volunteer with Ubuntu for Africa in Cape Town. Full-time placement with personal support.'
+        : 'Werde Freiwillige:r bei Ubuntu for Africa in Kapstadt. Vollzeit-Einsatz mit persönlicher Begleitung.',
       images: [{ url: 'https://ubuntuforafrica.com/images/Ubuntu_Logo.png' }],
       locale: isEn ? 'en_GB' : 'de_DE',
     },
@@ -62,16 +63,16 @@ export default async function FreiwilligePage({ params }: { params: Promise<{ lo
     ? [
         'At least 18 years old',
         'Extended police clearance certificate (can be applied for after acceptance)',
-        'Minimum commitment of 3 months',
-        'Willingness to work 30–35 hours/week, Mon–Fri',
+        'Minimum commitment — duration to be confirmed',
+        'Willingness to work full-time, Mon–Fri',
         'Openness, curiosity and teamwork skills',
         'Basic English (working language on-site)',
       ]
     : [
         'Volljährigkeit (mind. 18 Jahre)',
         'Erweitertes Führungszeugnis (kann nach Zusage beantragt werden)',
-        'Mindestdauer von 3 Monaten',
-        'Bereitschaft, 30–35 Stunden/Woche zu arbeiten, Mo–Fr',
+        'Mindestdauer – wird noch festgelegt',
+        'Bereitschaft, Vollzeit zu arbeiten, Mo–Fr',
         'Offenheit, Neugier und Teamfähigkeit',
         'Grundkenntnisse in Englisch (vor Ort Arbeitssprache)',
       ]
@@ -169,8 +170,8 @@ export default async function FreiwilligePage({ params }: { params: Promise<{ lo
             <h2 className="text-4xl font-bold text-[#212529]">{t('Was du machst', 'What you do')}</h2>
             <p className="text-gray-600 mt-4 max-w-xl mx-auto">
               {t(
-                'Als Freiwillige:r arbeitest du 30–35 Stunden pro Woche, Montag bis Freitag, in einem oder mehreren unserer Projekte.',
-                'As a volunteer you work 30–35 hours per week, Monday to Friday, in one or more of our projects.'
+                'Als Freiwillige:r arbeitest du Vollzeit, Montag bis Freitag, in einem oder mehreren unserer Projekte. Der genaue Stundenumfang wird noch festgelegt.',
+                'As a volunteer you work full-time, Monday to Friday, in one or more of our projects. The exact number of hours is still to be confirmed.'
               )}
             </p>
           </div>
@@ -221,10 +222,13 @@ export default async function FreiwilligePage({ params }: { params: Promise<{ lo
             </p>
             <h2 className="text-4xl font-bold text-[#212529]">{t('Kosten & Leistungen', 'Costs & Services')}</h2>
             <p className="text-gray-600 mt-4 max-w-xl mx-auto">
-              {t(
-                '995 € pro Monat – aufgeteilt in Unterkunft und direkte Projektunterstützung.',
-                '€ 995 per month – split between accommodation and direct project support.'
-              )}
+              <span style={PH}>
+                <PHLabel />
+                {t(
+                  'Der monatliche Beitrag teilt sich in Unterkunft und direkte Projektunterstützung. Die Höhe wird vom Verein noch bestätigt.',
+                  'The monthly contribution is split between accommodation and direct project support. The amount is still to be confirmed by the association.'
+                )}
+              </span>
             </p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">

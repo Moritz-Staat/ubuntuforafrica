@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import { setRequestLocale } from 'next-intl/server'
 import { Link } from '@/i18n/routing'
+import { PHNumber, PhotoSlot, PH, PHLabel } from '@/components/Placeholder'
 
 export async function generateMetadata(
   { params }: { params: Promise<{ locale: string }> }
@@ -56,8 +57,8 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
     {
       title: t('Freiwilligenprogramm', 'Volunteer Programme'),
       description: t(
-        'Internationales Freiwilligenprogramm: 3 Monate Einsatz, 30–35 Stunden/Woche, intensive Begleitung vor und nach dem Aufenthalt.',
-        'International volunteer programme: 3 months, 30–35 hours/week, with personal support before and after your stay.'
+        'Internationales Freiwilligenprogramm mit intensiver Begleitung vor und nach dem Aufenthalt. Mindestdauer und Wochenstunden werden noch festgelegt.',
+        'International volunteer programme with personal support before and after your stay. Minimum duration and weekly hours are still to be confirmed.'
       ),
       icon: '🤝',
       href: '/freiwillige' as const,
@@ -65,11 +66,14 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
     },
   ]
 
+  // Betraege bewusst als Platzhalter: Hanna hat am 22.07.2026 verfuegt, dass
+  // keine Geldbetraege in den Texten stehen, bis der Verein sie freigibt (#10).
+  // `was` zeigt den bisherigen Wert durchgestrichen, damit nichts verlorengeht.
   const donationAmounts = [
-    { amount: '10 €', impact: t('Deckt eine Woche Aftercare-Material', 'Covers one week of aftercare materials'), color: '#11aed1' },
-    { amount: '25 €', impact: t('Ermöglicht 1 Monat Schulpatenschaft', 'Enables 1 month school sponsorship'), color: '#ae64fd' },
-    { amount: '50 €', impact: t('Finanziert ein Yoga-/Therapieprogramm', 'Funds a yoga/therapy programme'), color: '#f7a900' },
-    { amount: '100 €', impact: t('Trägt zum Container-Bau bei', 'Contributes to container construction'), color: '#11aed1' },
+    { was: '10 €',  impact: t('Deckt eine Woche Aftercare-Material', 'Covers one week of aftercare materials'), color: '#11aed1' },
+    { was: '25 €',  impact: t('Ermöglicht 1 Monat Schulpatenschaft', 'Enables 1 month school sponsorship'), color: '#ae64fd' },
+    { was: '50 €',  impact: t('Finanziert ein Yoga-/Therapieprogramm', 'Funds a yoga/therapy programme'), color: '#f7a900' },
+    { was: '100 €', impact: t('Trägt zum Container-Bau bei', 'Contributes to container construction'), color: '#11aed1' },
   ]
 
   return (
@@ -124,15 +128,15 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
           </p>
           <div className="grid grid-cols-1 gap-8 text-center md:grid-cols-3 mt-8">
             <div>
-              <p className="text-6xl font-bold mb-2">200+</p>
+              <p className="text-6xl font-bold mb-2"><PHNumber was="200+" /></p>
               <p className="text-lg text-white/90">{t('Kinder betreut', 'Children supported')}</p>
             </div>
             <div>
-              <p className="text-6xl font-bold mb-2">16</p>
+              <p className="text-6xl font-bold mb-2"><PHNumber was="16" /></p>
               <p className="text-lg text-white/90">{t('Jahre aktiv', 'Years active')}</p>
             </div>
             <div>
-              <p className="text-6xl font-bold mb-2">50k+</p>
+              <p className="text-6xl font-bold mb-2"><PHNumber was="50k+" /></p>
               <p className="text-lg text-white/90">{t('€ Nothilfe geleistet', '€ Emergency aid')}</p>
             </div>
           </div>
@@ -143,14 +147,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
       <section className="py-20 bg-white">
         <div className="mx-auto max-w-7xl px-6">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <div className="relative rounded-2xl overflow-hidden aspect-[4/3]">
-              <div className="absolute inset-0 bg-gradient-to-br from-[#11aed1]/20 to-[#ae64fd]/20 flex items-center justify-center">
-                <div className="text-center text-[#11aed1]/60">
-                  <svg xmlns="http://www.w3.org/2000/svg" className="mx-auto mb-3 h-16 w-16" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>
-                  <p className="text-sm font-medium">{t('Foto folgt', 'Photo coming soon')}</p>
-                </div>
-              </div>
-            </div>
+            <PhotoSlot describe={t('Team oder Kinder vor Ort in Imizamo Yethu', 'Team or children on site in Imizamo Yethu')} />
             <div>
               <p className="text-[#11aed1] text-sm font-semibold uppercase tracking-widest mb-3">
                 {t('Über uns', 'About Us')}
@@ -235,12 +232,12 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
             {donationAmounts.map((item) => (
               <div
-                key={item.amount}
+                key={item.was}
                 className="rounded-2xl border-2 p-6 text-center hover:shadow-lg transition-all hover:-translate-y-1"
                 style={{ borderColor: item.color + '40' }}
               >
                 <p className="text-3xl font-bold mb-3" style={{ color: item.color }}>
-                  {item.amount}
+                  <PHNumber was={item.was} />
                 </p>
                 <p className="text-sm text-gray-600 leading-relaxed">{item.impact}</p>
               </div>
@@ -266,8 +263,8 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
           <h2 className="text-4xl font-bold mb-6">{t('Werde Teil unseres Teams', 'Join our team')}</h2>
           <p className="text-xl text-white/90 mb-10 max-w-2xl mx-auto leading-relaxed">
             {t(
-              'Du möchtest dich sozial engagieren und praktische Erfahrungen sammeln? Dann werde Teil von Ubuntu for Africa! Mindestens 3 Monate, Vollzeit, mit persönlicher Begleitung.',
-              'Want to make a social impact and gain hands-on experience? Join Ubuntu for Africa! Minimum 3 months, full-time, with personal support throughout.'
+              'Du möchtest dich sozial engagieren und praktische Erfahrungen sammeln? Dann werde Teil von Ubuntu for Africa! Vollzeit, mit persönlicher Begleitung.',
+              'Want to make a social impact and gain hands-on experience? Join Ubuntu for Africa! Full-time, with personal support throughout.'
             )}
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">

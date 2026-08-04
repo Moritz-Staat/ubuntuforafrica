@@ -9,6 +9,7 @@ import { useState } from 'react'
 import { useLocale } from 'next-intl'
 import { Link } from '@/i18n/routing'
 import { CONTACT_EMAIL, mailto } from '@/lib/site-config'
+import { PHNumber, PHInline } from '@/components/Placeholder'
 
 type LoadingKey = number | 'custom' | null
 
@@ -24,25 +25,25 @@ export default function SpendenClientPage() {
     {
       amount: 10,
       label: '10 €',
-      impact: t('Deckt eine Woche Aftercare-Material', 'Covers one week of aftercare materials'),
+      impact: t('Deckt eine Woche Aftercare-Material', 'Covers one week of aftercare materials'), unconfirmed: true,
       color: '#11aed1',
     },
     {
       amount: 25,
       label: '25 €',
-      impact: t('Ermöglicht 1 Monat Schulpatenschaft', 'Enables 1 month school sponsorship'),
+      impact: t('Ermöglicht 1 Monat Schulpatenschaft', 'Enables 1 month school sponsorship'), unconfirmed: true,
       color: '#ae64fd',
     },
     {
       amount: 50,
       label: '50 €',
-      impact: t('Finanziert ein Yoga-/Therapieprogramm', 'Funds a yoga/therapy program'),
+      impact: t('Finanziert ein Yoga-/Therapieprogramm', 'Funds a yoga/therapy program'), unconfirmed: true,
       color: '#f7a900',
     },
     {
       amount: 100,
       label: '100 €',
-      impact: t('Trägt zum Container-Bau bei', 'Contributes to container construction'),
+      impact: t('Trägt zum Container-Bau bei', 'Contributes to container construction'), unconfirmed: true,
       color: '#11aed1',
     },
   ]
@@ -116,7 +117,9 @@ export default function SpendenClientPage() {
                 <p className="text-4xl font-bold mb-3" style={{ color: item.color }}>
                   {item.label}
                 </p>
-                <p className="text-gray-700 leading-relaxed flex-1">{item.impact}</p>
+                <p className="text-gray-700 leading-relaxed flex-1">
+                  <span style={item.unconfirmed ? PHInline : undefined}>{item.impact}</span>
+                </p>
                 <button
                   onClick={() => startCheckout(item.amount, item.amount)}
                   disabled={loadingKey !== null}
@@ -234,8 +237,10 @@ export default function SpendenClientPage() {
           </p>
           <div className="grid grid-cols-3 gap-8">
             {[
-              { value: '100%', label: t('Direkt in Projekte', 'Directly into projects') },
-              { value: '0 €', label: t('Verwaltungsgehälter', 'Administrative salaries') },
+              // Beide Werte sind unbelegt. Fuer einen gemeinnuetzigen Verein sind das
+              // pruefbare Aussagen – erst nach Bestaetigung durch den Vorstand einsetzen (#13).
+              { value: <PHNumber was="100%" />, label: t('Direkt in Projekte', 'Directly into projects') },
+              { value: <PHNumber was="0 €" />, label: t('Verwaltungsgehälter', 'Administrative salaries') },
               { value: t('seit 2008', 'since 2008'), label: t('Erfahrung vor Ort', 'Experience on the ground') },
             ].map((stat) => (
               <div key={stat.label}>
