@@ -43,5 +43,15 @@
     "transparency": "Transparenz",
     "engage": "Freiwillig engagieren",
     "supporter_link": "Förderpartner werden"
+  },
+  "newsletter": {
+    "title": "Newsletter",
+    "intro": "Bleib auf dem Laufenden — ein paar Mal im Jahr, kein Spam.",
+    "placeholder": "E-Mail-Adresse",
+    "button": "Anmelden",
+    "consent": "Ich möchte den Newsletter erhalten und habe die",
+    "privacy_link": "Datenschutzerklärung gelesen.",
+    "success": "Fast geschafft! Bitte bestätige die E-Mail, die wir dir geschickt haben.",
+    "error": "Das hat leider nicht geklappt. Bitte versuch es später noch einmal."
   }
 }

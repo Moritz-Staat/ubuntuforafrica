@@ -2,10 +2,12 @@ import Image from 'next/image';
 import { Link } from '@/i18n/routing';
 import { useTranslations } from 'next-intl';
 import { CONTACT_EMAIL, mailto } from '@/lib/site-config'
+import NewsletterForm from '@/components/NewsletterForm'
 
 export default function Footer() {
   const t = useTranslations('footer');
   const nav = useTranslations('nav');
+  const news = useTranslations('newsletter');
 
   return (
     <footer className="bg-[#212529] text-gray-300">
@@ -103,6 +105,17 @@ export default function Footer() {
               </a>
             </div>
           </div>
+        </div>
+
+        {/* Newsletter */}
+        <div className="mt-10 border-t border-white/10 pt-8 grid gap-6 md:grid-cols-2 md:items-start">
+          <div>
+            <h3 className="font-semibold text-white mb-2 text-sm uppercase tracking-wider">
+              {news('title')}
+            </h3>
+            <p className="text-sm text-gray-400">{news('intro')}</p>
+          </div>
+          <NewsletterForm />
         </div>
 
         <div className="mt-10 border-t border-white/10 pt-6 flex flex-col sm:flex-row justify-between items-center gap-4">

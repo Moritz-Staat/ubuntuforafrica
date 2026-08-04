@@ -43,5 +43,15 @@
     "transparency": "Transparency",
     "engage": "Volunteer with us",
     "supporter_link": "Become a Supporting Partner"
+  },
+  "newsletter": {
+    "title": "Newsletter",
+    "intro": "Stay in the loop — a few times a year, no spam.",
+    "placeholder": "Email address",
+    "button": "Subscribe",
+    "consent": "I would like to receive the newsletter and have read the",
+    "privacy_link": "privacy policy.",
+    "success": "Almost done! Please confirm the email we just sent you.",
+    "error": "That did not work. Please try again later."
   }
 }
