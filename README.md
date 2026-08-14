@@ -172,11 +172,12 @@ Der Code erkennt den Fall an `INSTAGRAM_USER_ID`: ist die gesetzt, läuft die Ab
 
 Danach ist der Feed still weg — kein Fehler auf der Seite, nur keine Bilder mehr. Zum Verlängern (Token muss älter als 24 Stunden sein):
 
-```
-GET /api/instagram/refresh?secret=<INSTAGRAM_REFRESH_SECRET>
+```bash
+curl -X POST https://ubuntuforafrica.vercel.app/api/instagram/refresh \
+  -H "Authorization: Bearer $INSTAGRAM_REFRESH_SECRET"
 ```
 
-Die Route gibt den **neuen** Token zurück; der muss von Hand in Vercel unter `INSTAGRAM_ACCESS_TOKEN` eingetragen und neu deployt werden. Ein laufender Prozess kann seine eigenen Env-Werte nicht überschreiben. Ohne gesetztes `INSTAGRAM_REFRESH_SECRET` antwortet die Route mit 404.
+Das Secret gehört in den Header, nicht in die URL — Query-Strings landen in Zugriffs-Logs und im Browser-Verlauf. Die Route gibt den **neuen** Token zurück; der muss von Hand in Vercel unter `INSTAGRAM_ACCESS_TOKEN` eingetragen und neu deployt werden. Ein laufender Prozess kann seine eigenen Env-Werte nicht überschreiben. Ohne gesetztes `INSTAGRAM_REFRESH_SECRET` antwortet die Route mit 404.
 
 > Am besten eine Kalendererinnerung alle ~50 Tage. Wer das automatisieren will, braucht die Vercel-API zum Schreiben der Env-Variable — das ist bewusst nicht eingebaut.
 

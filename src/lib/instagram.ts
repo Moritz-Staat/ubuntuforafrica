@@ -69,8 +69,16 @@ export async function getInstagramPosts(limit = 6): Promise<InstagramPost[]> {
     })
 
     if (!res.ok) {
-      const detail = await res.text()
-      console.error('[Instagram] Abruf fehlgeschlagen', res.status, detail.slice(0, 300))
+      // Nur Status und Meta-Fehlercode loggen, nicht den ganzen Body – der
+      // kann den Token enthalten.
+      const detail = (await res.json().catch(() => null)) as
+        | { error?: { code?: number; error_subcode?: number; type?: string } }
+        | null
+      console.error('[Instagram] Abruf fehlgeschlagen', res.status, {
+        code: detail?.error?.code,
+        subcode: detail?.error?.error_subcode,
+        type: detail?.error?.type,
+      })
       return []
     }
 
@@ -108,7 +116,9 @@ export async function refreshInstagramToken(): Promise<{ token: string; expiresI
 
   const res = await fetch(url, { cache: 'no-store' })
   if (!res.ok) {
-    console.error('[Instagram] Token-Verlängerung fehlgeschlagen', res.status, (await res.text()).slice(0, 300))
+    // Bewusst nur der Status: der Fehlertext von Meta kann den Token enthalten
+    // und Logs sind kein Ort für Zugangsdaten.
+    console.error('[Instagram] Token-Verlängerung fehlgeschlagen', res.status)
     return null
   }
 
