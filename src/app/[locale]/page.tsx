@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import { setRequestLocale } from 'next-intl/server'
 import { Link } from '@/i18n/routing'
 import { VOLUNTEER_EMAIL, mailto } from '@/lib/site-config'
+import InstagramFeed from '@/components/InstagramFeed'
 import { PHNumber, PhotoSlot } from '@/components/Placeholder'
 
 export async function generateMetadata(
@@ -262,6 +263,9 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
           </div>
         </div>
       </section>
+
+      {/* Instagram – erscheint nur, wenn ein gültiger Token gesetzt ist */}
+      <InstagramFeed locale={locale} limit={6} />
 
       {/* Volunteer Teaser */}
       <section className="py-20 bg-[#ae64fd]">

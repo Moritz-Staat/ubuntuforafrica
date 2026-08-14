@@ -1,7 +1,10 @@
 import type { Metadata } from 'next'
+import Image from 'next/image'
 import { client } from '@/sanity/lib/client'
 import { postsQuery } from '@/sanity/lib/queries'
 import { Link } from '@/i18n/routing'
+import { getInstagramPosts, captionTitle } from '@/lib/instagram'
+import { SOCIAL } from '@/lib/site-config'
 
 interface Post {
   _id: string
@@ -46,7 +49,32 @@ export default async function BlogPage({ params }: { params: Promise<{ locale: s
     // Sanity unavailable
   }
 
+  // Instagram-Beiträge stehen gleichberechtigt zwischen den Blogartikeln,
+  // chronologisch einsortiert. Ohne Token kommt hier eine leere Liste zurück.
+  const instagramPosts = await getInstagramPosts(9)
+
+  type Entry =
+    | { kind: 'post'; key: string; date: string; post: Post }
+    | { kind: 'instagram'; key: string; date: string; ig: (typeof instagramPosts)[number] }
+
+  const entries: Entry[] = [
+    ...posts.map((post): Entry => ({
+      kind: 'post',
+      key: post._id,
+      date: post.publishedAt ?? '',
+      post,
+    })),
+    ...instagramPosts.map((ig): Entry => ({
+      kind: 'instagram',
+      key: ig.id,
+      date: ig.timestamp,
+      ig,
+    })),
+  ].sort((a, b) => (a.date < b.date ? 1 : -1))
+
   const dateLocale = locale === 'en' ? 'en-GB' : 'de-DE'
+  const formatDate = (value: string) =>
+    new Date(value).toLocaleDateString(dateLocale, { year: 'numeric', month: 'long', day: 'numeric' })
 
   return (
     <>
@@ -68,7 +96,7 @@ export default async function BlogPage({ params }: { params: Promise<{ locale: s
 
       <section className="py-20 bg-white">
         <div className="mx-auto max-w-7xl px-6">
-          {posts.length === 0 ? (
+          {entries.length === 0 ? (
             <div className="text-center py-20">
               <p className="text-gray-400 text-lg mb-4">
                 {t('Noch keine Beiträge vorhanden.', 'No posts yet.')}
@@ -81,12 +109,51 @@ export default async function BlogPage({ params }: { params: Promise<{ locale: s
             </div>
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {posts.map((post) => {
+              {entries.map((entry) => {
+                if (entry.kind === 'instagram') {
+                  const { ig } = entry
+                  const title = captionTitle(ig.caption)
+                  return (
+                    <a
+                      key={entry.key}
+                      href={ig.permalink}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="group block bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-md transition-shadow overflow-hidden"
+                    >
+                      <div className="relative aspect-[4/3] bg-gray-100">
+                        <Image
+                          src={ig.imageUrl}
+                          alt={title || 'Instagram'}
+                          fill
+                          sizes="(max-width: 768px) 100vw, 33vw"
+                          className="object-cover transition-transform duration-300 group-hover:scale-105"
+                        />
+                      </div>
+                      <div className="p-6">
+                        <span className="inline-block text-xs font-semibold uppercase tracking-wide text-[#ae64fd] bg-[#ae64fd]/10 px-2 py-1 rounded-full mb-3">
+                          Instagram
+                        </span>
+                        {title && (
+                          <h2 className="text-lg font-bold text-[#212529] mb-2 group-hover:text-[#11aed1] transition-colors">
+                            {title}
+                          </h2>
+                        )}
+                        {ig.caption && (
+                          <p className="text-gray-600 text-sm leading-relaxed line-clamp-3">{ig.caption}</p>
+                        )}
+                        <p className="text-gray-400 text-xs mt-4">{formatDate(ig.timestamp)}</p>
+                      </div>
+                    </a>
+                  )
+                }
+
+                const { post } = entry
                 const title = locale === 'en' ? (post.title_en ?? post.title) : post.title
                 const excerpt = locale === 'en' ? (post.excerpt_en ?? post.excerpt) : post.excerpt
                 return (
                   <Link
-                    key={post._id}
+                    key={entry.key}
                     href={`/blog/${post.slug.current}`}
                     className="group block bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-md transition-shadow overflow-hidden"
                   >
@@ -110,19 +177,27 @@ export default async function BlogPage({ params }: { params: Promise<{ locale: s
                         <p className="text-gray-600 text-sm leading-relaxed line-clamp-3">{excerpt}</p>
                       )}
                       {post.publishedAt && (
-                        <p className="text-gray-400 text-xs mt-4">
-                          {new Date(post.publishedAt).toLocaleDateString(dateLocale, {
-                            year: 'numeric',
-                            month: 'long',
-                            day: 'numeric',
-                          })}
-                        </p>
+                        <p className="text-gray-400 text-xs mt-4">{formatDate(post.publishedAt)}</p>
                       )}
                     </div>
                   </Link>
                 )
               })}
             </div>
+          )}
+
+          {entries.length > 0 && (
+            <p className="mt-12 text-center text-sm text-gray-500">
+              {t('Mehr Bilder und Kurznachrichten auf ', 'More pictures and short updates on ')}
+              <a
+                href={SOCIAL.instagram}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-[#11aed1] font-semibold hover:underline"
+              >
+                @ubuntuforafrica
+              </a>
+            </p>
           )}
         </div>
       </section>

@@ -69,7 +69,9 @@ Für Vercel-Zugriff zusätzlich `npx vercel login` und `npx vercel link --projec
 | `STRIPE_SECRET_KEY` · `NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY` · `STRIPE_WEBHOOK_SECRET` | ⬜ Issue #13 |
 | `RESEND_API_KEY` | ⬜ ohne den verschickt das Kontaktformular nichts |
 | `MAILCHIMP_API_KEY` · `MAILCHIMP_AUDIENCE_ID` | ⬜ Issue #17 |
-| `INSTAGRAM_ACCESS_TOKEN` | ⬜ Issue #18 |
+| `INSTAGRAM_ACCESS_TOKEN` | ⬜ Code steht, Token fehlt — siehe „Instagram" unten |
+| `INSTAGRAM_USER_ID` | optional, nur bei Facebook-Login-Token |
+| `INSTAGRAM_REFRESH_SECRET` | optional, schützt `/api/instagram/refresh` |
 | `CONTACT_EMAIL` | ⬜ Issue #9 |
 
 Alle API-Routen haben Fallbacks — fehlende Keys lassen den Build nicht scheitern, die Funktion bleibt nur aus. `/api/newsletter` loggt dann nur in die Konsole.
@@ -146,6 +148,37 @@ Schema-Typen: `page` · `post` · `project` · `siteSettings` · `teamMember` (i
 | Spenden, Fördermitgliedschaft, Presse, Sonstiges | `info@ubuntuforafrica.com` |
 
 `pauline.schmiel@gmail.com` ist **nur** für Spendenquittungen richtig — so steht es im freigegebenen Spenden-Text. Nicht wieder pauschal durch `info@` ersetzen.
+
+---
+
+## Instagram
+
+Der Feed hängt an **@ubuntuforafrica** und erscheint an zwei Stellen: als Kachelraster auf der Startseite (6 Posts) und chronologisch einsortiert zwischen den Blogartikeln (9 Posts). Code: `src/lib/instagram.ts` und `src/components/InstagramFeed.tsx`.
+
+**Ohne Token passiert nichts** — die Sektion wird nicht gerendert, die Seiten funktionieren normal. Genauso, wenn der Abruf scheitert; der Fehler landet nur im Log.
+
+### Token besorgen
+
+Die alte **Basic Display API ist seit dem 4.12.2024 abgeschaltet**, alte Tokens funktionieren nicht mehr. Aktuell gibt es zwei Wege:
+
+| Weg | Voraussetzung | Env |
+|---|---|---|
+| Instagram API with Instagram Login | Instagram-Konto ist Professional (Business oder Creator) | nur `INSTAGRAM_ACCESS_TOKEN` |
+| Instagram API with Facebook Login | IG-Konto hängt an einer Facebook-Seite | zusätzlich `INSTAGRAM_USER_ID` (IG-Business-ID) |
+
+Der Code erkennt den Fall an `INSTAGRAM_USER_ID`: ist die gesetzt, läuft die Abfrage über `graph.facebook.com`, sonst über `graph.instagram.com/me/media`.
+
+### Der Token läuft nach 60 Tagen ab
+
+Danach ist der Feed still weg — kein Fehler auf der Seite, nur keine Bilder mehr. Zum Verlängern (Token muss älter als 24 Stunden sein):
+
+```
+GET /api/instagram/refresh?secret=<INSTAGRAM_REFRESH_SECRET>
+```
+
+Die Route gibt den **neuen** Token zurück; der muss von Hand in Vercel unter `INSTAGRAM_ACCESS_TOKEN` eingetragen und neu deployt werden. Ein laufender Prozess kann seine eigenen Env-Werte nicht überschreiben. Ohne gesetztes `INSTAGRAM_REFRESH_SECRET` antwortet die Route mit 404.
+
+> Am besten eine Kalendererinnerung alle ~50 Tage. Wer das automatisieren will, braucht die Vercel-API zum Schreiben der Env-Variable — das ist bewusst nicht eingebaut.
 
 ---
 
