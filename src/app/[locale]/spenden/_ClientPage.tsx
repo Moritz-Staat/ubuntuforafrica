@@ -8,7 +8,7 @@
 import { useState } from 'react'
 import { useLocale } from 'next-intl'
 import { Link } from '@/i18n/routing'
-import { CONTACT_EMAIL, mailto } from '@/lib/site-config'
+import { RECEIPT_EMAIL, mailto } from '@/lib/site-config'
 import { PHNumber, PHInline } from '@/components/Placeholder'
 
 type LoadingKey = number | 'custom' | null
@@ -91,11 +91,20 @@ export default function SpendenClientPage() {
             {t('Jetzt helfen', 'Help now')}
           </p>
           <h1 className="text-5xl font-bold mb-6 md:text-6xl">{t('Spenden', 'Donate')}</h1>
-          <p className="text-xl text-white/90 leading-relaxed max-w-2xl mx-auto">
+          <p className="text-xl text-white/90 leading-relaxed max-w-2xl mx-auto mb-6">
             {t(
-              'Mit deiner Spende hilfst du direkt dabei, Kindern und Jugendlichen in Südafrika neue Chancen zu eröffnen. Jeder Euro kommt ohne Umwege bei unserer südafrikanischen Partner-NGO an.',
-              'Your donation directly helps open up new opportunities for children and young people in South Africa. Every euro reaches our South African partner NGO without detours.'
+              'Mit Empathie, Engagement und Einfallsreichtum lässt sich viel bewegen – aber fast immer braucht es auch finanzielle Unterstützung. Mit deiner Spende hilfst du direkt dabei, Kindern und Jugendlichen in Südafrika neue Chancen zu eröffnen.',
+              'Empathy, commitment and creativity can move a lot – but almost always financial support is needed too. With your donation you directly help open up new opportunities for children and young people in South Africa.'
             )}
+          </p>
+          <p className="text-white/80 leading-relaxed max-w-2xl mx-auto">
+            {t(
+              'Jeder Euro, den du über unser Vereinskonto spendest, kommt ohne Umwege bei unserer südafrikanischen Partner-NGO an und wird dort gezielt eingesetzt – zum Beispiel für unsere Aftercare oder unsere Ferien-Camps.',
+              'Every euro you donate via our association account reaches our South African partner NGO without detours and is used there in a targeted way – for example for our aftercare or our holiday camps.'
+            )}{' '}
+            <Link href="/projekte" className="underline underline-offset-4 hover:text-white">
+              {t('Mehr zu den Projekten', 'More about the projects')}
+            </Link>
           </p>
         </div>
       </section>
@@ -208,13 +217,17 @@ export default function SpendenClientPage() {
                   {t('Spendenquittung:', 'Donation receipt:')}
                 </span>{' '}
                 {t(
-                  'Als gemeinnütziger Verein stellen wir gerne Spendenquittungen aus. Bitte sende uns dazu eine E-Mail an',
-                  'As a registered non-profit we are happy to issue donation receipts. Please send an email to'
+                  'Wenn du eine Spendenbescheinigung brauchst, schreib uns gerne an',
+                  'If you need a donation receipt, simply write to'
                 )}{' '}
-                <a href={mailto(CONTACT_EMAIL)} className="text-[#11aed1] hover:underline font-medium">
-                  {CONTACT_EMAIL}
+                {/* Einzige Stelle, an der pauline.schmiel@ richtig ist. */}
+                <a
+                  href={mailto(RECEIPT_EMAIL, locale === 'en' ? 'Donation receipt' : 'Spendenquittung')}
+                  className="text-[#11aed1] hover:underline font-medium"
+                >
+                  {RECEIPT_EMAIL}
                 </a>{' '}
-                {t('mit deiner Postadresse.', 'with your postal address.')}
+                {t('– mit deiner Postadresse und dem gespendeten Betrag.', '– with your postal address and the amount donated.')}
               </p>
             </div>
           </div>
@@ -227,27 +240,35 @@ export default function SpendenClientPage() {
             {t('Transparenz', 'Transparency')}
           </p>
           <h2 className="text-4xl font-bold text-[#212529] mb-6">
-            {t('100 % direkt vor Ort', '100 % directly on the ground')}
+            {t('Wo dein Geld ankommt', 'Where your money goes')}
           </h2>
           <p className="text-gray-600 leading-relaxed text-lg max-w-2xl mx-auto mb-10">
             {t(
-              'Jeder Euro deiner Spende kommt ohne Umwege bei unserer südafrikanischen Partner-NGO an. Wir arbeiten ehrenamtlich – kein Geld fließt in Verwaltungsgehälter in Deutschland.',
-              'Every euro of your donation reaches our South African partner NGO directly. We work on a voluntary basis – no money goes into administrative salaries in Germany.'
+              'Jeder Euro, den du auf unser Vereinskonto spendest, kommt ohne Umwege bei unserer südafrikanischen Partner-NGO an. Der Vorstand in Deutschland arbeitet vollständig ehrenamtlich – niemand bei uns bekommt ein Gehalt aus deiner Spende, es wird also auch nichts für die Verwaltung des Vereins abgezogen.',
+              'Every euro you donate to our association account reaches our South African partner NGO without detours. The board in Germany works entirely on a voluntary basis – nobody here receives a salary from your donation, so nothing is deducted for running the association either.'
             )}
           </p>
-          <div className="grid grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-8">
             {[
-              // Beide Werte sind unbelegt. Fuer einen gemeinnuetzigen Verein sind das
-              // pruefbare Aussagen – erst nach Bestaetigung durch den Vorstand einsetzen (#13).
-              { value: <PHNumber was="100%" />, label: t('Direkt in Projekte', 'Directly into projects') },
-              { value: <PHNumber was="0 €" />, label: t('Verwaltungsgehälter', 'Administrative salaries') },
-              { value: t('seit 2008', 'since 2008'), label: t('Erfahrung vor Ort', 'Experience on the ground') },
-            ].map((stat) => (
-              <div key={stat.label}>
+              // Der Anteil ist noch unbelegt – fuer einen gemeinnuetzigen Verein ist
+              // das eine pruefbare Aussage, siehe GitHub #13.
+              { value: <PHNumber was="100%" />, label: t('deiner Spende geht in die Projekte', 'of your donation goes into the projects') },
+              { value: t('kein Abzug', 'no deduction'), label: t('für Gehälter oder Verwaltung in Deutschland', 'for salaries or administration in Germany') },
+              { value: t('seit 2008', 'since 2008'), label: t('Erfahrung vor Ort', 'experience on the ground') },
+            ].map((stat, i) => (
+              <div key={i}>
                 <p className="text-3xl font-bold text-[#11aed1] mb-1">{stat.value}</p>
                 <p className="text-sm text-gray-600">{stat.label}</p>
               </div>
             ))}
+          </div>
+          <div className="mt-10">
+            <Link
+              href="/transparenz"
+              className="inline-flex items-center justify-center rounded-full border-2 border-[#11aed1] text-[#11aed1] px-8 py-3 font-semibold hover:bg-[#11aed1] hover:text-white transition-colors"
+            >
+              {t('Wie wir Spenden verwenden →', 'How we use donations →')}
+            </Link>
           </div>
         </div>
       </section>
@@ -259,8 +280,8 @@ export default function SpendenClientPage() {
           </h2>
           <p className="text-gray-400 mb-8">
             {t(
-              'Wir helfen gerne weiter – ob zu Spendenquittungen, Patenschaften oder anderen Wegen zu helfen.',
-              'We are happy to help – whether about donation receipts, sponsorships or other ways to contribute.'
+              'Wir helfen gerne weiter – ob zur Spendenquittung, zur Fördermitgliedschaft oder zu anderen Wegen, uns zu unterstützen.',
+              'We are happy to help – whether about donation receipts, supporting membership or other ways to contribute.'
             )}
           </p>
           <Link

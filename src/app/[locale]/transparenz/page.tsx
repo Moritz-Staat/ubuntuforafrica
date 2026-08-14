@@ -19,8 +19,7 @@ export async function generateMetadata(
 }
 
 import { Link } from '@/i18n/routing';
-import { CONTACT_EMAIL, mailto } from '@/lib/site-config'
-import { PH, PHLabel } from '@/components/Placeholder'
+import { RECEIPT_EMAIL, SATZUNG_PDF, mailto } from '@/lib/site-config'
 
 export default async function TransparenzPage({
   params,
@@ -39,13 +38,10 @@ export default async function TransparenzPage({
             {t('Transparenz', 'Transparency')}
           </h1>
           <p className="text-xl text-gray-300 max-w-2xl mx-auto">
-            <span style={{ ...PH, display: 'inline-block', color: '#212529' }} title="⚠ Placeholder – bitte prüfen">
-              <PHLabel />
-              {t(
-                'Wir zeigen offen, wie jeder Euro eingesetzt wird.',
-                'We openly show how every euro is used.'
-              )}
-            </span>
+            {t(
+              'Wir zeigen offen, wie wir arbeiten und wofür Spenden eingesetzt werden.',
+              'We openly show how we work and what donations are used for.'
+            )}
           </p>
         </div>
       </section>
@@ -67,11 +63,11 @@ export default async function TransparenzPage({
               </p>
             </div>
             <div className="bg-[#ae64fd] text-white rounded-2xl p-10 text-center shadow-lg">
-              <div className="text-6xl font-extrabold mb-4">0 €</div>
+              <div className="text-5xl font-extrabold mb-4">{t('ehrenamtlich', 'voluntary')}</div>
               <p className="text-lg font-medium leading-snug">
                 {t(
-                  'Verwaltungsgehälter in Deutschland',
-                  'Administrative salaries in Germany'
+                  'Der Vorstand in Deutschland arbeitet ohne Bezahlung – von deiner Spende wird nichts für Gehälter oder Verwaltung abgezogen',
+                  'The board in Germany works unpaid – nothing is deducted from your donation for salaries or administration'
                 )}
               </p>
             </div>
@@ -98,94 +94,60 @@ export default async function TransparenzPage({
           </h2>
           <p className="text-center text-gray-500 mb-12 max-w-2xl mx-auto">
             {t(
-              'Deine Unterstützung fließt in vier konkrete Bereiche, die das Leben von Kindern und Familien in Imizamo Yethu verändern.',
-              'Your support flows into four concrete areas that change the lives of children and families in Imizamo Yethu.'
+              'Deine Unterstützung fließt in konkrete Bereiche, die den Alltag von Kindern in Imizamo Yethu verändern.',
+              'Your support flows into concrete areas that change everyday life for children in Imizamo Yethu.'
             )}
           </p>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div className="bg-white rounded-2xl p-8 shadow-sm border border-gray-100">
-              <div
-                className="w-12 h-12 rounded-full flex items-center justify-center mb-5 text-2xl"
-                style={{ backgroundColor: '#11aed120' }}
-              >
-                🏫
+            {[
+              {
+                icon: '🏫',
+                color: '#11aed120',
+                title: t('Ubuntu Kids Aftercare', 'Ubuntu Kids Aftercare'),
+                text: t(
+                  'Täglich eine warme Mahlzeit, Lernmaterial, Hausaufgabenbetreuung und ein Team, das rund 50 Kinder von Montag bis Freitag nach der Schule begleitet.',
+                  'A warm meal every day, learning materials, homework support and a team that looks after around 50 children after school from Monday to Friday.'
+                ),
+              },
+              {
+                icon: '📚',
+                color: '#ae64fd20',
+                title: t('Schulkooperationen & Sprachförderung', 'School partnerships & language support'),
+                text: t(
+                  'Zusammenarbeit mit der Hout Bay Primary und der Kronendal Primary: Unterstützung im Unterricht und gezielte Nachhilfe in isiXhosa für Kinder, deren Familien aus Simbabwe und Malawi zugewandert sind.',
+                  'Cooperation with Hout Bay Primary and Kronendal Primary: support in the classroom and targeted isiXhosa tutoring for children whose families migrated from Zimbabwe and Malawi.'
+                ),
+              },
+              {
+                icon: '💻',
+                color: '#21252920',
+                title: t('Digitale Förderung', 'Digital learning'),
+                text: t(
+                  'Computerkurs und Tablets für die Klassen 3 bis 5 – finanziert über Sponsoren, seit 2025 fester Bestandteil der Woche.',
+                  'A computer course and tablets for grades 3 to 5 – funded by sponsors and a fixed part of the week since 2025.'
+                ),
+              },
+              {
+                icon: '🏕️',
+                color: '#f7a90020',
+                title: t('Ferien-Camps und Ausflüge', 'Holiday camps and excursions'),
+                text: t(
+                  'Ferienfreizeiten, Ausflüge zum Strand und zum Spielplatz sowie Surftherapie und Fußballtraining – Erfahrungen, die im Township sonst nicht möglich wären.',
+                  'Holiday programmes, trips to the beach and the playground as well as surf therapy and football training – experiences that would otherwise not be possible in the township.'
+                ),
+              },
+            ].map((item) => (
+              <div key={item.title} className="bg-white rounded-2xl p-8 shadow-sm border border-gray-100">
+                <div
+                  className="w-12 h-12 rounded-full flex items-center justify-center mb-5 text-2xl"
+                  style={{ backgroundColor: item.color }}
+                >
+                  {item.icon}
+                </div>
+                <h3 className="text-xl font-bold text-[#212529] mb-3">{item.title}</h3>
+                <p className="text-gray-600 leading-relaxed">{item.text}</p>
               </div>
-              <h3 className="text-xl font-bold text-[#212529] mb-3">
-                {t('Aftercare-Programm', 'Aftercare Programme')}
-              </h3>
-              <p className="text-gray-600 leading-relaxed">
-                <span style={PH} title="⚠ Placeholder – durch echte Projektbeschreibung ersetzen">
-                  <PHLabel />
-                  {t(
-                    'Täglich frische Mahlzeiten, Lernmaterial, Hausaufgabenbetreuung und qualifiziertes Personal, das die Kinder nach der Schule begleitet und fördert.',
-                    'Daily fresh meals, learning materials, homework support and qualified staff who accompany and nurture children after school.'
-                  )}
-                </span>
-              </p>
-            </div>
-            <div className="bg-white rounded-2xl p-8 shadow-sm border border-gray-100">
-              <div
-                className="w-12 h-12 rounded-full flex items-center justify-center mb-5 text-2xl"
-                style={{ backgroundColor: '#ae64fd20' }}
-              >
-                📚
-              </div>
-              <h3 className="text-xl font-bold text-[#212529] mb-3">
-                {t('Schulkooperationen', 'School Partnerships')}
-              </h3>
-              <p className="text-gray-600 leading-relaxed">
-                <span style={PH} title="⚠ Placeholder – durch echte Projektbeschreibung ersetzen">
-                  <PHLabel />
-                  {t(
-                    'Enge Zusammenarbeit mit der Hout Bay Primary und Kronendal Primary: Unterrichtsprojekte, Freiwilligeneinsätze und Unterstützung der Schulgemeinschaft.',
-                    'Close cooperation with Hout Bay Primary and Kronendal Primary: classroom projects, volunteer placements and support for the school community.'
-                  )}
-                </span>
-              </p>
-            </div>
-            <div className="bg-white rounded-2xl p-8 shadow-sm border border-gray-100">
-              <div
-                className="w-12 h-12 rounded-full flex items-center justify-center mb-5 text-2xl"
-                style={{ backgroundColor: '#f7a90020' }}
-              >
-                🏕️
-              </div>
-              <h3 className="text-xl font-bold text-[#212529] mb-3">
-                {t('Ferienfreizeiten und Camps', 'Holiday Camps')}
-              </h3>
-              <p className="text-gray-600 leading-relaxed">
-                <span style={PH} title="⚠ Placeholder – durch echte Projektbeschreibung ersetzen">
-                  <PHLabel />
-                  {t(
-                    'In den Schulferien organisieren wir Freizeiten und Camps, die Kindern neue Erfahrungen, Sport, Kreativität und Gemeinschaft ermöglichen.',
-                    'During school holidays we organise camps and holiday programmes that give children new experiences, sport, creativity and community.'
-                  )}
-                </span>
-              </p>
-            </div>
-            <div className="bg-white rounded-2xl p-8 shadow-sm border border-gray-100">
-              <div
-                className="w-12 h-12 rounded-full flex items-center justify-center mb-5 text-2xl"
-                style={{ backgroundColor: '#21252920' }}
-              >
-                🤝
-              </div>
-              <h3 className="text-xl font-bold text-[#212529] mb-3">
-                {t(
-                  'Nothilfe für Familien',
-                  'Emergency Aid for Families'
-                )}
-              </h3>
-              <p className="text-gray-600 leading-relaxed">
-                <span style={PH} title="⚠ Placeholder – durch echte Projektbeschreibung ersetzen">
-                  <PHLabel />
-                  {t(
-                    'Wenn Familien in akute Krisen geraten – durch Krankheit, Jobverlust oder andere Notlagen – helfen wir schnell und unbürokratisch mit gezielter Nothilfe.',
-                    'When families face acute crises – through illness, job loss or other emergencies – we respond quickly and without red tape with targeted emergency aid.'
-                  )}
-                </span>
-              </p>
-            </div>
+            ))}
           </div>
         </div>
       </section>
@@ -214,22 +176,35 @@ export default async function TransparenzPage({
               </h3>
               <p className="text-gray-600 leading-relaxed">
                 {t(
-                  'Unser professionelles Team vor Ort in Imizamo Yethu, Hout Bay, wird fair aus den Spendengeldern bezahlt. Brenda Moloto, Andiswa Watsha, Zizipho Nyanga und Mzwandile Ntozini leiten die tägliche Projektarbeit mit Kindern und Familien.',
-                  'Our professional on-the-ground team in Imizamo Yethu, Hout Bay, is fairly paid from donations. Brenda Moloto, Andiswa Watsha, Zizipho Nyanga and Mzwandile Ntozini lead the daily project work with children and families.'
+                  'Unser professionelles Team vor Ort in Imizamo Yethu, Hout Bay, wird fair aus den Spendengeldern bezahlt. Brenda Moloto, Andiswa Watsha, Zizipho Nyanga und Mzwandile Ntozini gestalten die tägliche Arbeit mit den Kindern; die Projektleitung liegt bei Marina Vucurevic, die ebenfalls ehrenamtlich arbeitet.',
+                  'Our professional on-the-ground team in Imizamo Yethu, Hout Bay, is fairly paid from donations. Brenda Moloto, Andiswa Watsha, Zizipho Nyanga and Mzwandile Ntozini shape the daily work with the children; project management is led by Marina Vucurevic, who also works on a voluntary basis.'
                 )}
               </p>
             </div>
           </div>
           <div className="mt-10 bg-gray-50 rounded-2xl p-8 text-center">
-            <p className="text-gray-700 leading-relaxed max-w-2xl mx-auto">
-              <span style={PH} title="⚠ Placeholder – formulierung bitte bestätigen">
-                <PHLabel />
-                {t(
-                  'Dieses Modell stellt sicher, dass Spendengelder dort ankommen, wo sie gebraucht werden – direkt bei den Menschen in Hout Bay.',
-                  'This model ensures that donations reach where they are needed – directly with the people in Hout Bay.'
-                )}
-              </span>
+            <p className="text-gray-700 leading-relaxed max-w-2xl mx-auto mb-6">
+              {t(
+                'Dieses Modell stellt sicher, dass Spendengelder dort ankommen, wo sie gebraucht werden – direkt bei den Menschen in Hout Bay.',
+                'This model ensures that donations reach where they are needed – directly with the people in Hout Bay.'
+              )}
             </p>
+            <div className="flex flex-col sm:flex-row gap-3 justify-center">
+              <Link
+                href="/ueber-uns"
+                className="inline-flex items-center justify-center rounded-full border-2 border-[#212529] text-[#212529] px-6 py-2.5 text-sm font-semibold hover:bg-[#212529] hover:text-white transition-colors"
+              >
+                {t('Das Team kennenlernen', 'Meet the team')}
+              </Link>
+              <a
+                href={SATZUNG_PDF}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center rounded-full border-2 border-[#212529] text-[#212529] px-6 py-2.5 text-sm font-semibold hover:bg-[#212529] hover:text-white transition-colors"
+              >
+                {t('Satzung als PDF', 'Statutes as PDF')}
+              </a>
+            </div>
           </div>
         </div>
       </section>
@@ -247,10 +222,10 @@ export default async function TransparenzPage({
             )}
           </p>
           <a
-            href={mailto(CONTACT_EMAIL, locale === 'en' ? 'Donation Receipt' : 'Spendenquittung')}
+            href={mailto(RECEIPT_EMAIL, locale === 'en' ? 'Donation Receipt' : 'Spendenquittung')}
             className="inline-block bg-[#212529] text-white font-semibold px-8 py-4 rounded-full hover:bg-[#11aed1] transition-colors duration-200"
           >
-            {CONTACT_EMAIL}
+            {RECEIPT_EMAIL}
           </a>
         </div>
       </section>

@@ -4,6 +4,7 @@ import { Link } from '@/i18n/routing'
 import { client } from '@/sanity/lib/client'
 import { projectsQuery } from '@/sanity/lib/queries'
 import { urlFor } from '@/sanity/lib/image'
+import { PhotoSlot } from '@/components/Placeholder'
 
 interface Project {
   _id: string
@@ -16,30 +17,37 @@ interface Project {
   active: boolean
 }
 
+/**
+ * Inhalte aus den freigegebenen Texten (Aftercare-Beschreibung, Volunteers).
+ * Solange in Sanity keine Projekte gepflegt sind, trägt diese Liste die Seite.
+ */
 const hardcodedProjects = [
   {
     id: 'aftercare',
     title: 'Ubuntu Kids Aftercare',
     title_en: 'Ubuntu Kids Aftercare',
-    subtitle: 'Nachmittagsbetreuung in Imizamo Yethu',
-    subtitle_en: 'Afternoon care in Imizamo Yethu',
-    description: 'Das Herzstück unserer Arbeit: Die Ubuntu Kids Aftercare bietet Kindern aus Imizamo Yethu einen sicheren Raum am Nachmittag. Hier bekommen sie Unterstützung bei den Hausaufgaben, eine warme Mahlzeit, sportliche Aktivitäten und kreative Förderung.',
-    description_en: 'The heart of our work: Ubuntu Kids Aftercare offers children from Imizamo Yethu a safe space in the afternoons. Here they receive homework support, a warm meal, sporting activities and creative programmes.',
+    subtitle: 'Ein sicherer Ort nach der Schule',
+    subtitle_en: 'A safe place after school',
+    description:
+      'Unsere Aftercare ist eine Nachmittagsbetreuung für Kinder aus dem Township Imizamo Yethu in Hout Bay. Viele Kinder sind nach der Schule mehrere Stunden auf sich allein gestellt, weil ihre Eltern arbeiten – und verbringen den Nachmittag auf der Straße, in einem Umfeld voller Gefahren. Genau hier setzt unser Angebot an: Von Montag bis Freitag betreuen wir rund 50 Kinder im Alter von etwa 6 bis 10 Jahren, täglich von 13:30 bis 17:00 Uhr.',
+    description_en:
+      'Our aftercare is an afternoon programme for children from the township of Imizamo Yethu in Hout Bay. Many children are left on their own for hours after school because their parents work – and spend the afternoon on the street, in an environment full of dangers. This is exactly where our programme comes in: from Monday to Friday we care for around 50 children aged roughly 6 to 10, daily from 1:30 to 5:00 pm.',
     details: [
-      'Hausaufgabenhilfe und schulische Unterstützung',
-      'Tägliche warme Mahlzeit',
-      'Sport- und Bewegungsangebote',
-      'Kreative Aktivitäten und Kunstprojekte',
-      'Emotionale Begleitung und Beziehungsarbeit',
+      'Hausaufgabenbetreuung in altersgerechten Gruppen',
+      'Eine warme Mahlzeit an jedem Tag',
+      'Kreative Aktivitäten wie Malen und gemeinsames Spielen',
+      'Freies Spiel, zum Beispiel Fußball oder Gruppenspiele',
+      'Der tägliche „Circle“ – ein Ritual, das Orientierung und Zusammenhalt gibt',
     ],
     details_en: [
-      'Homework help and academic support',
-      'Daily warm meal',
-      'Sports and physical activities',
-      'Creative activities and art projects',
-      'Emotional support and relationship building',
+      'Homework support in age-appropriate groups',
+      'A warm meal every day',
+      'Creative activities such as painting and playing together',
+      'Free play, for example football or group games',
+      'The daily “circle” – a ritual that provides orientation and togetherness',
     ],
-    image: null,
+    photo: 'Kinder in der Aftercare, z. B. beim Circle oder bei den Hausaufgaben',
+    photo_en: 'Children in the aftercare, e.g. during the circle or homework',
     color: '#11aed1',
     icon: '🏠',
   },
@@ -49,23 +57,26 @@ const hardcodedProjects = [
     title_en: 'School Partnership',
     subtitle: 'Hout Bay Primary & Kronendal Primary',
     subtitle_en: 'Hout Bay Primary & Kronendal Primary',
-    description: 'Wir kooperieren eng mit zwei Grundschulen in Hout Bay. Unsere Freiwilligen unterstützen Lehrerinnen im Unterricht, helfen einzelnen Kindern und bringen neue Impulse, Energie und internationale Perspektiven in den Schulalltag.',
-    description_en: 'We work closely with two primary schools in Hout Bay. Our volunteers support teachers in the classroom, help individual children and bring fresh ideas, energy and international perspectives to everyday school life.',
+    description:
+      'Wir arbeiten eng mit zwei Grundschulen in Hout Bay zusammen. Unsere Freiwilligen unterstützen die Lehrkräfte im Unterricht, fördern einzelne Kinder gezielt und bringen neue Impulse in den Schulalltag. Ein Schwerpunkt ist die Sprachförderung: Viele unserer Kinder sind mit ihren Familien aus Simbabwe und Malawi nach Südafrika gekommen. Die Landessprache isiXhosa ist für sie eine große Hürde – sie ist eigenes Unterrichtsfach und wird teilweise auch im Fachunterricht verwendet.',
+    description_en:
+      'We work closely with two primary schools in Hout Bay. Our volunteers support teachers in the classroom, give individual children targeted help and bring fresh impulses into everyday school life. One focus is language support: many of our children came to South Africa from Zimbabwe and Malawi with their families. The national language isiXhosa is a major hurdle for them – it is a subject in its own right and is partly used in other lessons too.',
     details: [
-      'Unterrichtsunterstützung in Klassenzimmern',
-      'Individuelle Förderung schwächerer Schüler:innen',
-      'Einbringen von kreativen Unterrichtsmethoden',
+      'Unterrichtsunterstützung in den Klassenzimmern',
+      'Gezielte Sprachförderung in isiXhosa durch intensive Nachhilfe',
+      'Individuelle Förderung einzelner Kinder',
       'Enge Zusammenarbeit mit dem Schulpersonal',
-      'Regelmäßige Austausche und Fortbildungen',
+      'Mehr Sicherheit im Unterricht – und eigene Lernerfolge',
     ],
     details_en: [
       'Classroom teaching support',
-      'Individual support for weaker students',
-      'Bringing in creative teaching methods',
-      'Close collaboration with school staff',
-      'Regular exchanges and training',
+      'Targeted isiXhosa language support through intensive tutoring',
+      'Individual support for single children',
+      'Close cooperation with school staff',
+      'More confidence in class – and their own learning successes',
     ],
-    image: null,
+    photo: 'Freiwillige oder Lehrkraft mit Kindern in der Hout Bay Primary School',
+    photo_en: 'Volunteer or teacher with children at Hout Bay Primary School',
     color: '#ae64fd',
     icon: '📚',
   },
@@ -75,23 +86,26 @@ const hardcodedProjects = [
     title_en: 'Volunteer Programme',
     subtitle: 'Internationaler Einsatz in Hout Bay',
     subtitle_en: 'International commitment in Hout Bay',
-    description: 'Unser Freiwilligenprogramm ermöglicht es Menschen aus aller Welt, aktiv in unseren Projekten mitzuwirken – mit persönlicher Betreuung vor, während und nach dem Aufenthalt. Mindestdauer und Stundenumfang werden noch festgelegt.',
-    description_en: 'Our volunteer programme enables people from all over the world to actively participate in our projects, with personal support before, during and after the stay. Minimum duration and weekly hours are still to be confirmed.',
+    description:
+      'Unsere Freiwilligen helfen in allen Projekten mit und arbeiten eng mit dem multiprofessionellen Team vor Ort zusammen – ob in der Hout Bay Primary School, der Kronendal Primary oder bei Ubuntu Kids Aftercare. Sie unterstützen die Lehrkräfte, helfen bei den Hausaufgaben, planen Freizeitaktivitäten und begleiten Ausflüge – und bringen dabei ihre eigenen Ideen und Stärken ein.',
+    description_en:
+      'Our volunteers help in all our projects and work closely with the multi-professional team on site – whether at Hout Bay Primary School, Kronendal Primary or Ubuntu Kids Aftercare. They support the teachers, help with homework, plan leisure activities and accompany excursions – bringing in their own ideas and strengths.',
     details: [
       'Einsatz in Schule und Aftercare',
-      'Persönliche Begleitung durch das lokale Team',
-      'Unterkunft in Hout Bay inklusive',
-      'Sprachkurse und Kultureinführung',
-      'Vernetzung mit anderen Freiwilligen weltweit',
+      'In der Regel 30 bis 35 Stunden pro Woche, Montag bis Freitag',
+      'Mindestdauer: drei Monate',
+      'Persönliche Begleitung vor, während und nach dem Aufenthalt',
+      'Sichere Unterkunft mit anderen Freiwilligen',
     ],
     details_en: [
-      'Work in school and aftercare',
-      'Personal support from the local team',
-      'Accommodation in Hout Bay included',
-      'Language courses and cultural orientation',
-      'Networking with volunteers worldwide',
+      'Placement in school and aftercare',
+      'Usually 30 to 35 hours per week, Monday to Friday',
+      'Minimum duration: three months',
+      'Personal support before, during and after the stay',
+      'Safe accommodation shared with other volunteers',
     ],
-    image: null,
+    photo: 'Freiwillige gemeinsam mit dem Team oder den Kindern',
+    photo_en: 'Volunteers together with the team or the children',
     color: '#f7a900',
     icon: '🤝',
   },
@@ -131,6 +145,13 @@ export default async function ProjektePage({ params }: { params: Promise<{ local
 
   const useSanity = sanityProjects.length > 0
 
+  const week = [
+    { day: t('Dienstag', 'Tuesday'), text: t('Surftherapie mit „Waves for Change“', 'Surf therapy with “Waves for Change”') },
+    { day: t('Mittwoch & Donnerstag', 'Wednesday & Thursday'), text: t('Computerkurs für die Klassen 3 bis 5', 'Computer course for grades 3 to 5') },
+    { day: t('Freitag', 'Friday'), text: t('Ausflüge zum Strand oder zum Spielplatz', 'Trips to the beach or the playground') },
+    { day: t('Samstag', 'Saturday'), text: t('Training der Fußballmannschaft „Ubuntu Kids“', 'Training of the “Ubuntu Kids” football team') },
+  ]
+
   return (
     <>
       <section className="py-32 bg-gradient-to-br from-[#212529] to-[#11aed1]/30 text-white">
@@ -160,7 +181,7 @@ export default async function ProjektePage({ params }: { params: Promise<{ local
                       <h2 className="text-4xl font-bold text-[#212529] mb-5">{title}</h2>
                       {description && <p className="text-gray-600 leading-relaxed mb-8">{description}</p>}
                     </div>
-                    {project.mainImage && (
+                    {project.mainImage ? (
                       <div className={`relative rounded-2xl overflow-hidden aspect-[4/3] ${i % 2 === 1 ? 'lg:order-1' : ''}`}>
                         <Image
                           src={urlFor(project.mainImage).width(800).url()}
@@ -168,6 +189,10 @@ export default async function ProjektePage({ params }: { params: Promise<{ local
                           fill
                           className="object-cover"
                         />
+                      </div>
+                    ) : (
+                      <div className={i % 2 === 1 ? 'lg:order-1' : ''}>
+                        <PhotoSlot describe={t('Foto zu diesem Projekt', 'Photo for this project')} />
                       </div>
                     )}
                   </div>
@@ -180,6 +205,7 @@ export default async function ProjektePage({ params }: { params: Promise<{ local
             const subtitle = locale === 'en' ? project.subtitle_en : project.subtitle
             const description = locale === 'en' ? project.description_en : project.description
             const details = locale === 'en' ? project.details_en : project.details
+            const photo = locale === 'en' ? project.photo_en : project.photo
             return (
               <section key={project.id} className={`py-20 ${i % 2 === 0 ? 'bg-white' : 'bg-gray-50'}`}>
                 <div className="mx-auto max-w-7xl px-6">
@@ -221,16 +247,49 @@ export default async function ProjektePage({ params }: { params: Promise<{ local
                         </Link>
                       )}
                     </div>
-                    <div className={`relative rounded-2xl overflow-hidden aspect-[4/3] ${i % 2 === 1 ? 'lg:order-1' : ''}`}>
-                      <div className="absolute inset-0 flex items-center justify-center text-white/30">
-                    <svg xmlns="http://www.w3.org/2000/svg" className="h-16 w-16" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>
-                  </div>
+                    {/* Bis die Fotos aus dem Drive da sind, steht hier ein
+                        beschrifteter Platzhalter statt einer leeren Fläche. */}
+                    <div className={i % 2 === 1 ? 'lg:order-1' : ''}>
+                      <PhotoSlot describe={photo} />
                     </div>
                   </div>
                 </div>
               </section>
             )
           })}
+
+      {/* Wochenplan und digitale Förderung: gehören zur Aftercare, waren in den
+          Texten aber bisher nirgends auf der Website abgebildet. */}
+      <section className="py-20 bg-[#212529] text-white">
+        <div className="mx-auto max-w-5xl px-6">
+          <div className="text-center mb-14">
+            <p className="text-[#f7a900] text-sm font-semibold uppercase tracking-widest mb-3">
+              {t('Aftercare im Detail', 'Aftercare in detail')}
+            </p>
+            <h2 className="text-4xl font-bold">{t('Besondere Aktivitäten', 'Special activities')}</h2>
+            <p className="text-gray-400 mt-4 max-w-xl mx-auto">
+              {t('Jeder Tag bringt neue Impulse.', 'Every day brings something new.')}
+            </p>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+            {week.map((item) => (
+              <div key={item.day} className="rounded-2xl bg-white/5 border border-white/10 p-6">
+                <p className="text-[#11aed1] text-sm font-semibold uppercase tracking-widest mb-2">{item.day}</p>
+                <p className="text-gray-200">{item.text}</p>
+              </div>
+            ))}
+          </div>
+          <div className="mt-10 rounded-2xl bg-white/5 border border-white/10 p-8">
+            <h3 className="text-xl font-bold mb-3">{t('Digitale Förderung', 'Digital learning')}</h3>
+            <p className="text-gray-300 leading-relaxed">
+              {t(
+                'Dank unserer Sponsoren nehmen Schüler:innen der Klassen 3 bis 5 seit 2025 regelmäßig an einem Computerkurs teil und arbeiten mit Tablets. Die digitalen Hilfsmittel unterstützen sie bei den Hausaufgaben, beim Verbessern der Sprachkenntnisse und beim Erlernen grundlegender Computerfähigkeiten.',
+                'Thanks to our sponsors, pupils in grades 3 to 5 have taken part in a regular computer course since 2025 and work with tablets. The digital tools help them with homework, with improving their language skills and with learning basic computer skills.'
+              )}
+            </p>
+          </div>
+        </div>
+      </section>
 
       <section className="py-20 bg-[#11aed1]">
         <div className="mx-auto max-w-3xl px-6 text-center text-white">

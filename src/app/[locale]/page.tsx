@@ -1,7 +1,8 @@
 import type { Metadata } from 'next'
 import { setRequestLocale } from 'next-intl/server'
 import { Link } from '@/i18n/routing'
-import { PHNumber, PhotoSlot, PH, PHLabel } from '@/components/Placeholder'
+import { VOLUNTEER_EMAIL, mailto } from '@/lib/site-config'
+import { PHNumber, PhotoSlot } from '@/components/Placeholder'
 
 export async function generateMetadata(
   { params }: { params: Promise<{ locale: string }> }
@@ -57,8 +58,8 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
     {
       title: t('Freiwilligenprogramm', 'Volunteer Programme'),
       description: t(
-        'Internationales Freiwilligenprogramm mit intensiver Begleitung vor und nach dem Aufenthalt. Mindestdauer und Wochenstunden werden noch festgelegt.',
-        'International volunteer programme with personal support before and after your stay. Minimum duration and weekly hours are still to be confirmed.'
+        'Freiwillige und Praktikant:innen arbeiten in Schule und Aftercare mit – ab drei Monaten, mit persönlicher Begleitung vor, während und nach dem Aufenthalt.',
+        'Volunteers and interns work in the school and aftercare – from three months, with personal support before, during and after the stay.'
       ),
       icon: '🤝',
       href: '/freiwillige' as const,
@@ -127,17 +128,25 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
             {t('Unsere Wirkung', 'Our Impact')}
           </p>
           <div className="grid grid-cols-1 gap-8 text-center md:grid-cols-3 mt-8">
+            {/* Alle drei Zahlen stammen aus den freigegebenen Texten
+                (Aftercare-Beschreibung, Vereinsgeschichte) – keine Platzhalter. */}
             <div>
-              <p className="text-6xl font-bold mb-2"><PHNumber was="200+" /></p>
-              <p className="text-lg text-white/90">{t('Kinder betreut', 'Children supported')}</p>
+              <p className="text-6xl font-bold mb-2">50</p>
+              <p className="text-lg text-white/90">
+                {t('Kinder täglich in der Aftercare', 'children in aftercare every day')}
+              </p>
             </div>
             <div>
-              <p className="text-6xl font-bold mb-2"><PHNumber was="16" /></p>
-              <p className="text-lg text-white/90">{t('Jahre aktiv', 'Years active')}</p>
+              <p className="text-6xl font-bold mb-2">2008</p>
+              <p className="text-lg text-white/90">
+                {t('seit diesem Jahr vor Ort', 'on the ground since')}
+              </p>
             </div>
             <div>
-              <p className="text-6xl font-bold mb-2"><PHNumber was="50k+" /></p>
-              <p className="text-lg text-white/90">{t('€ Nothilfe geleistet', '€ Emergency aid')}</p>
+              <p className="text-6xl font-bold mb-2">5</p>
+              <p className="text-lg text-white/90">
+                {t('Tage pro Woche Betreuung', 'days of care per week')}
+              </p>
             </div>
           </div>
         </div>
@@ -263,8 +272,8 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
           <h2 className="text-4xl font-bold mb-6">{t('Werde Teil unseres Teams', 'Join our team')}</h2>
           <p className="text-xl text-white/90 mb-10 max-w-2xl mx-auto leading-relaxed">
             {t(
-              'Du möchtest dich sozial engagieren und praktische Erfahrungen sammeln? Dann werde Teil von Ubuntu for Africa! Vollzeit, mit persönlicher Begleitung.',
-              'Want to make a social impact and gain hands-on experience? Join Ubuntu for Africa! Full-time, with personal support throughout.'
+              'Du möchtest dich sozial engagieren und praktische Erfahrungen sammeln? Dann werde Teil von Ubuntu for Africa – in der Schule, in der Aftercare und mit deinen eigenen Ideen.',
+              'Want to make a social impact and gain hands-on experience? Join Ubuntu for Africa – in the school, in the aftercare and with your own ideas.'
             )}
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -274,12 +283,17 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
             >
               {t('Mehr erfahren', 'Learn more')}
             </Link>
-            <Link
-              href="/kontakt"
+            {/* Bewerbungen sollen direkt bei der Freiwilligen-Koordination
+                landen, nicht im allgemeinen Kontaktformular. */}
+            <a
+              href={mailto(
+                VOLUNTEER_EMAIL,
+                locale === 'en' ? 'Volunteer application' : 'Bewerbung als Freiwillige:r'
+              )}
               className="inline-flex items-center justify-center gap-2 rounded-full border-2 border-white text-white px-8 py-4 text-lg font-semibold hover:bg-white/10 transition-colors"
             >
               {t('Jetzt bewerben', 'Apply now')}
-            </Link>
+            </a>
           </div>
         </div>
       </section>
