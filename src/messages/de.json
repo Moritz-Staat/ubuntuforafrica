@@ -7,8 +7,8 @@
     "volunteers": "Freiwillige",
     "blog": "Blog",
     "contact": "Kontakt",
-    "sponsorship": "Patenschaften",
-    "navigation": "Navigation"
+    "navigation": "Navigation",
+    "transparency": "Transparenz"
   },
   "hero": {
     "headline": "Umuntu Ngumntu Ngabantu",
@@ -39,10 +39,10 @@
     "legal": "Impressum",
     "privacy": "Datenschutz",
     "participate": "Mitmachen",
-    "sponsorship_link": "Patenschaft übernehmen",
     "transparency": "Transparenz",
     "engage": "Freiwillig engagieren",
-    "supporter_link": "Förderpartner werden"
+    "supporter_link": "Fördermitglied werden",
+    "statutes": "Satzung"
   },
   "newsletter": {
     "title": "Newsletter",

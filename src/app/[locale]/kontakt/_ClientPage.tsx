@@ -7,7 +7,14 @@
 
 import { useState } from 'react'
 import { useLocale } from 'next-intl'
-import { CONTACT_EMAIL, VOLUNTEER_EMAIL, mailto } from '@/lib/site-config'
+import {
+  CONTACT_EMAIL,
+  CONTACT_ROUTING,
+  RECEIPT_EMAIL,
+  VOLUNTEER_EMAIL,
+  isContactCategory,
+  mailto,
+} from '@/lib/site-config'
 import { PH, PHLabel } from '@/components/Placeholder'
 
 type Status = 'idle' | 'loading' | 'success' | 'error'
@@ -59,21 +66,16 @@ export default function KontaktClientPage() {
     }
   }
 
-  const subjectOptions = locale === 'en'
-    ? [
-        { value: 'freiwillig', label: 'Volunteer programme' },
-        { value: 'spenden', label: 'Donations' },
-        { value: 'patenschaft', label: 'Sponsorship' },
-        { value: 'presse', label: 'Press & partnerships' },
-        { value: 'sonstiges', label: 'Other' },
-      ]
-    : [
-        { value: 'freiwillig', label: 'Freiwilligenprogramm' },
-        { value: 'spenden', label: 'Spenden' },
-        { value: 'patenschaft', label: 'Patenschaft' },
-        { value: 'presse', label: 'Presse & Kooperationen' },
-        { value: 'sonstiges', label: 'Sonstiges' },
-      ]
+  // Kategorien und Empfänger kommen aus derselben Tabelle wie in /api/contact.
+  const subjectOptions = Object.entries(CONTACT_ROUTING).map(([value, route]) => ({
+    value,
+    label: locale === 'en' ? route.label_en : route.label_de,
+    email: route.email,
+  }))
+
+  const selectedRoute = isContactCategory(formData.subject)
+    ? CONTACT_ROUTING[formData.subject]
+    : null
 
   return (
     <>
@@ -150,11 +152,12 @@ export default function KontaktClientPage() {
                   </div>
                   <div>
                     <label htmlFor="subject" className="block text-sm font-semibold text-[#212529] mb-2">
-                      {t('Betreff', 'Subject')}
+                      {t('Thema', 'Topic')} *
                     </label>
                     <select
                       id="subject"
                       name="subject"
+                      required
                       value={formData.subject}
                       onChange={handleChange}
                       disabled={status === 'loading'}
@@ -165,6 +168,17 @@ export default function KontaktClientPage() {
                         <option key={opt.value} value={opt.value}>{opt.label}</option>
                       ))}
                     </select>
+                    <p className="mt-2 text-xs text-gray-500">
+                      {selectedRoute
+                        ? <>
+                            {t('Deine Nachricht geht direkt an ', 'Your message goes directly to ')}
+                            <span className="font-semibold text-[#212529]">{selectedRoute.email}</span>
+                          </>
+                        : t(
+                            'Je nach Thema landet deine Nachricht direkt bei der richtigen Ansprechperson.',
+                            'Depending on the topic your message goes straight to the right person.'
+                          )}
+                    </p>
                   </div>
                   <div>
                     <label htmlFor="message" className="block text-sm font-semibold text-[#212529] mb-2">
@@ -222,9 +236,15 @@ export default function KontaktClientPage() {
                     },
                     {
                       icon: '📧',
-                      label: t('E-Mail (Freiwillige)', 'Email (Volunteers)'),
+                      label: t('E-Mail (Freiwillige & Praktikum)', 'Email (Volunteers & internships)'),
                       value: VOLUNTEER_EMAIL,
                       href: mailto(VOLUNTEER_EMAIL),
+                    },
+                    {
+                      icon: '🧾',
+                      label: t('E-Mail (Spendenquittung)', 'Email (Donation receipt)'),
+                      value: RECEIPT_EMAIL,
+                      href: mailto(RECEIPT_EMAIL, locale === 'en' ? 'Donation receipt' : 'Spendenquittung'),
                     },
                     {
                       icon: '📍',

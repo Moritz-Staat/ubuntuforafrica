@@ -133,9 +133,9 @@ export default async function FoerderpartnerPage({
             {t('Förderpartner werden', 'Become a supporting partner')}
           </a>
           <p className="mt-6 text-gray-600">
-            {t('Lieber erst stöbern? ', 'Rather browse first? ')}
-            <Link href="/patenschaften" className="text-[#11aed1] hover:underline font-medium">
-              {t('Patenschaften ansehen', 'View sponsorships')}
+            {t('Lieber einmalig spenden? ', 'Prefer a one-off donation? ')}
+            <Link href="/spenden" className="text-[#11aed1] hover:underline font-medium">
+              {t('Zur Spendenseite', 'To the donation page')}
             </Link>
           </p>
         </div>

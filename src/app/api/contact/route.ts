@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { Resend } from 'resend'
 import { z } from 'zod'
-import { CONTACT_EMAIL } from '@/lib/site-config'
+import { CONTACT_EMAIL, CONTACT_ROUTING, NOREPLY_EMAIL, isContactCategory } from '@/lib/site-config'
 
 const schema = z.object({
   name: z.string().min(2).max(100),
@@ -10,7 +10,8 @@ const schema = z.object({
   message: z.string().min(10).max(5000),
 })
 
-const RECIPIENT = process.env.CONTACT_EMAIL ?? CONTACT_EMAIL
+/** Fallback für Kategorien, die es (noch) nicht in der Tabelle gibt. */
+const FALLBACK_RECIPIENT = process.env.CONTACT_EMAIL ?? CONTACT_EMAIL
 
 export async function POST(req: NextRequest) {
   let body: unknown
@@ -27,26 +28,24 @@ export async function POST(req: NextRequest) {
 
   const { name, email, subject, message } = parsed.data
 
-  const subjectLabels: Record<string, string> = {
-    freiwillig: 'Freiwilligenprogramm',
-    spenden: 'Spenden',
-    patenschaft: 'Patenschaft',
-    presse: 'Presse & Kooperationen',
-    sonstiges: 'Sonstiges',
-  }
-  const subjectLabel = subjectLabels[subject] ?? subject
+  // Empfänger serverseitig aus der Kategorie ableiten. Der Client schickt nur
+  // den Schlüssel – so kann über das Formular keine fremde Adresse angesteuert
+  // werden.
+  const route = isContactCategory(subject) ? CONTACT_ROUTING[subject] : null
+  const subjectLabel = route?.label_de ?? subject
+  const recipient = route?.email ?? FALLBACK_RECIPIENT
 
   if (!process.env.RESEND_API_KEY) {
     // Dev fallback: just log and return success
-    console.log('[Contact Form]', { name, email, subject: subjectLabel, message })
+    console.log('[Contact Form]', { name, email, subject: subjectLabel, to: recipient, message })
     return NextResponse.json({ ok: true })
   }
 
   const resend = new Resend(process.env.RESEND_API_KEY)
 
   const { error } = await resend.emails.send({
-    from: 'Ubuntu for Africa <noreply@ubuntuforafrica.com>',
-    to: RECIPIENT,
+    from: `Ubuntu for Africa <${NOREPLY_EMAIL}>`,
+    to: recipient,
     replyTo: email,
     subject: `Kontaktanfrage: ${subjectLabel} – ${name}`,
     html: `

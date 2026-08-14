@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import { Link } from '@/i18n/routing';
 import { useTranslations } from 'next-intl';
-import { CONTACT_EMAIL, mailto } from '@/lib/site-config'
+import { CONTACT_EMAIL, SATZUNG_PDF, SOCIAL, mailto } from '@/lib/site-config'
 import NewsletterForm from '@/components/NewsletterForm'
 
 export default function Footer() {
@@ -56,7 +56,6 @@ export default function Footer() {
             <ul className="space-y-2.5">
               {[
                 { href: '/spenden' as const, label: nav('donate') },
-                { href: '/patenschaften' as const, label: t('sponsorship_link') },
                 { href: '/foerderpartner' as const, label: t('supporter_link') },
                 { href: '/transparenz' as const, label: t('transparency') },
                 { href: '/freiwillige' as const, label: t('engage') },
@@ -83,10 +82,11 @@ export default function Footer() {
                 </a>
               </p>
             </address>
-            {/* Social placeholders */}
             <div className="flex gap-3 mt-5">
               <a
-                href="#"
+                href={SOCIAL.instagram}
+                target="_blank"
+                rel="noopener noreferrer"
                 aria-label="Instagram"
                 className="w-9 h-9 rounded-full bg-white/10 flex items-center justify-center hover:bg-[#11aed1] transition-colors"
               >
@@ -95,7 +95,9 @@ export default function Footer() {
                 </svg>
               </a>
               <a
-                href="#"
+                href={SOCIAL.facebook}
+                target="_blank"
+                rel="noopener noreferrer"
                 aria-label="Facebook"
                 className="w-9 h-9 rounded-full bg-white/10 flex items-center justify-center hover:bg-[#11aed1] transition-colors"
               >
@@ -129,6 +131,15 @@ export default function Footer() {
             <Link href="/datenschutz" className="text-gray-500 hover:text-[#11aed1] transition-colors">
               {t('privacy')}
             </Link>
+            {/* Satzung lag auf der alten Website ebenfalls im Footer. */}
+            <a
+              href={SATZUNG_PDF}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-gray-500 hover:text-[#11aed1] transition-colors"
+            >
+              {t('statutes')}
+            </a>
           </div>
         </div>
       </div>

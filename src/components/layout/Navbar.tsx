@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import { useTranslations } from 'next-intl';
 import { Link, usePathname } from '@/i18n/routing';
@@ -12,12 +12,18 @@ export default function Navbar() {
   const locale = useLocale();
   const [menuOpen, setMenuOpen] = useState(false);
 
+  // Sicherheitsnetz: bei jedem Seitenwechsel schließen, damit das Menü nicht
+  // offen über der neuen Seite stehen bleibt.
+  useEffect(() => {
+    setMenuOpen(false);
+  }, [pathname]);
+
   const navLinks = [
     { href: '/', label: t('home') },
     { href: '/ueber-uns', label: t('about') },
     { href: '/projekte', label: t('projects') },
     { href: '/freiwillige', label: t('volunteers') },
-    { href: '/spenden', label: t('donate') },
+    { href: '/transparenz', label: t('transparency') },
     { href: '/kontakt', label: t('contact') },
   ];
 
@@ -94,9 +100,12 @@ export default function Navbar() {
 
             {/* Hamburger */}
             <button
+              type="button"
               onClick={() => setMenuOpen(!menuOpen)}
               className="lg:hidden p-2 rounded-md text-[#212529] hover:bg-gray-100"
-              aria-label="Menu"
+              aria-label={menuOpen ? 'Menü schließen' : 'Menü öffnen'}
+              aria-expanded={menuOpen}
+              aria-controls="mobile-menu"
             >
               <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 {menuOpen ? (
@@ -111,7 +120,10 @@ export default function Navbar() {
 
         {/* Mobile Menu */}
         {menuOpen && (
-          <div className="lg:hidden border-t border-gray-100 py-3 pb-4">
+          <div
+            id="mobile-menu"
+            className="lg:hidden border-t border-gray-100 py-3 pb-4 max-h-[calc(100dvh-4rem)] overflow-y-auto"
+          >
             {navLinks.map((link) => (
               <Link
                 key={link.href}
