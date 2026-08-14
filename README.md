@@ -14,7 +14,7 @@
 |---|---|---|
 | **Produktion** | https://ubuntuforafrica.vercel.app | Live, öffentlich erreichbar, `noindex` |
 | Studio (CMS) | https://ubuntuforafrica.vercel.app/studio | Sanity-Login nötig |
-| Alte Testumgebung | https://ubuntu.staatsprojekte.uk | Läuft noch, **veralteter Stand** |
+| Testumgebung | https://ubuntu.staatsprojekte.uk | Aktueller Stand, Docker auf 192.168.178.166 |
 | Zieldomain | ubuntuforafrica.com | Noch nicht umgezogen, Issue #21 |
 
 Die Produktions-URL ist **ohne Login erreichbar**. Auf dem Vercel-Hobby-Plan lässt sich das nicht ändern (`Vercel Authentication is not available on your plan for production deployments`). Deshalb sind `robots.txt` mit `Disallow: /` und `noindex, nofollow` gesetzt — die Seite ist erreichbar, aber nicht auffindbar. Beides beim Launch entfernen.
@@ -102,18 +102,20 @@ Alles dafür liegt in `src/components/Placeholder.tsx` — **nie neu definieren,
 
 ### Was konkret ersetzt werden muss
 
+Stand 14.08.2026, nachdem die Texte von Hanna eingepflegt sind:
+
 | Seite | Offen |
 |---|---|
-| Startseite | 3 Wirkungszahlen (200+, 16, 50k+), 4 Spendenbeträge, 1 Foto |
-| Über uns | 1 Foto (Sylke Funk oder Team) |
-| Freiwillige | Mindestdauer, Wochenstunden, Monatsbeitrag |
-| Projekte | Projektbeschreibungen prüfen |
-| Spenden | **„100 % direkt in Projekte" und „0 € Verwaltungsgehälter" — belegen oder streichen**, Wirkungstexte, IBAN |
-| Patenschaften | Kosten, Leistungen, Abgrenzung zu Förderpartner |
-| Förderpartner | Kompletter Seitentext |
-| Transparenz | Zahlen und Projektbeschreibungen |
+| Startseite | 4 Spendenbeträge mit Wirkungstexten, 1 Foto |
+| Über uns | 1 Foto (Sylke Funk oder Team), Teamfotos |
+| Projekte | 3 Fotos |
+| Spenden | IBAN, Wirkungstexte, **„100 % direkt in Projekte" belegen oder streichen** |
+| Förderpartner | Kompletter Seitentext (Issue #20) |
+| Kontakt | Antwortzeiten in den FAQ |
 
-**Entfernt, weil Hanna es so vorgegeben hat:** alle Geldbeträge aus Fließtexten, „mindestens 3 Monate" (soll 2 werden), „30–35 Stunden/Woche", „995 €/Monat". Die alten Werte stehen durchgestrichen daneben, damit nichts verlorengeht.
+**Quelle der Wahrheit sind die Dokumente von Hanna** (`Website - Text …docx`), nicht ältere Notizen. Daraus stammen unter anderem: Mindestdauer drei Monate, 995 € pro Monat (400 Unterkunft + 595 Projekt), 30–35 Stunden pro Woche, rund 50 Kinder in der Aftercare von 13:30 bis 17:00 Uhr.
+
+**Nicht mehr vorhanden:** Familienprogramm/Nothilfe für Familien und Patenschaften. Beides ist aus dem Code entfernt, `/patenschaften` gibt es nicht mehr.
 
 ### Beim Launch entfernen
 
@@ -133,6 +135,18 @@ Schema-Typen: `page` · `post` · `project` · `siteSettings` · `teamMember` (i
 
 **Kontaktadressen niemals direkt in Seiten schreiben**, immer aus `src/lib/site-config.ts` importieren. Sie standen schon einmal 15× hartcodiert in 7 Dateien.
 
+### Wer bekommt welche Nachricht
+
+`CONTACT_ROUTING` in `src/lib/site-config.ts` ist die einzige Stelle dafür — sie speist die Themenauswahl im Kontaktformular **und** den Empfänger in `/api/contact`. Der Empfänger wird serverseitig aus dem Schlüssel abgeleitet, das Formular kann keine beliebige Adresse ansteuern.
+
+| Thema | geht an |
+|---|---|
+| Freiwillige & Praktikum | `volunteers.ubuntuforafrica@gmx.de` |
+| Spendenquittung | `pauline.schmiel@gmail.com` |
+| Spenden, Fördermitgliedschaft, Presse, Sonstiges | `info@ubuntuforafrica.com` |
+
+`pauline.schmiel@gmail.com` ist **nur** für Spendenquittungen richtig — so steht es im freigegebenen Spenden-Text. Nicht wieder pauschal durch `info@` ersetzen.
+
 ---
 
 ## Deployment
@@ -143,6 +157,22 @@ Push auf `main` löst automatisch ein Production-Deployment aus (verbunden seit 
 npx vercel --prod --yes          # manuell
 npx vercel curl <url>            # geschützte Deployments prüfen
 ```
+
+### Testumgebung aktualisieren
+
+Läuft als Docker-Container auf `moritz@192.168.178.166` unter `~/projects/ubuntu-for-africa`, erreichbar über den Nginx Proxy als https://ubuntu.staatsprojekte.uk.
+
+```bash
+# Code auf den Server bringen (aus dem Projektverzeichnis)
+tar -czf - --exclude=node_modules --exclude=.next --exclude=.git . \
+  | ssh moritz@192.168.178.166 "cd ~/projects/ubuntu-for-africa && tar -xzf -"
+
+ssh moritz@192.168.178.166 "cd ~/projects/ubuntu-for-africa && docker compose up -d --build"
+```
+
+**Der Container baut produktiv (`next build` + `next start`) — bitte nicht auf `next dev` zurückstellen.** Im Dev-Modus scheitert hinter dem Proxy der HMR-WebSocket, die Seite hydriert nie, und dann funktioniert nichts, was JavaScript braucht: mobiles Menü, Sprachumschalter, Formulare. Das sah lange wie ein Layout-Bug aus.
+
+`.env.local` liegt nur auf dem Server und wird **nicht** ins Image kopiert (`.dockerignore`). Die beiden `NEXT_PUBLIC_SANITY_*`-Werte gehen als Build-Args aus der `docker-compose.yml` in den Build.
 
 **Wichtig:** Zwischen dem 14. Mai und dem 4. August sind **alle** Builds fehlgeschlagen. Ursache war Versions-Drift der `^`-Ranges: `@sanity/image-url` hatte den Pfad `lib/types/types` entfernt, das Stripe-SDK verlangte eine neue `apiVersion`. Behoben in `4c11fcc`. Wenn Builds wieder rot werden, zuerst dort nachsehen.
 

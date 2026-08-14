@@ -1,11 +1,19 @@
 services:
   web:
-    build: .
+    build:
+      context: .
+      # Nur die oeffentlichen Sanity-Werte, die der Client-Build braucht.
+      # Keine Secrets als Build-Arg: die landen sonst in der Image-Historie.
+      args:
+        NEXT_PUBLIC_SANITY_PROJECT_ID: u9u79lmd
+        NEXT_PUBLIC_SANITY_DATASET: production
     ports:
       - "3000:3000"
+    # Laufzeit-Secrets (SANITY_API_TOKEN, Stripe, Resend) – bleiben aus dem
+    # Image heraus.
     env_file: .env.local
     environment:
       - NODE_ENV=production
-    # Kein Bind-Mount des Quellcodes: das Image enthält den fertigen Build.
-    # Nach Codeänderungen: docker compose up -d --build
+    # Kein Bind-Mount des Quellcodes: das Image enthaelt den fertigen Build.
+    # Nach Codeaenderungen: docker compose up -d --build
     restart: unless-stopped

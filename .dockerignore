@@ -3,3 +3,7 @@ node_modules
 .git
 .vercel
 *.tsbuildinfo
+# Secrets gehoeren nicht ins Image. Die Werte, die der Build braucht
+# (NEXT_PUBLIC_*), kommen als Build-Args, alles andere zur Laufzeit
+# ueber env_file.
+.env*
