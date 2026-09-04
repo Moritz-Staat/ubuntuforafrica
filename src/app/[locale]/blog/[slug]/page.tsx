@@ -1,3 +1,4 @@
+import type { Metadata } from 'next'
 import { client } from '@/sanity/lib/client'
 import { postBySlugQuery } from '@/sanity/lib/queries'
 import { PortableText } from '@portabletext/react'
@@ -19,6 +20,52 @@ interface Post {
 
 interface Props {
   params: Promise<{ slug: string; locale: string }>
+}
+
+/**
+ * Als einzige Seite hatte die Blog-Detailseite kein `generateMetadata` – jeder
+ * Artikel ging mit dem Titel des Root-Layouts und ohne OG-Tags raus. Beim
+ * Teilen in Social Media stand dort für alle Beiträge dasselbe.
+ *
+ * Der Artikel wird hier ein zweites Mal geladen. Das ist kein Fehler: Next
+ * dedupliziert `fetch`-Aufrufe innerhalb eines Requests, und der Sanity-Client
+ * nutzt darunter `fetch`. Es geht also eine Anfrage raus, nicht zwei.
+ */
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { slug, locale } = await params
+  const isEn = locale === 'en'
+
+  let post: Post | null = null
+  try {
+    post = await client.fetch(postBySlugQuery, { slug })
+  } catch {
+    // Sanity nicht erreichbar – dann trägt der Fallback unten.
+  }
+
+  if (!post) {
+    return {
+      title: isEn ? 'Article | Ubuntu for Africa e.V.' : 'Beitrag | Ubuntu for Africa e.V.',
+    }
+  }
+
+  const title = isEn ? (post.title_en ?? post.title) : post.title
+  const excerpt = isEn ? (post.excerpt_en ?? post.excerpt) : post.excerpt
+  const description = excerpt ?? (isEn
+    ? 'News from Hout Bay, Cape Town.'
+    : 'Neuigkeiten aus Hout Bay, Kapstadt.')
+
+  return {
+    title: `${title} | Ubuntu for Africa e.V.`,
+    description,
+    openGraph: {
+      type: 'article',
+      title,
+      description,
+      publishedTime: post.publishedAt,
+      images: [{ url: 'https://ubuntuforafrica.com/images/Ubuntu_Logo.png' }],
+      locale: isEn ? 'en_GB' : 'de_DE',
+    },
+  }
 }
 
 export default async function BlogPostPage({ params }: Props) {
