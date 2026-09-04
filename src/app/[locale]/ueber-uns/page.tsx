@@ -141,15 +141,15 @@ export async function generateMetadata(
   const { locale } = await params
   const isEn = locale === 'en'
   return {
-    title: isEn ? 'About Us & Team | Ubuntu for Africa' : 'Über uns & Team | Ubuntu for Africa',
+    title: isEn ? 'About Us & Team | Ubuntu for Africa e.V.' : 'Über uns & Team | Ubuntu for Africa e.V.',
     description: isEn
-      ? 'Meet the Ubuntu for Africa team – active in Hout Bay, Cape Town since 2008. Founded by Sylke Funk, driven by volunteers.'
-      : 'Lerne das Team von Ubuntu for Africa kennen – seit 2008 in Hout Bay, Kapstadt aktiv. Gegründet von Sylke Funk, getragen von Ehrenamtlichen.',
+      ? 'Meet the Ubuntu for Africa e.V. team – active in Hout Bay, Cape Town since 2008. Founded by Sylke Funk, driven by volunteers.'
+      : 'Lerne das Team von Ubuntu for Africa e.V. kennen – seit 2008 in Hout Bay, Kapstadt aktiv. Gegründet von Sylke Funk, getragen von Ehrenamtlichen.',
     openGraph: {
-      title: isEn ? 'About Us & Team | Ubuntu for Africa' : 'Über uns & Team | Ubuntu for Africa',
+      title: isEn ? 'About Us & Team | Ubuntu for Africa e.V.' : 'Über uns & Team | Ubuntu for Africa e.V.',
       description: isEn
-        ? 'Meet the Ubuntu for Africa team – active in Hout Bay, Cape Town since 2008. Founded by Sylke Funk, driven by volunteers.'
-        : 'Lerne das Team von Ubuntu for Africa kennen – seit 2008 in Hout Bay, Kapstadt aktiv. Gegründet von Sylke Funk, getragen von Ehrenamtlichen.',
+        ? 'Meet the Ubuntu for Africa e.V. team – active in Hout Bay, Cape Town since 2008. Founded by Sylke Funk, driven by volunteers.'
+        : 'Lerne das Team von Ubuntu for Africa e.V. kennen – seit 2008 in Hout Bay, Kapstadt aktiv. Gegründet von Sylke Funk, getragen von Ehrenamtlichen.',
       images: [{ url: 'https://ubuntuforafrica.com/images/Ubuntu_Logo.png' }],
       locale: isEn ? 'en_GB' : 'de_DE',
     },
@@ -181,8 +181,8 @@ export default async function UeberUnsPage({ params }: { params: Promise<{ local
   const pageSubtitle = pageContent
     ? (locale === 'en' ? pageContent.hero_subtitle_en : pageContent.hero_subtitle_de) ?? ''
     : t(
-        'Seit 2008 im Einsatz für Kinder und Familien in Südafrika.',
-        'Working for children and families in South Africa since 2008.'
+        'Seit 2008 im Einsatz für Kinder in Südafrika.',
+        'Working for children in South Africa since 2008.'
       )
 
   return (
@@ -208,14 +208,14 @@ export default async function UeberUnsPage({ params }: { params: Promise<{ local
           <div className="space-y-4 text-lg text-gray-700 leading-relaxed">
             <p>
               {t(
-                'Ubuntu for Africa ist ein in Deutschland eingetragener gemeinnütziger Verein, der Projekte in Hout Bay (Kapstadt, Südafrika) initiiert und begleitet. Unser Ziel ist es, Kinder, Jugendliche und Familien darin zu stärken, ein selbstbestimmtes Leben zu führen und langfristige Perspektiven zu entwickeln.',
-                'Ubuntu for Africa is a registered non-profit association in Germany that initiates and accompanies projects in Hout Bay (Cape Town, South Africa). Our goal is to empower children, young people and families to lead self-determined lives and develop long-term prospects.'
+                'Ubuntu for Africa e.V. ist ein in Deutschland eingetragener gemeinnütziger Verein, der Projekte in Hout Bay (Kapstadt, Südafrika) initiiert und begleitet. Unser Ziel ist ein sicherer Ort für den Nachmittag: ein Raum, in dem Kinder sich entwickeln und entfalten können, in dem soziale und schulische Kompetenzen gefördert werden – und in dem sie einfach Kind sein dürfen.',
+                'Ubuntu for Africa e.V. is a registered non-profit association in Germany that initiates and accompanies projects in Hout Bay (Cape Town, South Africa). Our goal is a safe place for the afternoon: a space where children can grow and develop, where social and academic skills are nurtured – and where they can simply be children.'
               )}
             </p>
             <p>
               {t(
-                'Die Organisation wird von zwei eng miteinander verbundenen Teams getragen: Das südafrikanische Team gestaltet die operative Arbeit direkt vor Ort und ist täglich mit den Kindern und Familien im Einsatz. Das deutsche Team unterstützt diese Arbeit vor allem organisatorisch, strategisch und finanziell.',
-                'The organisation is carried by two closely connected teams: the South African team does the operational work directly on the ground and is with the children and families every day. The German team supports this work organisationally, strategically and financially.'
+                'Die Organisation wird von zwei eng miteinander verbundenen Teams getragen: Das südafrikanische Team gestaltet die operative Arbeit direkt vor Ort und ist täglich mit den Kindern im Einsatz. Das deutsche Team unterstützt diese Arbeit vor allem organisatorisch, strategisch und finanziell.',
+                'The organisation is carried by two closely connected teams: the South African team does the operational work directly on the ground and is with the children every day. The German team supports this work organisationally, strategically and financially.'
               )}
             </p>
             <p>
@@ -241,8 +241,8 @@ export default async function UeberUnsPage({ params }: { params: Promise<{ local
               <div className="space-y-4 text-gray-600 leading-relaxed">
                 <p>
                   {t(
-                    'Sylke Funk gründete Ubuntu for Africa 2008 aus einer einfachen, aber dringenden Erkenntnis heraus: Die Not vieler Kinder und Familien ist groß – und es braucht Menschen, die handeln. Als Sozialarbeiterin und Familientherapeutin arbeitete sie täglich ehrenamtlich in der Townshipschule in Imizamo Yethu mit Kindern, die Gewalt, Vernachlässigung und schwierige Lebensumstände erfahren mussten.',
-                    'Sylke Funk founded Ubuntu for Africa in 2008 out of a simple but urgent realisation: the hardship of many children and families is great – and it takes people who act. As a social worker and family therapist she worked every day, on a voluntary basis, at the township school in Imizamo Yethu with children who had experienced violence, neglect and difficult living conditions.'
+                    'Sylke Funk gründete Ubuntu for Africa e.V. 2008 aus einer einfachen, aber dringenden Erkenntnis heraus: Die Not vieler Kinder und Familien ist groß – und es braucht Menschen, die handeln. Als Sozialarbeiterin und Familientherapeutin arbeitete sie täglich ehrenamtlich in der Townshipschule in Imizamo Yethu mit Kindern, die Armut, Gewalt oder Vernachlässigung erfahren mussten.',
+                    'Sylke Funk founded Ubuntu for Africa e.V. in 2008 out of a simple but urgent realisation: the hardship of many children and families is great – and it takes people who act. As a social worker and family therapist she worked every day, on a voluntary basis, at the township school in Imizamo Yethu with children who had experienced poverty, violence or neglect.'
                   )}
                 </p>
                 <p>
@@ -284,8 +284,8 @@ export default async function UeberUnsPage({ params }: { params: Promise<{ local
           <div className="space-y-4 text-gray-600 leading-relaxed">
             <p>
               {t(
-                'Wir wissen aus eigener Erfahrung, wie herausfordernd die Lebensrealitäten vieler Kinder und Familien sind. Genau deshalb setzen wir uns mit voller Überzeugung für bessere Lebens- und Lernbedingungen für Kinder der 1. bis 5. Klassen ein.',
-                'We know from our own experience how challenging the realities of many children and families are. That is exactly why we are fully committed to better living and learning conditions for children in grades 1 to 5.'
+                'Wir haben über Jahre miterlebt, wie herausfordernd der Alltag vieler Kinder in Imizamo Yethu ist. Genau deshalb setzen wir uns mit voller Überzeugung für bessere Lebens- und Lernbedingungen ein.',
+                'Over the years we have seen how challenging everyday life is for many children in Imizamo Yethu. That is exactly why we are fully committed to better living and learning conditions.'
               )}
             </p>
             <p>
@@ -332,8 +332,8 @@ export default async function UeberUnsPage({ params }: { params: Promise<{ local
                 icon: '🌱',
                 title: t('Selbstbestimmung stärken', 'Empowering self-determination'),
                 text: t(
-                  'Kinder, Jugendliche und Familien befähigen, ein selbstbestimmtes Leben zu führen und langfristige Perspektiven zu entwickeln.',
-                  'Empowering children, youth and families to lead self-determined lives and develop long-term prospects.'
+                  'Kindern einen verlässlichen Rahmen geben, in dem sie ihre Stärken entdecken und langfristige Perspektiven entwickeln können.',
+                  'Giving children a reliable framework in which they can discover their strengths and develop long-term prospects.'
                 ),
                 color: '#11aed1',
               },
@@ -380,8 +380,8 @@ export default async function UeberUnsPage({ params }: { params: Promise<{ local
             <h2 className="text-4xl font-bold text-[#212529]">{t('Team Südafrika', 'South Africa Team')}</h2>
             <p className="text-gray-600 mt-4 max-w-xl mx-auto">
               {t(
-                'Unser Team in Kapstadt arbeitet täglich daran, Kindern und Familien in schwierigen Lebenssituationen Perspektiven zu schaffen.',
-                'Our team in Cape Town works every day to create prospects for children and families in difficult circumstances.'
+                'Unser Team in Kapstadt arbeitet täglich daran, Kindern in schwierigen Lebenssituationen Perspektiven zu schaffen.',
+                'Our team in Cape Town works every day to create prospects for children in difficult circumstances.'
               )}
             </p>
           </div>
@@ -426,8 +426,8 @@ export default async function UeberUnsPage({ params }: { params: Promise<{ local
               </p>
               <p>
                 {t(
-                  'Seit 2025 leitet Marina die Projekte von Ubuntu for Africa in Kapstadt und verantwortet Projektkoordination wie Fundraising. Für diesen Einsatz erhält sie eine Aufwandsentschädigung.',
-                  'Since 2025 Marina has led the Ubuntu for Africa projects in Cape Town and is responsible for project coordination as well as fundraising. She receives an expense allowance for this work.'
+                  'Seit 2025 leitet Marina die Projekte von Ubuntu for Africa e.V. in Kapstadt und verantwortet Projektkoordination wie Fundraising. Für diesen Einsatz erhält sie eine Aufwandsentschädigung.',
+                  'Since 2025 Marina has led the Ubuntu for Africa e.V. projects in Cape Town and is responsible for project coordination as well as fundraising. She receives an expense allowance for this work.'
                 )}
               </p>
             </div>
@@ -452,7 +452,7 @@ export default async function UeberUnsPage({ params }: { params: Promise<{ local
             <h2 className="text-4xl font-bold text-[#212529]">{t('Team Deutschland', 'Germany Team')}</h2>
             <p className="text-gray-600 mt-4 max-w-xl mx-auto">
               {t(
-                'Im deutschen Verein sind ehemalige Freiwillige und enge Freundinnen und Freunde der Organisation tätig – alle ehrenamtlich.',
+                'Im deutschen Verein sind ehemalige Freiwillige und enge Freund:innen der Organisation tätig – alle ehrenamtlich.',
                 'The German association is run by former volunteers and close friends of the organisation – all on a voluntary basis.'
               )}
             </p>
@@ -478,8 +478,8 @@ export default async function UeberUnsPage({ params }: { params: Promise<{ local
             <h3 className="font-bold text-[#212529] text-xl mb-3">Sylke Funk</h3>
             <p className="text-gray-600 text-sm leading-relaxed">
               {t(
-                'Sylke hat Ubuntu for Africa 2008 gegründet und über viele Jahre geprägt. Ende 2024 ist sie offiziell aus dem Verein ausgetreten – sie hat ihr Privatleben auf ein Segelschiff verlegt und bereist seitdem die Weltmeere. Dem Verein bleibt sie eng verbunden und unterstützt ihn weiterhin mit Rat und Tat.',
-                'Sylke founded Ubuntu for Africa in 2008 and shaped it for many years. At the end of 2024 she officially left the association – she has moved her private life onto a sailing boat and has been travelling the oceans ever since. She remains closely connected to the association and continues to support it with advice and practical help.'
+                'Sylke hat Ubuntu for Africa e.V. 2008 gegründet und über viele Jahre geprägt. Ende 2024 ist sie offiziell aus dem Verein ausgetreten – sie hat ihr Privatleben auf ein Segelschiff verlegt und bereist seitdem die Weltmeere. Dem Verein bleibt sie eng verbunden und unterstützt ihn weiterhin mit Rat und Tat.',
+                'Sylke founded Ubuntu for Africa e.V. in 2008 and shaped it for many years. At the end of 2024 she officially left the association – she has moved her private life onto a sailing boat and has been travelling the oceans ever since. She remains closely connected to the association and continues to support it with advice and practical help.'
               )}
             </p>
           </div>

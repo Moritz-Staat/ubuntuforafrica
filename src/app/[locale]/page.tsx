@@ -12,18 +12,18 @@ export async function generateMetadata(
   const isEn = locale === 'en'
   return {
     title: isEn
-      ? 'Ubuntu for Africa – Children, Youth & Family Support | Cape Town, South Africa'
-      : 'Ubuntu for Africa – Kinder, Jugend- und Familienhilfe | Kapstadt, Südafrika',
+      ? 'Ubuntu for Africa e.V. – Support for Children in Cape Town, South Africa'
+      : 'Ubuntu for Africa e.V. – Hilfe für Kinder in Kapstadt, Südafrika',
     description: isEn
-      ? 'Ubuntu for Africa supports children, young people and families in Imizamo Yethu, Hout Bay, Cape Town. On the ground since 2008.'
-      : 'Ubuntu for Africa unterstützt Kinder, Jugendliche und Familien in Imizamo Yethu, Hout Bay, Kapstadt. Seit 2008 vor Ort.',
+      ? 'Ubuntu for Africa e.V. gives children in Imizamo Yethu, Hout Bay, Cape Town a safe place after school. On the ground since 2008.'
+      : 'Ubuntu for Africa e.V. gibt Kindern in Imizamo Yethu, Hout Bay, Kapstadt einen sicheren Ort nach der Schule. Seit 2008 vor Ort.',
     openGraph: {
       title: isEn
-        ? 'Ubuntu for Africa – Children, Youth & Family Support | Cape Town, South Africa'
-        : 'Ubuntu for Africa – Kinder, Jugend- und Familienhilfe | Kapstadt, Südafrika',
+        ? 'Ubuntu for Africa e.V. – Support for Children in Cape Town, South Africa'
+        : 'Ubuntu for Africa e.V. – Hilfe für Kinder in Kapstadt, Südafrika',
       description: isEn
-        ? 'Ubuntu for Africa supports children, young people and families in Imizamo Yethu, Hout Bay, Cape Town. On the ground since 2008.'
-        : 'Ubuntu for Africa unterstützt Kinder, Jugendliche und Familien in Imizamo Yethu, Hout Bay, Kapstadt. Seit 2008 vor Ort.',
+        ? 'Ubuntu for Africa e.V. gives children in Imizamo Yethu, Hout Bay, Cape Town a safe place after school. On the ground since 2008.'
+        : 'Ubuntu for Africa e.V. gibt Kindern in Imizamo Yethu, Hout Bay, Kapstadt einen sicheren Ort nach der Schule. Seit 2008 vor Ort.',
       images: [{ url: 'https://ubuntuforafrica.com/images/Ubuntu_Logo.png' }],
       locale: isEn ? 'en_GB' : 'de_DE',
     },
@@ -49,7 +49,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
     {
       title: t('Schulkooperation', 'School Partnership'),
       description: t(
-        'Enge Zusammenarbeit mit der Hout Bay Primary School und Kronendal Primary – Freiwillige unterstützen Lehrerinnen im Unterricht.',
+        'Enge Zusammenarbeit mit der Hout Bay Primary School und Kronendal Primary – Freiwillige unterstützen Lehrer:innen im Unterricht.',
         'Close cooperation with Hout Bay Primary School and Kronendal Primary – volunteers support teachers in the classroom.'
       ),
       icon: '📚',
@@ -96,8 +96,8 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
           </p>
           <p className="mb-10 text-lg text-gray-200 max-w-2xl mx-auto leading-relaxed">
             {t(
-              'Ubuntu for Africa unterstützt Kinder, Jugendliche und Familien in Imizamo Yethu, Hout Bay, Kapstadt.',
-              'Ubuntu for Africa supports children, young people and families in Imizamo Yethu, Hout Bay, Cape Town.'
+              'Ubuntu for Africa e.V. gibt Kindern in Imizamo Yethu, Hout Bay, Kapstadt einen sicheren Ort für den Nachmittag.',
+              'Ubuntu for Africa e.V. gives children in Imizamo Yethu, Hout Bay, Cape Town a safe place to spend their afternoons.'
             )}
           </p>
           <div className="flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
@@ -167,14 +167,14 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
               </h2>
               <p className="text-gray-600 leading-relaxed mb-4">
                 {t(
-                  'Ubuntu for Africa ist ein in Deutschland eingetragener gemeinnütziger Verein, der Projekte in Hout Bay (Kapstadt, Südafrika) initiiert und begleitet. Seit 2008 setzen wir uns dafür ein, Kinder, Jugendliche und Familien darin zu stärken, ein selbstbestimmtes Leben zu führen.',
-                  'Ubuntu for Africa is a registered non-profit association in Germany that initiates and accompanies projects in Hout Bay (Cape Town, South Africa). Since 2008, we have been committed to empowering children, young people and families to lead self-determined lives.'
+                  'Ubuntu for Africa e.V. ist ein in Deutschland eingetragener gemeinnütziger Verein, der Projekte in Hout Bay (Kapstadt, Südafrika) initiiert und begleitet. Seit 2008 geben wir Kindern einen sicheren Ort für den Nachmittag: einen Raum, in dem sie sich entwickeln und entfalten können, in dem soziale und schulische Kompetenzen gefördert werden – und in dem sie einfach Kind sein dürfen.',
+                  'Ubuntu for Africa e.V. is a registered non-profit association in Germany that initiates and accompanies projects in Hout Bay (Cape Town, South Africa). Since 2008 we have been giving children a safe place to spend their afternoons: a space to grow and develop, where social and academic skills are nurtured – and where they can simply be children.'
                 )}
               </p>
               <p className="text-gray-600 leading-relaxed mb-8">
                 {t(
-                  'Das südafrikanische Team gestaltet die operative Arbeit direkt vor Ort und ist täglich mit den Kindern und Familien im Einsatz. Das deutsche Team unterstützt diese Arbeit organisatorisch, strategisch und finanziell.',
-                  'The South African team carries out the operational work directly on the ground and is daily engaged with children and families. The German team provides organisational, strategic and financial support.'
+                  'Das südafrikanische Team gestaltet die operative Arbeit direkt vor Ort und ist täglich mit den Kindern im Einsatz. Das deutsche Team unterstützt diese Arbeit organisatorisch, strategisch und finanziell.',
+                  'The South African team carries out the operational work directly on the ground and is with the children every day. The German team provides organisational, strategic and financial support.'
                 )}
               </p>
               <Link
@@ -276,8 +276,8 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
           <h2 className="text-4xl font-bold mb-6">{t('Werde Teil unseres Teams', 'Join our team')}</h2>
           <p className="text-xl text-white/90 mb-10 max-w-2xl mx-auto leading-relaxed">
             {t(
-              'Du möchtest dich sozial engagieren und praktische Erfahrungen sammeln? Dann werde Teil von Ubuntu for Africa – in der Schule, in der Aftercare und mit deinen eigenen Ideen.',
-              'Want to make a social impact and gain hands-on experience? Join Ubuntu for Africa – in the school, in the aftercare and with your own ideas.'
+              'Du möchtest dich sozial engagieren und praktische Erfahrungen sammeln? Dann werde Teil von Ubuntu for Africa e.V. – in der Schule, in der Aftercare und mit deinen eigenen Ideen.',
+              'Want to make a social impact and gain hands-on experience? Join Ubuntu for Africa e.V. – in the school, in the aftercare and with your own ideas.'
             )}
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">

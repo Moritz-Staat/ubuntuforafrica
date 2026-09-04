@@ -79,8 +79,8 @@ export default async function FoerderpartnerPage({
             <PHLabel />
             <p className="text-lg text-gray-700 leading-relaxed">
               {t(
-                'Als Förderpartner unterstützt du uns nicht einmalig, sondern über einen längeren Zeitraum. Das gibt uns Planungssicherheit für Projekte, die nicht nach wenigen Wochen enden — Bildung, Betreuung und Familienarbeit brauchen Kontinuität. Förderpartner können Unternehmen, Vereine, Stiftungen oder Privatpersonen sein.',
-                'As a supporting partner you back us over a longer period rather than with a one-off gift. That gives us planning certainty for projects that do not end after a few weeks — education, care and family work need continuity. Supporting partners can be companies, clubs, foundations or private individuals.',
+                'Als Förderpartner unterstützt du uns nicht einmalig, sondern über einen längeren Zeitraum. Das gibt uns Planungssicherheit für Projekte, die nicht nach wenigen Wochen enden — Bildung und verlässliche Betreuung brauchen Kontinuität. Förderpartner können Unternehmen, Vereine, Stiftungen oder Privatpersonen sein.',
+                'As a supporting partner you back us over a longer period rather than with a one-off gift. That gives us planning certainty for projects that do not end after a few weeks — education and reliable care need continuity. Supporting partners can be companies, clubs, foundations or private individuals.',
               )}
             </p>
           </div>
