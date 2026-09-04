@@ -32,8 +32,8 @@ export async function POST(req: NextRequest) {
 
   const productName =
     locale === 'en'
-      ? `Donation Ubuntu for Africa – ${amountEur} €`
-      : `Spende Ubuntu for Africa – ${amountEur} €`
+      ? `Donation Ubuntu for Africa e.V. – ${amountEur} €`
+      : `Spende Ubuntu for Africa e.V. – ${amountEur} €`
 
   const session = await stripe.checkout.sessions.create({
     mode: 'payment',

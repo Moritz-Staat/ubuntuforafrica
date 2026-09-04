@@ -24,7 +24,7 @@ export default function Footer() {
                 className="h-12 w-auto"
               />
               <div>
-                <p className="font-bold text-white text-lg leading-tight">Ubuntu for Africa</p>
+                <p className="font-bold text-white text-lg leading-tight">Ubuntu for Africa e.V.</p>
                 <p className="text-xs text-gray-400">Kinder, Jugend- & Familienhilfe e.V.</p>
               </div>
             </Link>

@@ -13,12 +13,12 @@ export async function generateMetadata(
   const { locale } = await params
   const isEn = locale === 'en'
   return {
-    title: isEn ? 'Donate | Ubuntu for Africa' : 'Spenden | Ubuntu for Africa',
+    title: isEn ? 'Donate | Ubuntu for Africa e.V.' : 'Spenden | Ubuntu for Africa e.V.',
     description: isEn
       ? 'Every euro helps directly on the ground. Donate now for children and young people in Imizamo Yethu, Hout Bay, Cape Town.'
       : 'Jeder Euro hilft direkt vor Ort. Spende jetzt für Kinder und Jugendliche in Imizamo Yethu, Hout Bay, Kapstadt.',
     openGraph: {
-      title: isEn ? 'Donate | Ubuntu for Africa' : 'Spenden | Ubuntu for Africa',
+      title: isEn ? 'Donate | Ubuntu for Africa e.V.' : 'Spenden | Ubuntu for Africa e.V.',
       description: isEn
         ? 'Every euro helps directly on the ground. Donate now for children and young people in Imizamo Yethu, Hout Bay, Cape Town.'
         : 'Jeder Euro hilft direkt vor Ort. Spende jetzt für Kinder und Jugendliche in Imizamo Yethu, Hout Bay, Kapstadt.',

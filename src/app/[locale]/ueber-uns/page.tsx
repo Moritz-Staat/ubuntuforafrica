@@ -420,7 +420,7 @@ export default async function UeberUnsPage({ params }: { params: Promise<{ local
               </p>
               <p>
                 {t(
-                  'Ihre ersten praktischen Erfahrungen sammelte sie als Freiwillige in einer Organisation für Straßenkinder. 2001 gründete sie die Initiative „Reisen mit Herz“ und ermöglichte Besucherinnen und Besuchern, durch gezielte Spenden Kindern aus schwierigsten Lebensverhältnissen den Schulbesuch zu finanzieren – vom Schultransport über Schulkleidung bis zur Versorgung von Familien mit Lebensmitteln.',
+                  'Ihre ersten praktischen Erfahrungen sammelte sie als Freiwillige in einer Organisation für Straßenkinder. 2001 gründete sie die Initiative „Reisen mit Herz“ und ermöglichte Besucher:innen, durch gezielte Spenden Kindern aus schwierigsten Lebensverhältnissen den Schulbesuch zu finanzieren – vom Schultransport über Schulkleidung bis zur Versorgung von Familien mit Lebensmitteln.',
                   'She gained her first practical experience as a volunteer in an organisation for street children. In 2001 she founded the initiative “Reisen mit Herz”, enabling visitors to fund schooling for children from the most difficult circumstances through targeted donations – from school transport and school clothing to providing families with food.'
                 )}
               </p>

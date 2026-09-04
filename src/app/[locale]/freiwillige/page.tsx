@@ -18,18 +18,18 @@ export async function generateMetadata(
   const isEn = locale === 'en'
   return {
     title: isEn
-      ? 'Volunteer Programme | Ubuntu for Africa'
-      : 'Freiwillige & Praktikum | Ubuntu for Africa',
+      ? 'Volunteer Programme | Ubuntu for Africa e.V.'
+      : 'Freiwillige & Praktikum | Ubuntu for Africa e.V.',
     description: isEn
-      ? 'Volunteer with Ubuntu for Africa in Cape Town: school, aftercare, from two months, with personal support.'
-      : 'Freiwilligenarbeit und Praktikum bei Ubuntu for Africa in Kapstadt: Schule, Aftercare, ab zwei Monaten, mit persönlicher Begleitung.',
+      ? 'Volunteer with Ubuntu for Africa e.V. in Cape Town: school, aftercare, from two months, with personal support.'
+      : 'Freiwilligenarbeit und Praktikum bei Ubuntu for Africa e.V. in Kapstadt: Schule, Aftercare, ab zwei Monaten, mit persönlicher Begleitung.',
     openGraph: {
       title: isEn
-        ? 'Volunteer Programme | Ubuntu for Africa'
-        : 'Freiwillige & Praktikum | Ubuntu for Africa',
+        ? 'Volunteer Programme | Ubuntu for Africa e.V.'
+        : 'Freiwillige & Praktikum | Ubuntu for Africa e.V.',
       description: isEn
-        ? 'Volunteer with Ubuntu for Africa in Cape Town: school, aftercare, from two months, with personal support.'
-        : 'Freiwilligenarbeit und Praktikum bei Ubuntu for Africa in Kapstadt: Schule, Aftercare, ab zwei Monaten, mit persönlicher Begleitung.',
+        ? 'Volunteer with Ubuntu for Africa e.V. in Cape Town: school, aftercare, from two months, with personal support.'
+        : 'Freiwilligenarbeit und Praktikum bei Ubuntu for Africa e.V. in Kapstadt: Schule, Aftercare, ab zwei Monaten, mit persönlicher Begleitung.',
       images: [{ url: 'https://ubuntuforafrica.com/images/Ubuntu_Logo.png' }],
       locale: isEn ? 'en_GB' : 'de_DE',
     },
@@ -54,8 +54,8 @@ export default async function FreiwilligePage({ params }: { params: Promise<{ lo
   const pageSubtitle = pageContent
     ? (locale === 'en' ? pageContent.hero_subtitle_en : pageContent.hero_subtitle_de) ?? ''
     : t(
-        'Du möchtest dich sozial engagieren und praktische Erfahrungen sammeln? Dann werde Teil von Ubuntu for Africa!',
-        'Want to get involved and gain practical experience? Then become part of Ubuntu for Africa!'
+        'Du möchtest dich sozial engagieren und praktische Erfahrungen sammeln? Dann werde Teil von Ubuntu for Africa e.V.!',
+        'Want to get involved and gain practical experience? Then become part of Ubuntu for Africa e.V.!'
       )
 
   const requirements = locale === 'en'

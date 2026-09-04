@@ -208,7 +208,7 @@ export default function SpendenClientPage() {
               </div>
               <div>
                 <p className="text-sm text-gray-500 mb-1">{t('Verwendungszweck', 'Reference')}</p>
-                <p className="font-semibold text-[#212529]">{t('Spende Ubuntu for Africa', 'Donation Ubuntu for Africa')}</p>
+                <p className="font-semibold text-[#212529]">{t('Spende Ubuntu for Africa e.V.', 'Donation Ubuntu for Africa e.V.')}</p>
               </div>
             </div>
             <div className="mt-8 p-5 bg-[#11aed1]/5 rounded-xl border border-[#11aed1]/20">

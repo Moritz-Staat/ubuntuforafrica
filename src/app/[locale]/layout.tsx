@@ -12,7 +12,7 @@ import '../globals.css';
 const geist = Geist({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  title: 'Ubuntu for Africa – Kinder, Jugend- und Familienhilfe e.V.',
+  title: 'Ubuntu for Africa e.V. – Kinder, Jugend- und Familienhilfe e.V.',
   description: 'Ubuntu for Africa e.V. gibt Kindern in Imizamo Yethu, Hout Bay, Kapstadt einen sicheren Ort nach der Schule.',
   // Vor dem Launch nichts indexieren lassen: die Seite enthält noch
   // Platzhaltertexte, Impressum und Datenschutz sind ungeprüft (GitHub #14).

@@ -7,12 +7,12 @@ export async function generateMetadata(
   const { locale } = await params
   const isEn = locale === 'en'
   return {
-    title: isEn ? 'Transparency | Ubuntu for Africa' : 'Transparenz | Ubuntu for Africa',
+    title: isEn ? 'Transparency | Ubuntu for Africa e.V.' : 'Transparenz | Ubuntu for Africa e.V.',
     description: isEn
-      ? '100% of donations go directly to projects on the ground. Learn how Ubuntu for Africa uses your support.'
-      : '100% der Spenden fließen direkt in Projekte vor Ort. Erfahre, wie Ubuntu for Africa deine Unterstützung einsetzt.',
+      ? '100% of donations go directly to projects on the ground. Learn how Ubuntu for Africa e.V. uses your support.'
+      : '100% der Spenden fließen direkt in Projekte vor Ort. Erfahre, wie Ubuntu for Africa e.V. deine Unterstützung einsetzt.',
     openGraph: {
-      title: isEn ? 'Transparency | Ubuntu for Africa' : 'Transparenz | Ubuntu for Africa',
+      title: isEn ? 'Transparency | Ubuntu for Africa e.V.' : 'Transparenz | Ubuntu for Africa e.V.',
       images: [{ url: 'https://ubuntuforafrica.com/images/Ubuntu_Logo.png' }],
     },
   }

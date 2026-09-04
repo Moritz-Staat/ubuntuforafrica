@@ -13,15 +13,15 @@ export async function generateMetadata(
   const { locale } = await params
   const isEn = locale === 'en'
   return {
-    title: isEn ? 'Contact | Ubuntu for Africa' : 'Kontakt | Ubuntu for Africa',
+    title: isEn ? 'Contact | Ubuntu for Africa e.V.' : 'Kontakt | Ubuntu for Africa e.V.',
     description: isEn
-      ? 'Get in touch with Ubuntu for Africa – questions about volunteering, donations, supporting membership or partnerships.'
-      : 'Kontaktiere Ubuntu for Africa – Fragen zu Freiwilligenarbeit, Spenden, Fördermitgliedschaft oder Kooperationen.',
+      ? 'Get in touch with Ubuntu for Africa e.V. – questions about volunteering, donations, supporting membership or partnerships.'
+      : 'Kontaktiere Ubuntu for Africa e.V. – Fragen zu Freiwilligenarbeit, Spenden, Fördermitgliedschaft oder Kooperationen.',
     openGraph: {
-      title: isEn ? 'Contact | Ubuntu for Africa' : 'Kontakt | Ubuntu for Africa',
+      title: isEn ? 'Contact | Ubuntu for Africa e.V.' : 'Kontakt | Ubuntu for Africa e.V.',
       description: isEn
-        ? 'Get in touch with Ubuntu for Africa – questions about volunteering, donations, supporting membership or partnerships.'
-        : 'Kontaktiere Ubuntu for Africa – Fragen zu Freiwilligenarbeit, Spenden, Fördermitgliedschaft oder Kooperationen.',
+        ? 'Get in touch with Ubuntu for Africa e.V. – questions about volunteering, donations, supporting membership or partnerships.'
+        : 'Kontaktiere Ubuntu for Africa e.V. – Fragen zu Freiwilligenarbeit, Spenden, Fördermitgliedschaft oder Kooperationen.',
       images: [{ url: 'https://ubuntuforafrica.com/images/Ubuntu_Logo.png' }],
       locale: isEn ? 'en_GB' : 'de_DE',
     },

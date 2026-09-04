@@ -44,13 +44,13 @@ export async function POST(req: NextRequest) {
   const resend = new Resend(process.env.RESEND_API_KEY)
 
   const { error } = await resend.emails.send({
-    from: `Ubuntu for Africa <${NOREPLY_EMAIL}>`,
+    from: `Ubuntu for Africa e.V. <${NOREPLY_EMAIL}>`,
     to: recipient,
     replyTo: email,
     subject: `Kontaktanfrage: ${subjectLabel} – ${name}`,
     html: `
       <div style="font-family:sans-serif;max-width:600px;margin:0 auto">
-        <h2 style="color:#11aed1">Neue Kontaktanfrage – Ubuntu for Africa</h2>
+        <h2 style="color:#11aed1">Neue Kontaktanfrage – Ubuntu for Africa e.V.</h2>
         <table style="width:100%;border-collapse:collapse">
           <tr><td style="padding:8px 0;color:#666;width:120px">Name</td><td style="padding:8px 0;font-weight:600">${name}</td></tr>
           <tr><td style="padding:8px 0;color:#666">E-Mail</td><td style="padding:8px 0"><a href="mailto:${email}">${email}</a></td></tr>

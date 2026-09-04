@@ -7,10 +7,10 @@ export async function generateMetadata(
   const { locale } = await params
   const isEn = locale === 'en'
   return {
-    title: isEn ? 'Legal Notice | Ubuntu for Africa' : 'Impressum | Ubuntu for Africa',
+    title: isEn ? 'Legal Notice | Ubuntu for Africa e.V.' : 'Impressum | Ubuntu for Africa e.V.',
     description: isEn
-      ? 'Legal notice for Ubuntu for Africa Kinder, Jugend- und Familienhilfe e.V.'
-      : 'Impressum von Ubuntu for Africa Kinder, Jugend- und Familienhilfe e.V.',
+      ? 'Legal notice for UBUNTU for Africa Kinder, Jugend- und Familienhilfe e.V.'
+      : 'Impressum von UBUNTU for Africa Kinder, Jugend- und Familienhilfe e.V.',
   }
 }
 

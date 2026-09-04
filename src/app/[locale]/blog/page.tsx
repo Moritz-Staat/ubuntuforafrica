@@ -23,15 +23,15 @@ export async function generateMetadata(
   const { locale } = await params
   const isEn = locale === 'en'
   return {
-    title: isEn ? 'Blog & News | Ubuntu for Africa' : 'Blog & Neuigkeiten | Ubuntu for Africa',
+    title: isEn ? 'Blog & News | Ubuntu for Africa e.V.' : 'Blog & Neuigkeiten | Ubuntu for Africa e.V.',
     description: isEn
-      ? 'News from Hout Bay, volunteer reports and updates from the Ubuntu for Africa association.'
-      : 'Neuigkeiten aus Hout Bay, Berichte von Freiwilligen und Updates aus dem Ubuntu for Africa Verein.',
+      ? 'News from Hout Bay, volunteer reports and updates from Ubuntu for Africa e.V..'
+      : 'Neuigkeiten aus Hout Bay, Berichte von Freiwilligen und Updates aus dem Ubuntu for Africa e.V..',
     openGraph: {
-      title: isEn ? 'Blog & News | Ubuntu for Africa' : 'Blog & Neuigkeiten | Ubuntu for Africa',
+      title: isEn ? 'Blog & News | Ubuntu for Africa e.V.' : 'Blog & Neuigkeiten | Ubuntu for Africa e.V.',
       description: isEn
-        ? 'News from Hout Bay, volunteer reports and updates from the Ubuntu for Africa association.'
-        : 'Neuigkeiten aus Hout Bay, Berichte von Freiwilligen und Updates aus dem Ubuntu for Africa Verein.',
+        ? 'News from Hout Bay, volunteer reports and updates from Ubuntu for Africa e.V..'
+        : 'Neuigkeiten aus Hout Bay, Berichte von Freiwilligen und Updates aus dem Ubuntu for Africa e.V..',
       images: [{ url: 'https://ubuntuforafrica.com/images/Ubuntu_Logo.png' }],
       locale: isEn ? 'en_GB' : 'de_DE',
     },

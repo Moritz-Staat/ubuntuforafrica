@@ -9,12 +9,12 @@ export async function generateMetadata(
   const { locale } = await params
   const isEn = locale === 'en'
   return {
-    title: isEn ? 'Become a Supporting Partner | Ubuntu for Africa' : 'Förderpartner werden | Ubuntu for Africa',
+    title: isEn ? 'Become a Supporting Partner | Ubuntu for Africa e.V.' : 'Förderpartner werden | Ubuntu for Africa e.V.',
     description: isEn
       ? 'Support our work in Imizamo Yethu long-term as a company, club or private supporting partner.'
       : 'Unterstütze unsere Arbeit in Imizamo Yethu langfristig als Unternehmen, Verein oder privater Förderpartner.',
     openGraph: {
-      title: isEn ? 'Become a Supporting Partner | Ubuntu for Africa' : 'Förderpartner werden | Ubuntu for Africa',
+      title: isEn ? 'Become a Supporting Partner | Ubuntu for Africa e.V.' : 'Förderpartner werden | Ubuntu for Africa e.V.',
       images: [{ url: 'https://ubuntuforafrica.com/images/Ubuntu_Logo.png' }],
     },
   }
