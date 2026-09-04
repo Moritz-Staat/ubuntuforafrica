@@ -76,6 +76,9 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
     { src: '/images/fotos/galerie-strand.jpg',   alt: t('Kinder bauen eine Sandburg am Strand von Hout Bay', 'Children building a sandcastle on the beach in Hout Bay') },
     { src: '/images/fotos/galerie-baum.jpg',     alt: t('Kinder beim Ausflug unter einem grossen Baum', 'Children on an excursion under a large tree') },
     { src: '/images/fotos/galerie-hafen.jpg',    alt: t('Gruppe der Ubuntu Kids am Hafen von Hout Bay', 'Group of Ubuntu Kids at the harbour in Hout Bay') },
+    { src: '/images/fotos/galerie-reifen-hof.jpg',   alt: t('Kinder spielen mit Reifen auf dem Hof', 'Children playing with hoops in the yard') },
+    { src: '/images/fotos/galerie-reifen-wiese.jpg', alt: t('Bewegungsspiele auf der Wiese vor den Bergen von Hout Bay', 'Games on the lawn against the mountains of Hout Bay') },
+    { src: '/images/fotos/galerie-gruppe.jpg',       alt: t('Drei Maedchen der Ubuntu Kids beim Nachmittagsprogramm', 'Three girls from the Ubuntu Kids during the afternoon programme') },
   ]
 
   // Betraege bewusst als Platzhalter: Hanna hat am 22.07.2026 verfuegt, dass
