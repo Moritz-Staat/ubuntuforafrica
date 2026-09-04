@@ -3,7 +3,7 @@ import { Link } from '@/i18n/routing'
 import { client } from '@/sanity/lib/client'
 import { teamMembersQuery, pageQuery } from '@/sanity/lib/queries'
 import { usable } from '@/sanity/lib/usable'
-import { PhotoSlot } from '@/components/Placeholder'
+import { Photo, HeroPhoto } from '@/components/Photo'
 
 interface TeamMember {
   _id: string
@@ -195,6 +195,8 @@ export default async function UeberUnsPage({ params }: { params: Promise<{ local
   return (
     <>
       <section className="relative py-32 bg-[#212529] text-white overflow-hidden">
+        <HeroPhoto src="/images/fotos/hero-ueber-uns.jpg" />
+        <div className="absolute inset-0 bg-[#212529]/70" />
         <div className="absolute inset-0 bg-gradient-to-br from-[#11aed1]/20 to-[#ae64fd]/10" />
         <div className="relative z-10 mx-auto max-w-4xl px-6 text-center">
           <p className="text-[#f7a900] text-sm font-semibold uppercase tracking-widest mb-4">
@@ -275,7 +277,13 @@ export default async function UeberUnsPage({ params }: { params: Promise<{ local
                 </p>
               </div>
             </div>
-            <PhotoSlot describe={t('Gründerin Sylke Funk oder Team vor Ort', 'Founder Sylke Funk or team on site')} />
+            <Photo
+              src="/images/fotos/kinder-auf-dem-feld.jpg"
+              alt={t(
+                'Kinder der Ubuntu Kids auf dem Sportplatz in Hout Bay',
+                'Ubuntu Kids children on the sports field in Hout Bay'
+              )}
+            />
           </div>
         </div>
       </section>

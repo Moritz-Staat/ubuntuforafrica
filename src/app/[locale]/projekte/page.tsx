@@ -5,6 +5,7 @@ import { client } from '@/sanity/lib/client'
 import { projectsQuery } from '@/sanity/lib/queries'
 import { urlFor } from '@/sanity/lib/image'
 import { PhotoSlot } from '@/components/Placeholder'
+import { Photo, HeroPhoto } from '@/components/Photo'
 
 interface Project {
   _id: string
@@ -46,8 +47,10 @@ const hardcodedProjects = [
       'Free play, for example football or group games',
       'A reliable place with a fixed routine where children can simply be children',
     ],
-    photo: 'Kinder in der Aftercare, z. B. beim Circle oder bei den Hausaufgaben',
-    photo_en: 'Children in the aftercare, e.g. during the circle or homework',
+    image: '/images/fotos/hausaufgaben.jpg',
+    imageAspect: 'aspect-[3/4]',
+    photo: 'Kind bei den Hausaufgaben in der Ubuntu Kids Aftercare',
+    photo_en: 'Child doing homework at Ubuntu Kids Aftercare',
     color: '#11aed1',
     icon: '🏠',
   },
@@ -75,8 +78,10 @@ const hardcodedProjects = [
       'Close cooperation with school staff',
       'More confidence in class – and their own learning successes',
     ],
-    photo: 'Freiwillige oder Lehrkraft mit Kindern in der Hout Bay Primary School',
-    photo_en: 'Volunteer or teacher with children at Hout Bay Primary School',
+    image: '/images/fotos/freiwillige-mit-kindern.jpg',
+    imageAspect: 'aspect-[3/4]',
+    photo: 'Freiwillige lernt gemeinsam mit Kindern auf dem Boden sitzend',
+    photo_en: 'Volunteer learning together with children, sitting on the floor',
     color: '#ae64fd',
     icon: '📚',
   },
@@ -104,8 +109,10 @@ const hardcodedProjects = [
       'Personal support before, during and after the stay',
       'Safe accommodation shared with other volunteers',
     ],
-    photo: 'Freiwillige gemeinsam mit dem Team oder den Kindern',
-    photo_en: 'Volunteers together with the team or the children',
+    image: '/images/fotos/freiwillige-am-strand.jpg',
+    imageAspect: 'aspect-[3/2]',
+    photo: 'Freiwillige mit Kindern am Strand von Hout Bay',
+    photo_en: 'Volunteer with children on the beach in Hout Bay',
     color: '#f7a900',
     icon: '🤝',
   },
@@ -153,8 +160,10 @@ export default async function ProjektePage({ params }: { params: Promise<{ local
 
   return (
     <>
-      <section className="py-32 bg-gradient-to-br from-[#212529] to-[#11aed1]/30 text-white">
-        <div className="mx-auto max-w-4xl px-6 text-center">
+      <section className="relative py-32 overflow-hidden text-white">
+        <HeroPhoto src="/images/fotos/hero-projekte.jpg" />
+        <div className="absolute inset-0 bg-gradient-to-br from-[#212529]/85 to-[#11aed1]/40" />
+        <div className="relative z-10 mx-auto max-w-4xl px-6 text-center">
           <p className="text-[#f7a900] text-sm font-semibold uppercase tracking-widest mb-4">
             {t('Was wir tun', 'What we do')}
           </p>
@@ -246,10 +255,8 @@ export default async function ProjektePage({ params }: { params: Promise<{ local
                         </Link>
                       )}
                     </div>
-                    {/* Bis die Fotos aus dem Drive da sind, steht hier ein
-                        beschrifteter Platzhalter statt einer leeren Fläche. */}
                     <div className={i % 2 === 1 ? 'lg:order-1' : ''}>
-                      <PhotoSlot describe={photo} />
+                      <Photo src={project.image} alt={photo} aspect={project.imageAspect} />
                     </div>
                   </div>
                 </div>

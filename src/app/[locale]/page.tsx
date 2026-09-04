@@ -3,7 +3,8 @@ import { setRequestLocale } from 'next-intl/server'
 import { Link } from '@/i18n/routing'
 import { VOLUNTEER_EMAIL, mailto } from '@/lib/site-config'
 import InstagramFeed from '@/components/InstagramFeed'
-import { PHNumber, PhotoSlot } from '@/components/Placeholder'
+import { PHNumber } from '@/components/Placeholder'
+import { Photo, HeroPhoto } from '@/components/Photo'
 
 export async function generateMetadata(
   { params }: { params: Promise<{ locale: string }> }
@@ -68,6 +69,15 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
     },
   ]
 
+  const gallery = [
+    { src: '/images/fotos/galerie-mahlzeit.jpg', alt: t('Warme Mahlzeiten, vorbereitet fuer die Kinder der Aftercare', 'Warm meals prepared for the children in the aftercare') },
+    { src: '/images/fotos/galerie-yoga.jpg',     alt: t('Kinder bei einer Bewegungseinheit auf Matten im Freien', 'Children during an outdoor exercise session on mats') },
+    { src: '/images/fotos/galerie-reifen.jpg',   alt: t('Kind spielt mit einem Reifen auf dem Schulhof', 'Child playing with a hoop in the school yard') },
+    { src: '/images/fotos/galerie-strand.jpg',   alt: t('Kinder bauen eine Sandburg am Strand von Hout Bay', 'Children building a sandcastle on the beach in Hout Bay') },
+    { src: '/images/fotos/galerie-baum.jpg',     alt: t('Kinder beim Ausflug unter einem grossen Baum', 'Children on an excursion under a large tree') },
+    { src: '/images/fotos/galerie-hafen.jpg',    alt: t('Gruppe der Ubuntu Kids am Hafen von Hout Bay', 'Group of Ubuntu Kids at the harbour in Hout Bay') },
+  ]
+
   // Betraege bewusst als Platzhalter: Hanna hat am 22.07.2026 verfuegt, dass
   // keine Geldbetraege in den Texten stehen, bis der Verein sie freigibt (#10).
   // `was` zeigt den bisherigen Wert durchgestrichen, damit nichts verlorengeht.
@@ -87,8 +97,11 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
     <>
       {/* Hero Section */}
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-[#212529] via-[#1a3a4a] to-[#11aed1]/40" />
-        <div className="absolute inset-0 bg-gradient-to-b from-[#212529]/70 via-[#212529]/50 to-[#212529]/80" />
+        <HeroPhoto src="/images/fotos/hero-startseite.jpg" />
+        {/* Zwei Verlaeufe uebereinander: der erste nimmt dem Foto den Kontrast,
+            der zweite dunkelt oben und unten ab, damit die Schrift traegt. */}
+        <div className="absolute inset-0 bg-gradient-to-br from-[#212529]/80 via-[#1a3a4a]/70 to-[#11aed1]/40" />
+        <div className="absolute inset-0 bg-gradient-to-b from-[#212529]/70 via-[#212529]/30 to-[#212529]/80" />
         <div className="relative z-10 mx-auto max-w-4xl px-6 text-center text-white">
           <p className="mb-3 text-[#f7a900] text-sm font-semibold uppercase tracking-widest">
             Imizamo Yethu · Hout Bay · {t('Kapstadt', 'Cape Town')}
@@ -162,7 +175,13 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
       <section className="py-20 bg-white">
         <div className="mx-auto max-w-7xl px-6">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <PhotoSlot describe={t('Team oder Kinder vor Ort in Imizamo Yethu', 'Team or children on site in Imizamo Yethu')} />
+            <Photo
+              src="/images/fotos/team-vor-ort.jpg"
+              alt={t(
+                'Kinder im Klassenraum der Hout Bay Primary School',
+                'Children in the classroom at Hout Bay Primary School'
+              )}
+            />
             <div>
               <p className="text-[#11aed1] text-sm font-semibold uppercase tracking-widest mb-3">
                 {t('Über uns', 'About Us')}
@@ -224,6 +243,34 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
                   {t('Mehr erfahren →', 'Learn more →')}
                 </span>
               </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Einblicke: die Bilder tragen den Abschnitt, deshalb bewusst wenig Text.
+          Fotos liegen in public/images/fotos/ (#12). Vor dem Launch muss der
+          Verein bestaetigen, dass fuer alle abgebildeten Kinder ein
+          Einverstaendnis vorliegt. */}
+      <section className="py-20 bg-white">
+        <div className="mx-auto max-w-7xl px-6">
+          <div className="text-center mb-14">
+            <p className="text-[#f7a900] text-sm font-semibold uppercase tracking-widest mb-3">
+              {t('Einblicke', 'Impressions')}
+            </p>
+            <h2 className="text-4xl font-bold text-[#212529]">
+              {t('Ein Nachmittag bei den Ubuntu Kids', 'An afternoon with the Ubuntu Kids')}
+            </h2>
+          </div>
+          <div className="grid grid-cols-2 gap-4 md:grid-cols-3 md:gap-6">
+            {gallery.map((item) => (
+              <Photo
+                key={item.src}
+                src={item.src}
+                alt={item.alt}
+                aspect="aspect-[3/4]"
+                sizes="(min-width: 768px) 33vw, 50vw"
+              />
             ))}
           </div>
         </div>

@@ -3,6 +3,7 @@ import { client } from '@/sanity/lib/client'
 import { pageQuery } from '@/sanity/lib/queries'
 import { VOLUNTEER_EMAIL, mailto } from '@/lib/site-config'
 import { usable } from '@/sanity/lib/usable'
+import { HeroPhoto } from '@/components/Photo'
 
 interface PageContent {
   title_de?: string
@@ -152,8 +153,9 @@ export default async function FreiwilligePage({ params }: { params: Promise<{ lo
   return (
     <>
       <section className="relative py-32 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-[#212529] via-[#1a3a4a] to-[#ae64fd]/40" />
-        <div className="absolute inset-0 bg-gradient-to-b from-[#212529]/80 to-[#212529]/60" />
+        <HeroPhoto src="/images/fotos/hero-freiwillige.jpg" />
+        <div className="absolute inset-0 bg-gradient-to-br from-[#212529]/85 via-[#1a3a4a]/75 to-[#ae64fd]/40" />
+        <div className="absolute inset-0 bg-gradient-to-b from-[#212529]/60 to-[#212529]/70" />
         <div className="relative z-10 mx-auto max-w-4xl px-6 text-center text-white">
           <p className="text-[#f7a900] text-sm font-semibold uppercase tracking-widest mb-4">
             {t('Mitarbeiten', 'Get involved')}
