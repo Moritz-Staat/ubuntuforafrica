@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import { Link } from '@/i18n/routing'
 import { client } from '@/sanity/lib/client'
 import { teamMembersQuery, pageQuery } from '@/sanity/lib/queries'
+import { usable } from '@/sanity/lib/usable'
 import { PhotoSlot } from '@/components/Placeholder'
 
 interface TeamMember {
@@ -115,10 +116,16 @@ function mergeTeam(base: Person[], fromSanity: TeamMember[], locale: string) {
   const merged = base.map((person) => {
     const match = fromSanity.find((m) => m.name.trim() === person.name.trim())
     if (!match) return person
+    const role = locale === 'en'
+      ? usable(match.role_en) ?? usable(match.role)
+      : usable(match.role)
+    const bio = locale === 'en'
+      ? usable(match.bio_en) ?? usable(match.bio)
+      : usable(match.bio)
     return {
       ...person,
-      role: locale === 'en' ? (match.role_en ?? match.role) : match.role,
-      description: locale === 'en' ? (match.bio_en ?? match.bio ?? '') : (match.bio ?? ''),
+      role: role ?? person.role,
+      description: bio ?? person.description,
     }
   })
 
@@ -174,16 +181,16 @@ export default async function UeberUnsPage({ params }: { params: Promise<{ local
   const displayTeamSA = mergeTeam(teamSA, sanityMembers.filter((m) => m.team === 'sa'), locale)
   const displayTeamDE = mergeTeam(teamDE, sanityMembers.filter((m) => m.team === 'de'), locale)
 
-  const pageTitle = pageContent
-    ? (locale === 'en' ? pageContent.title_en : pageContent.title_de) ?? t('Über uns', 'About Us')
-    : t('Über uns', 'About Us')
+  const pageTitle =
+    usable(locale === 'en' ? pageContent?.title_en : pageContent?.title_de)
+    ?? t('Über uns', 'About Us')
 
-  const pageSubtitle = pageContent
-    ? (locale === 'en' ? pageContent.hero_subtitle_en : pageContent.hero_subtitle_de) ?? ''
-    : t(
-        'Seit 2008 im Einsatz für Kinder in Südafrika.',
-        'Working for children in South Africa since 2008.'
-      )
+  const pageSubtitle =
+    usable(locale === 'en' ? pageContent?.hero_subtitle_en : pageContent?.hero_subtitle_de)
+    ?? t(
+      'Seit 2008 im Einsatz für Kinder in Südafrika.',
+      'Working for children in South Africa since 2008.'
+    )
 
   return (
     <>

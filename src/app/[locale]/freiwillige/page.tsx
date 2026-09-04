@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import { client } from '@/sanity/lib/client'
 import { pageQuery } from '@/sanity/lib/queries'
 import { VOLUNTEER_EMAIL, mailto } from '@/lib/site-config'
+import { usable } from '@/sanity/lib/usable'
 
 interface PageContent {
   title_de?: string
@@ -46,13 +47,13 @@ export default async function FreiwilligePage({ params }: { params: Promise<{ lo
     // Sanity unavailable
   }
 
-  const pageTitle = pageContent
-    ? (locale === 'en' ? pageContent.title_en : pageContent.title_de) ?? t('Wir suchen Volunteers!', 'We are looking for volunteers!')
-    : t('Wir suchen Volunteers!', 'We are looking for volunteers!')
+  const pageTitle =
+    usable(locale === 'en' ? pageContent?.title_en : pageContent?.title_de)
+    ?? t('Wir suchen Volunteers!', 'We are looking for volunteers!')
 
-  const pageSubtitle = pageContent
-    ? (locale === 'en' ? pageContent.hero_subtitle_en : pageContent.hero_subtitle_de) ?? ''
-    : t(
+  const pageSubtitle =
+    usable(locale === 'en' ? pageContent?.hero_subtitle_en : pageContent?.hero_subtitle_de)
+    ?? t(
         'Du möchtest dich sozial engagieren und praktische Erfahrungen sammeln? Dann werde Teil von Ubuntu for Africa e.V.!',
         'Want to get involved and gain practical experience? Then become part of Ubuntu for Africa e.V.!'
       )
