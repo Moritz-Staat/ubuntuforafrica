@@ -29,22 +29,22 @@ const hardcodedProjects = [
     subtitle: 'Ein sicherer Ort nach der Schule',
     subtitle_en: 'A safe place after school',
     description:
-      'Unsere Aftercare ist eine Nachmittagsbetreuung für Kinder aus dem Township Imizamo Yethu in Hout Bay. Viele Kinder sind nach der Schule mehrere Stunden auf sich allein gestellt, weil ihre Eltern arbeiten – und verbringen den Nachmittag auf der Straße, in einem Umfeld voller Gefahren. Genau hier setzt unser Angebot an: Von Montag bis Freitag betreuen wir rund 50 Kinder im Alter von etwa 6 bis 10 Jahren, täglich von 13:30 bis 17:00 Uhr.',
+      'Unsere Aftercare ist eine Nachmittagsbetreuung für Kinder aus dem Township Imizamo Yethu in Hout Bay. Viele Kinder sind nach der Schule mehrere Stunden auf sich allein gestellt, weil ihre Eltern arbeiten – und verbringen den Nachmittag auf der Straße, wo sie auf sich gestellt und möglichen Gefahren ausgesetzt sind. Genau hier setzt unser Angebot an: Von Montag bis Freitag betreuen wir rund 40 Kinder im Alter von etwa 6 bis 10 Jahren, täglich von 13:30 bis 17:00 Uhr.',
     description_en:
-      'Our aftercare is an afternoon programme for children from the township of Imizamo Yethu in Hout Bay. Many children are left on their own for hours after school because their parents work – and spend the afternoon on the street, in an environment full of dangers. This is exactly where our programme comes in: from Monday to Friday we care for around 50 children aged roughly 6 to 10, daily from 1:30 to 5:00 pm.',
+      'Our aftercare is an afternoon programme for children from the township of Imizamo Yethu in Hout Bay. Many children are left on their own for hours after school because their parents work – and spend the afternoon on the street, left to themselves and exposed to possible dangers. This is exactly where our programme comes in: from Monday to Friday we care for around 40 children aged roughly 6 to 10, daily from 1:30 to 5:00 pm.',
     details: [
       'Hausaufgabenbetreuung in altersgerechten Gruppen',
       'Eine warme Mahlzeit an jedem Tag',
       'Kreative Aktivitäten wie Malen und gemeinsames Spielen',
       'Freies Spiel, zum Beispiel Fußball oder Gruppenspiele',
-      'Der tägliche „Circle“ – ein Ritual, das Orientierung und Zusammenhalt gibt',
+      'Ein verlässlicher Ort mit fester Routine, an dem Kinder einfach Kind sein dürfen',
     ],
     details_en: [
       'Homework support in age-appropriate groups',
       'A warm meal every day',
       'Creative activities such as painting and playing together',
       'Free play, for example football or group games',
-      'The daily “circle” – a ritual that provides orientation and togetherness',
+      'A reliable place with a fixed routine where children can simply be children',
     ],
     photo: 'Kinder in der Aftercare, z. B. beim Circle oder bei den Hausaufgaben',
     photo_en: 'Children in the aftercare, e.g. during the circle or homework',
@@ -58,19 +58,19 @@ const hardcodedProjects = [
     subtitle: 'Hout Bay Primary & Kronendal Primary',
     subtitle_en: 'Hout Bay Primary & Kronendal Primary',
     description:
-      'Wir arbeiten eng mit zwei Grundschulen in Hout Bay zusammen. Unsere Freiwilligen unterstützen die Lehrkräfte im Unterricht, fördern einzelne Kinder gezielt und bringen neue Impulse in den Schulalltag. Ein Schwerpunkt ist die Sprachförderung: Viele unserer Kinder sind mit ihren Familien aus Simbabwe und Malawi nach Südafrika gekommen. Die Landessprache isiXhosa ist für sie eine große Hürde – sie ist eigenes Unterrichtsfach und wird teilweise auch im Fachunterricht verwendet.',
+      'Wir arbeiten eng mit zwei Grundschulen in Hout Bay zusammen. Unsere Freiwilligen unterstützen die Lehrkräfte im Unterricht, fördern einzelne Kinder gezielt und bringen neue Impulse in den Schulalltag. Ein Schwerpunkt ist die Förderung in Englisch: Viele unserer Kinder sind mit ihren Familien aus Simbabwe und Malawi nach Südafrika gekommen und lernen in einer Sprache, die zu Hause niemand spricht. Dazu kommt isiXhosa als eigenes Unterrichtsfach – eine zusätzliche Hürde.',
     description_en:
-      'We work closely with two primary schools in Hout Bay. Our volunteers support teachers in the classroom, give individual children targeted help and bring fresh impulses into everyday school life. One focus is language support: many of our children came to South Africa from Zimbabwe and Malawi with their families. The national language isiXhosa is a major hurdle for them – it is a subject in its own right and is partly used in other lessons too.',
+      'We work closely with two primary schools in Hout Bay. Our volunteers support teachers in the classroom, give individual children targeted help and bring fresh impulses into everyday school life. One focus is English: many of our children came to South Africa from Zimbabwe and Malawi with their families and learn in a language nobody speaks at home. On top of that isiXhosa is a school subject in its own right – another hurdle.',
     details: [
       'Unterrichtsunterstützung in den Klassenzimmern',
-      'Gezielte Sprachförderung in isiXhosa durch intensive Nachhilfe',
+      'Gezielte Förderung in Englisch durch intensive Nachhilfe in kleinen Gruppen',
       'Individuelle Förderung einzelner Kinder',
       'Enge Zusammenarbeit mit dem Schulpersonal',
       'Mehr Sicherheit im Unterricht – und eigene Lernerfolge',
     ],
     details_en: [
       'Classroom teaching support',
-      'Targeted isiXhosa language support through intensive tutoring',
+      'Targeted English support through intensive tutoring in small groups',
       'Individual support for single children',
       'Close cooperation with school staff',
       'More confidence in class – and their own learning successes',
@@ -93,14 +93,14 @@ const hardcodedProjects = [
     details: [
       'Einsatz in Schule und Aftercare',
       'In der Regel 30 bis 35 Stunden pro Woche, Montag bis Freitag',
-      'Mindestdauer: drei Monate',
+      'Mindestdauer: zwei Monate',
       'Persönliche Begleitung vor, während und nach dem Aufenthalt',
       'Sichere Unterkunft mit anderen Freiwilligen',
     ],
     details_en: [
       'Placement in school and aftercare',
       'Usually 30 to 35 hours per week, Monday to Friday',
-      'Minimum duration: three months',
+      'Minimum duration: two months',
       'Personal support before, during and after the stay',
       'Safe accommodation shared with other volunteers',
     ],
@@ -146,7 +146,6 @@ export default async function ProjektePage({ params }: { params: Promise<{ local
   const useSanity = sanityProjects.length > 0
 
   const week = [
-    { day: t('Dienstag', 'Tuesday'), text: t('Surftherapie mit „Waves for Change“', 'Surf therapy with “Waves for Change”') },
     { day: t('Mittwoch & Donnerstag', 'Wednesday & Thursday'), text: t('Computerkurs für die Klassen 3 bis 5', 'Computer course for grades 3 to 5') },
     { day: t('Freitag', 'Friday'), text: t('Ausflüge zum Strand oder zum Spielplatz', 'Trips to the beach or the playground') },
     { day: t('Samstag', 'Saturday'), text: t('Training der Fußballmannschaft „Ubuntu Kids“', 'Training of the “Ubuntu Kids” football team') },

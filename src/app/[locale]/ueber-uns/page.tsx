@@ -44,9 +44,9 @@ const teamSA: Person[] = [
     role: 'Projektleitung & Fundraising',
     role_en: 'Project lead & fundraising',
     description:
-      'Marina lebt seit 1997 in Kapstadt und leitet seit 2025 ehrenamtlich die Projekte vor Ort. Sie verbindet die Arbeit in Hout Bay mit dem Verein und dem Vorstand in Deutschland.',
+      'Marina lebt seit 1997 in Kapstadt und leitet seit 2025 die Projekte vor Ort. Sie verbindet die Arbeit in Hout Bay mit dem Verein und dem Vorstand in Deutschland.',
     description_en:
-      'Marina has lived in Cape Town since 1997 and has led the projects on the ground on a voluntary basis since 2025. She connects the work in Hout Bay with the association and the board in Germany.',
+      'Marina has lived in Cape Town since 1997 and has led the projects on the ground since 2025. She connects the work in Hout Bay with the association and the board in Germany.',
   },
   {
     name: 'Brenda Moloto',
@@ -62,9 +62,9 @@ const teamSA: Person[] = [
     role: 'Allgemeine Betreuung',
     role_en: 'General care',
     description:
-      'Andiswa verantwortet das allgemeine Management der Aftercare und sorgt dafür, dass der Nachmittag für rund 50 Kinder verlässlich läuft.',
+      'Andiswa verantwortet das allgemeine Management der Aftercare und sorgt dafür, dass der Nachmittag für rund 40 Kinder verlässlich läuft.',
     description_en:
-      'Andiswa is responsible for the general management of the aftercare and makes sure the afternoon runs reliably for around 50 children.',
+      'Andiswa is responsible for the general management of the aftercare and makes sure the afternoon runs reliably for around 40 children.',
   },
   {
     name: 'Zizipho Nyanga',
@@ -350,8 +350,8 @@ export default async function UeberUnsPage({ params }: { params: Promise<{ local
                 icon: '💡',
                 title: t('Chancen schaffen', 'Creating opportunities'),
                 text: t(
-                  'Bildung, Sprachförderung, Sport und Gemeinschaft – wir schaffen Räume, in denen Kinder lernen, wachsen und einfach Kind sein dürfen.',
-                  'Education, language support, sport and community – we create spaces where children can learn, grow and simply be children.'
+                  'Bildung, Englischförderung, Sport und Gemeinschaft – wir schaffen Räume, in denen Kinder lernen, wachsen und einfach Kind sein dürfen.',
+                  'Education, English support, sport and community – we create spaces where children can learn, grow and simply be children.'
                 ),
                 color: '#f7a900',
               },
@@ -426,8 +426,8 @@ export default async function UeberUnsPage({ params }: { params: Promise<{ local
               </p>
               <p>
                 {t(
-                  'Seit 2025 ist Marina ehrenamtlich im Einsatz und leitet die Projekte von Ubuntu for Africa in Kapstadt. Sie verantwortet sowohl die Projektkoordination als auch das Fundraising.',
-                  'Since 2025 Marina has worked on a voluntary basis, leading the Ubuntu for Africa projects in Cape Town. She is responsible for project coordination as well as fundraising.'
+                  'Seit 2025 leitet Marina die Projekte von Ubuntu for Africa in Kapstadt und verantwortet Projektkoordination wie Fundraising. Für diesen Einsatz erhält sie eine Aufwandsentschädigung.',
+                  'Since 2025 Marina has led the Ubuntu for Africa projects in Cape Town and is responsible for project coordination as well as fundraising. She receives an expense allowance for this work.'
                 )}
               </p>
             </div>
@@ -495,7 +495,7 @@ export default async function UeberUnsPage({ params }: { params: Promise<{ local
           </h2>
           <p className="text-gray-600 mb-6 leading-relaxed">
             {t(
-              'Der Vorstand in Deutschland arbeitet vollständig ehrenamtlich, das Team in Südafrika wird fair aus Spenden bezahlt. Alle Details dazu stehen auf der Transparenz-Seite.',
+              'Der Vorstand in Deutschland arbeitet vollständig ehrenamtlich, das Team in Südafrika wird fair aus Spenden vergütet. Alle Details dazu stehen auf der Transparenz-Seite.',
               'The board in Germany works entirely on a voluntary basis, the team in South Africa is fairly paid from donations. All the details are on the transparency page.'
             )}
           </p>

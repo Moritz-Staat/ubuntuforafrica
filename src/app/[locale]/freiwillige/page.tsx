@@ -21,15 +21,15 @@ export async function generateMetadata(
       ? 'Volunteer Programme | Ubuntu for Africa'
       : 'Freiwillige & Praktikum | Ubuntu for Africa',
     description: isEn
-      ? 'Volunteer with Ubuntu for Africa in Cape Town: school, aftercare, from three months, with personal support.'
-      : 'Freiwilligenarbeit und Praktikum bei Ubuntu for Africa in Kapstadt: Schule, Aftercare, ab drei Monaten, mit persönlicher Begleitung.',
+      ? 'Volunteer with Ubuntu for Africa in Cape Town: school, aftercare, from two months, with personal support.'
+      : 'Freiwilligenarbeit und Praktikum bei Ubuntu for Africa in Kapstadt: Schule, Aftercare, ab zwei Monaten, mit persönlicher Begleitung.',
     openGraph: {
       title: isEn
         ? 'Volunteer Programme | Ubuntu for Africa'
         : 'Freiwillige & Praktikum | Ubuntu for Africa',
       description: isEn
-        ? 'Volunteer with Ubuntu for Africa in Cape Town: school, aftercare, from three months, with personal support.'
-        : 'Freiwilligenarbeit und Praktikum bei Ubuntu for Africa in Kapstadt: Schule, Aftercare, ab drei Monaten, mit persönlicher Begleitung.',
+        ? 'Volunteer with Ubuntu for Africa in Cape Town: school, aftercare, from two months, with personal support.'
+        : 'Freiwilligenarbeit und Praktikum bei Ubuntu for Africa in Kapstadt: Schule, Aftercare, ab zwei Monaten, mit persönlicher Begleitung.',
       images: [{ url: 'https://ubuntuforafrica.com/images/Ubuntu_Logo.png' }],
       locale: isEn ? 'en_GB' : 'de_DE',
     },
@@ -63,13 +63,13 @@ export default async function FreiwilligePage({ params }: { params: Promise<{ lo
         'You are of legal age',
         'You can present an extended police clearance certificate',
         'Studies or training in an educational or social field are an advantage, but not a requirement',
-        'The minimum duration of an internship is three months',
+        'The minimum duration of an internship is two months',
       ]
     : [
         'Du bist volljährig',
         'Du kannst ein erweitertes Führungszeugnis vorlegen',
         'Ein Studium oder eine Ausbildung im pädagogischen oder sozialen Bereich ist von Vorteil, aber keine Voraussetzung',
-        'Die Mindestdauer eines Praktikums beträgt drei Monate',
+        'Die Mindestdauer eines Praktikums beträgt zwei Monate',
       ]
 
   const activities = locale === 'en'

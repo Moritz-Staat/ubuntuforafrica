@@ -105,17 +105,17 @@ export default async function TransparenzPage({
                 color: '#11aed120',
                 title: t('Ubuntu Kids Aftercare', 'Ubuntu Kids Aftercare'),
                 text: t(
-                  'Täglich eine warme Mahlzeit, Lernmaterial, Hausaufgabenbetreuung und ein Team, das rund 50 Kinder von Montag bis Freitag nach der Schule begleitet.',
-                  'A warm meal every day, learning materials, homework support and a team that looks after around 50 children after school from Monday to Friday.'
+                  'Täglich eine warme Mahlzeit, Lernmaterial, Hausaufgabenbetreuung und ein Team, das rund 40 Kinder von Montag bis Freitag nach der Schule begleitet.',
+                  'A warm meal every day, learning materials, homework support and a team that looks after around 40 children after school from Monday to Friday.'
                 ),
               },
               {
                 icon: '📚',
                 color: '#ae64fd20',
-                title: t('Schulkooperationen & Sprachförderung', 'School partnerships & language support'),
+                title: t('Schulkooperationen & Englischförderung', 'School partnerships & language support'),
                 text: t(
-                  'Zusammenarbeit mit der Hout Bay Primary und der Kronendal Primary: Unterstützung im Unterricht und gezielte Nachhilfe in isiXhosa für Kinder, deren Familien aus Simbabwe und Malawi zugewandert sind.',
-                  'Cooperation with Hout Bay Primary and Kronendal Primary: support in the classroom and targeted isiXhosa tutoring for children whose families migrated from Zimbabwe and Malawi.'
+                  'Zusammenarbeit mit der Hout Bay Primary und der Kronendal Primary: Unterstützung im Unterricht und gezielte Nachhilfe in Englisch für Kinder, deren Familien aus Simbabwe und Malawi zugewandert sind.',
+                  'Cooperation with Hout Bay Primary and Kronendal Primary: support in the classroom and targeted English tutoring for children whose families migrated from Zimbabwe and Malawi.'
                 ),
               },
               {
@@ -132,8 +132,8 @@ export default async function TransparenzPage({
                 color: '#f7a90020',
                 title: t('Ferien-Camps und Ausflüge', 'Holiday camps and excursions'),
                 text: t(
-                  'Ferienfreizeiten, Ausflüge zum Strand und zum Spielplatz sowie Surftherapie und Fußballtraining – Erfahrungen, die im Township sonst nicht möglich wären.',
-                  'Holiday programmes, trips to the beach and the playground as well as surf therapy and football training – experiences that would otherwise not be possible in the township.'
+                  'Ferienfreizeiten, Ausflüge zum Strand und zum Spielplatz sowie Fußballtraining – Erfahrungen, die im Township sonst nicht möglich wären.',
+                  'Holiday programmes, trips to the beach and the playground as well as football training – experiences that would otherwise not be possible in the township.'
                 ),
               },
             ].map((item) => (
@@ -176,8 +176,8 @@ export default async function TransparenzPage({
               </h3>
               <p className="text-gray-600 leading-relaxed">
                 {t(
-                  'Unser professionelles Team vor Ort in Imizamo Yethu, Hout Bay, wird fair aus den Spendengeldern bezahlt. Brenda Moloto, Andiswa Watsha, Zizipho Nyanga und Mzwandile Ntozini gestalten die tägliche Arbeit mit den Kindern; die Projektleitung liegt bei Marina Vucurevic, die ebenfalls ehrenamtlich arbeitet.',
-                  'Our professional on-the-ground team in Imizamo Yethu, Hout Bay, is fairly paid from donations. Brenda Moloto, Andiswa Watsha, Zizipho Nyanga and Mzwandile Ntozini shape the daily work with the children; project management is led by Marina Vucurevic, who also works on a voluntary basis.'
+                  'Unser professionelles Team vor Ort in Imizamo Yethu, Hout Bay, wird fair aus den Spendengeldern bezahlt. Brenda Moloto, Andiswa Watsha, Zizipho Nyanga und Mzwandile Ntozini gestalten die tägliche Arbeit mit den Kindern. Die Projektleitung liegt bei Marina Vucurevic, die dafür eine Aufwandsentschädigung erhält.',
+                  'Our professional on-the-ground team in Imizamo Yethu, Hout Bay, is fairly paid from donations. Brenda Moloto, Andiswa Watsha, Zizipho Nyanga and Mzwandile Ntozini shape the daily work with the children. Project management is led by Marina Vucurevic, who receives an expense allowance for this work.'
                 )}
               </p>
             </div>

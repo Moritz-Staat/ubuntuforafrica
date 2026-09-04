@@ -59,8 +59,8 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
     {
       title: t('Freiwilligenprogramm', 'Volunteer Programme'),
       description: t(
-        'Freiwillige und Praktikant:innen arbeiten in Schule und Aftercare mit – ab drei Monaten, mit persönlicher Begleitung vor, während und nach dem Aufenthalt.',
-        'Volunteers and interns work in the school and aftercare – from three months, with personal support before, during and after the stay.'
+        'Freiwillige und Praktikant:innen arbeiten in Schule und Aftercare mit – ab zwei Monaten, mit persönlicher Begleitung vor, während und nach dem Aufenthalt.',
+        'Volunteers and interns work in the school and aftercare – from two months, with personal support before, during and after the stay.'
       ),
       icon: '🤝',
       href: '/freiwillige' as const,
@@ -132,7 +132,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
             {/* Alle drei Zahlen stammen aus den freigegebenen Texten
                 (Aftercare-Beschreibung, Vereinsgeschichte) – keine Platzhalter. */}
             <div>
-              <p className="text-6xl font-bold mb-2">50</p>
+              <p className="text-6xl font-bold mb-2">40</p>
               <p className="text-lg text-white/90">
                 {t('Kinder täglich in der Aftercare', 'children in aftercare every day')}
               </p>
