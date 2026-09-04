@@ -25,25 +25,25 @@ export default function SpendenClientPage() {
     {
       amount: 10,
       label: '10 €',
-      impact: t('Deckt eine Woche Aftercare-Material', 'Covers one week of aftercare materials'), unconfirmed: true,
+      impact: t('Lernmaterial für ein Kind, einen Monat lang', 'Learning materials for one child for a month'), unconfirmed: true,
       color: '#11aed1',
     },
     {
       amount: 25,
       label: '25 €',
-      impact: t('Ermöglicht 1 Monat Schulpatenschaft', 'Enables 1 month school sponsorship'), unconfirmed: true,
+      impact: t('Warme Mahlzeiten für ein Kind, einen Monat lang', 'Warm meals for one child for a month'), unconfirmed: true,
       color: '#ae64fd',
     },
     {
       amount: 50,
       label: '50 €',
-      impact: t('Finanziert ein Yoga-/Therapieprogramm', 'Funds a yoga/therapy program'), unconfirmed: true,
+      impact: t('Ein Ausflug für die ganze Gruppe – Strand oder Spielplatz', 'One outing for the whole group – beach or playground'), unconfirmed: true,
       color: '#f7a900',
     },
     {
       amount: 100,
       label: '100 €',
-      impact: t('Trägt zum Container-Bau bei', 'Contributes to container construction'), unconfirmed: true,
+      impact: t('Trägt einen Monat lang zur Vergütung einer Betreuungskraft bei', 'Contributes to a month of a care worker’s pay'), unconfirmed: true,
       color: '#11aed1',
     },
   ]

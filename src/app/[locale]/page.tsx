@@ -71,11 +71,16 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
   // Betraege bewusst als Platzhalter: Hanna hat am 22.07.2026 verfuegt, dass
   // keine Geldbetraege in den Texten stehen, bis der Verein sie freigibt (#10).
   // `was` zeigt den bisherigen Wert durchgestrichen, damit nichts verlorengeht.
+  //
+  // Die Verwendungszwecke sind am 04.09.2026 ausgetauscht worden (#32):
+  // Schulpatenschaft, Yoga/Therapie und Container-Bau gibt es nicht mehr.
+  // Die neuen Zuordnungen sind ein Redaktionsvorschlag und muessen vom
+  // Verein bestaetigt werden - deshalb bleiben sie als Platzhalter markiert.
   const donationAmounts = [
-    { was: '10 €',  impact: t('Deckt eine Woche Aftercare-Material', 'Covers one week of aftercare materials'), color: '#11aed1' },
-    { was: '25 €',  impact: t('Ermöglicht 1 Monat Schulpatenschaft', 'Enables 1 month school sponsorship'), color: '#ae64fd' },
-    { was: '50 €',  impact: t('Finanziert ein Yoga-/Therapieprogramm', 'Funds a yoga/therapy programme'), color: '#f7a900' },
-    { was: '100 €', impact: t('Trägt zum Container-Bau bei', 'Contributes to container construction'), color: '#11aed1' },
+    { was: '10 €',  impact: t('Lernmaterial für ein Kind, einen Monat lang', 'Learning materials for one child for a month'), color: '#11aed1' },
+    { was: '25 €',  impact: t('Warme Mahlzeiten für ein Kind, einen Monat lang', 'Warm meals for one child for a month'), color: '#ae64fd' },
+    { was: '50 €',  impact: t('Ein Ausflug für die ganze Gruppe – Strand oder Spielplatz', 'One outing for the whole group – beach or playground'), color: '#f7a900' },
+    { was: '100 €', impact: t('Trägt einen Monat lang zur Vergütung einer Betreuungskraft bei', 'Contributes to a month of a care worker’s pay'), color: '#11aed1' },
   ]
 
   return (
