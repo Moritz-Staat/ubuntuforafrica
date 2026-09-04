@@ -92,14 +92,14 @@ const hardcodedProjects = [
       'Our volunteers help in all our projects and work closely with the multi-professional team on site – whether at Hout Bay Primary School, Kronendal Primary or Ubuntu Kids Aftercare. They support the teachers, help with homework, plan leisure activities and accompany excursions – bringing in their own ideas and strengths.',
     details: [
       'Einsatz in Schule und Aftercare',
-      'In der Regel 30 bis 35 Stunden pro Woche, Montag bis Freitag',
+      'In der Regel 30 bis 40 Stunden pro Woche, Montag bis Freitag',
       'Mindestdauer: zwei Monate',
       'Persönliche Begleitung vor, während und nach dem Aufenthalt',
       'Sichere Unterkunft mit anderen Freiwilligen',
     ],
     details_en: [
       'Placement in school and aftercare',
-      'Usually 30 to 35 hours per week, Monday to Friday',
+      'Usually 30 to 40 hours per week, Monday to Friday',
       'Minimum duration: two months',
       'Personal support before, during and after the stay',
       'Safe accommodation shared with other volunteers',

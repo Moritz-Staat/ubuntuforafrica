@@ -1,5 +1,4 @@
 import type { Metadata } from 'next'
-import { Link } from '@/i18n/routing'
 import { client } from '@/sanity/lib/client'
 import { pageQuery } from '@/sanity/lib/queries'
 import { VOLUNTEER_EMAIL, mailto } from '@/lib/site-config'
@@ -61,14 +60,14 @@ export default async function FreiwilligePage({ params }: { params: Promise<{ lo
   const requirements = locale === 'en'
     ? [
         'You are of legal age',
-        'You can present an extended police clearance certificate',
-        'Studies or training in an educational or social field are an advantage, but not a requirement',
+        'An advantage, but not a requirement: studies or training in an educational or social field',
+        'You can present an extended police clearance certificate without relevant entries – we work with children, so this is non-negotiable',
         'The minimum duration of an internship is two months',
       ]
     : [
         'Du bist volljährig',
-        'Du kannst ein erweitertes Führungszeugnis vorlegen',
-        'Ein Studium oder eine Ausbildung im pädagogischen oder sozialen Bereich ist von Vorteil, aber keine Voraussetzung',
+        'Von Vorteil, aber keine Voraussetzung: ein Studium oder eine Ausbildung im pädagogischen oder sozialen Bereich',
+        'Du kannst ein erweitertes Führungszeugnis ohne einschlägige Einträge vorlegen – wir arbeiten mit Kindern, da gibt es keinen Spielraum',
         'Die Mindestdauer eines Praktikums beträgt zwei Monate',
       ]
 
@@ -76,13 +75,8 @@ export default async function FreiwilligePage({ params }: { params: Promise<{ lo
     ? [
         {
           icon: '📚',
-          title: 'Hout Bay Primary School',
-          description: 'You support teachers in the classroom, help individual children and bring new ideas and energy to everyday school life.',
-        },
-        {
-          icon: '🏫',
-          title: 'Kronendal Primary',
-          description: 'A second school partnership: volunteers are deployed as valuable classroom support.',
+          title: 'Hout Bay Primary & Kronendal Primary',
+          description: 'At both partner schools you support teachers in the classroom, help individual children and bring new ideas and energy to everyday school life.',
         },
         {
           icon: '🏠',
@@ -93,13 +87,8 @@ export default async function FreiwilligePage({ params }: { params: Promise<{ lo
     : [
         {
           icon: '📚',
-          title: 'Hout Bay Primary School',
-          description: 'Du unterstützt die Lehrkräfte im Unterricht, hilfst einzelnen Kindern und bringst neue Impulse in den Schulalltag.',
-        },
-        {
-          icon: '🏫',
-          title: 'Kronendal Primary',
-          description: 'Weitere Schulkooperation: Freiwillige werden als wertvolle Unterstützung im Klassenraum eingesetzt.',
+          title: 'Hout Bay Primary & Kronendal Primary',
+          description: 'An beiden Partnerschulen unterstützt du die Lehrkräfte im Unterricht, hilfst einzelnen Kindern und bringst neue Impulse in den Schulalltag.',
         },
         {
           icon: '🏠',
@@ -199,12 +188,12 @@ export default async function FreiwilligePage({ params }: { params: Promise<{ lo
             <h2 className="text-4xl font-bold text-[#212529]">{t('Was du machst', 'What you do')}</h2>
             <p className="text-gray-600 mt-4 max-w-2xl mx-auto">
               {t(
-                'In der Regel beträgt die Arbeitszeit 30 bis 35 Stunden pro Woche, Montag bis Freitag. Individuelle Absprachen sind möglich – wir legen viel Wert auf Flexibilität und gegenseitige Rücksichtnahme. Die Wochenenden bleiben frei, um Kapstadt und die Umgebung zu entdecken.',
-                'Working hours are usually 30 to 35 hours per week, Monday to Friday. Individual arrangements are possible – we value flexibility and mutual consideration. Weekends are free to explore Cape Town and the surrounding area.'
+                'In der Regel beträgt die Arbeitszeit 30 bis 40 Stunden pro Woche, Montag bis Freitag. Individuelle Absprachen sind möglich – wir legen viel Wert auf Flexibilität und gegenseitige Rücksichtnahme. Die Wochenenden bleiben frei, um Kapstadt und die Umgebung zu entdecken.',
+                'Working hours are usually 30 to 40 hours per week, Monday to Friday. Individual arrangements are possible – we value flexibility and mutual consideration. Weekends are free to explore Cape Town and the surrounding area.'
               )}
             </p>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {activities.map((activity) => (
               <div key={activity.title} className="bg-white rounded-2xl p-8 shadow-sm">
                 <div className="w-14 h-14 rounded-xl bg-[#11aed1]/10 flex items-center justify-center text-2xl mb-6">
@@ -330,15 +319,6 @@ export default async function FreiwilligePage({ params }: { params: Promise<{ lo
           >
             {VOLUNTEER_EMAIL}
           </a>
-          <p className="text-white/70 text-sm">
-            {t('Oder nutze unser Kontaktformular:', 'Or use our contact form:')}
-          </p>
-          <Link
-            href="/kontakt"
-            className="inline-flex items-center justify-center gap-2 rounded-full border-2 border-white text-white px-8 py-3 text-base font-semibold hover:bg-white/10 transition-colors mt-3"
-          >
-            {t('Zum Kontaktformular', 'Contact form')}
-          </Link>
         </div>
       </section>
     </>
