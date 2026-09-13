@@ -26,11 +26,7 @@
   "donate": {
     "title": "Donate now",
     "subtitle": "Every contribution makes a difference",
-    "10": "Covers one week of aftercare materials",
-    "25": "Enables 1 month school sponsorship",
-    "50": "Funds a yoga/therapy program",
-    "100": "Contributes to container construction",
-    "custom": "Enter custom amount",
+    "custom": "Donate an amount of your choice",
     "btn": "Donate"
   },
   "footer": {

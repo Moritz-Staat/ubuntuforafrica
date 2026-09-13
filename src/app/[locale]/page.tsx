@@ -3,7 +3,6 @@ import { setRequestLocale } from 'next-intl/server'
 import { Link } from '@/i18n/routing'
 import { VOLUNTEER_EMAIL, mailto } from '@/lib/site-config'
 import InstagramFeed from '@/components/InstagramFeed'
-import { PHNumber } from '@/components/Placeholder'
 import { Photo, HeroPhoto } from '@/components/Photo'
 
 export async function generateMetadata(
@@ -79,21 +78,6 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
     { src: '/images/fotos/galerie-reifen-hof.jpg',   alt: t('Kinder spielen mit Reifen auf dem Hof', 'Children playing with hoops in the yard') },
     { src: '/images/fotos/galerie-reifen-wiese.jpg', alt: t('Bewegungsspiele auf der Wiese vor den Bergen von Hout Bay', 'Games on the lawn against the mountains of Hout Bay') },
     { src: '/images/fotos/galerie-gruppe.jpg',       alt: t('Drei Maedchen der Ubuntu Kids beim Nachmittagsprogramm', 'Three girls from the Ubuntu Kids during the afternoon programme') },
-  ]
-
-  // Betraege bewusst als Platzhalter: Hanna hat am 22.07.2026 verfuegt, dass
-  // keine Geldbetraege in den Texten stehen, bis der Verein sie freigibt (#10).
-  // `was` zeigt den bisherigen Wert durchgestrichen, damit nichts verlorengeht.
-  //
-  // Die Verwendungszwecke sind am 04.09.2026 ausgetauscht worden (#32):
-  // Schulpatenschaft, Yoga/Therapie und Container-Bau gibt es nicht mehr.
-  // Die neuen Zuordnungen sind ein Redaktionsvorschlag und muessen vom
-  // Verein bestaetigt werden - deshalb bleiben sie als Platzhalter markiert.
-  const donationAmounts = [
-    { was: '10 €',  impact: t('Lernmaterial für ein Kind, einen Monat lang', 'Learning materials for one child for a month'), color: '#11aed1' },
-    { was: '25 €',  impact: t('Warme Mahlzeiten für ein Kind, einen Monat lang', 'Warm meals for one child for a month'), color: '#ae64fd' },
-    { was: '50 €',  impact: t('Ein Ausflug für die ganze Gruppe – Strand oder Spielplatz', 'One outing for the whole group – beach or playground'), color: '#f7a900' },
-    { was: '100 €', impact: t('Trägt einen Monat lang zur Vergütung einer Betreuungskraft bei', 'Contributes to a month of a care worker’s pay'), color: '#11aed1' },
   ]
 
   return (
@@ -294,19 +278,24 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
               )}
             </p>
           </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
-            {donationAmounts.map((item) => (
-              <div
-                key={item.was}
-                className="rounded-2xl border-2 p-6 text-center hover:shadow-lg transition-all hover:-translate-y-1"
-                style={{ borderColor: item.color + '40' }}
-              >
-                <p className="text-3xl font-bold mb-3" style={{ color: item.color }}>
-                  <PHNumber was={item.was} />
-                </p>
-                <p className="text-sm text-gray-600 leading-relaxed">{item.impact}</p>
-              </div>
-            ))}
+          {/* Bewusst ohne Betraege. Hanna hat am 22.07.2026 verfuegt, dass keine
+              Geldbetraege in den Texten stehen (#10); die frueheren Stufen
+              10/25/50/100 EUR waren ein Redaktionsvorschlag und vom Verein nie
+              freigegeben. Am 13.09.2026 komplett entfernt. Die Saetze hier
+              stammen aus "Website - Text Spenden.docx". */}
+          <div className="mx-auto max-w-2xl text-center mb-10">
+            <p className="text-lg text-gray-600 leading-relaxed">
+              {t(
+                'Jeder Euro, den du über unser Vereinskonto spendest, kommt ohne Umwege bei unserer südafrikanischen Partner-NGO an und wird dort gezielt eingesetzt – zum Beispiel für unsere Aftercare oder unsere Ferien-Camps.',
+                'Every euro you donate via our association account reaches our South African partner NGO without detours and is used there in a targeted way – for example for our aftercare or our holiday camps.'
+              )}
+            </p>
+            <p className="mt-4 text-gray-600 leading-relaxed">
+              {t(
+                'Du entscheidest selbst, mit welchem Betrag du uns unterstützt. Jeder Beitrag, egal wie klein er auf den ersten Blick erscheinen mag, hilft uns enorm weiter.',
+                'You decide for yourself how much you would like to give. Every contribution, however small it may seem at first, helps us enormously.'
+              )}
+            </p>
           </div>
           <div className="text-center">
             <Link

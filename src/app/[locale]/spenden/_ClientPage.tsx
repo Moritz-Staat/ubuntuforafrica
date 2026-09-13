@@ -9,9 +9,8 @@ import { useState } from 'react'
 import { useLocale } from 'next-intl'
 import { Link } from '@/i18n/routing'
 import { RECEIPT_EMAIL, mailto } from '@/lib/site-config'
-import { PHNumber, PHInline } from '@/components/Placeholder'
 
-type LoadingKey = number | 'custom' | null
+type LoadingKey = 'custom' | null
 
 export default function SpendenClientPage() {
   const locale = useLocale()
@@ -21,35 +20,8 @@ export default function SpendenClientPage() {
   const [customAmount, setCustomAmount] = useState('')
   const [error, setError] = useState('')
 
-  const amounts = [
-    {
-      amount: 10,
-      label: '10 €',
-      impact: t('Lernmaterial für ein Kind, einen Monat lang', 'Learning materials for one child for a month'), unconfirmed: true,
-      color: '#11aed1',
-    },
-    {
-      amount: 25,
-      label: '25 €',
-      impact: t('Warme Mahlzeiten für ein Kind, einen Monat lang', 'Warm meals for one child for a month'), unconfirmed: true,
-      color: '#ae64fd',
-    },
-    {
-      amount: 50,
-      label: '50 €',
-      impact: t('Ein Ausflug für die ganze Gruppe – Strand oder Spielplatz', 'One outing for the whole group – beach or playground'), unconfirmed: true,
-      color: '#f7a900',
-    },
-    {
-      amount: 100,
-      label: '100 €',
-      impact: t('Trägt einen Monat lang zur Vergütung einer Betreuungskraft bei', 'Contributes to a month of a care worker’s pay'), unconfirmed: true,
-      color: '#11aed1',
-    },
-  ]
-
-  async function startCheckout(amountEur: number, key: LoadingKey) {
-    setLoadingKey(key)
+  async function startCheckout(amountEur: number) {
+    setLoadingKey('custom')
     setError('')
     try {
       const res = await fetch('/api/donate', {
@@ -80,7 +52,7 @@ export default function SpendenClientPage() {
       setError(t('Bitte gib einen Betrag von mindestens 1 € ein.', 'Please enter an amount of at least €1.'))
       return
     }
-    startCheckout(Math.round(val), 'custom')
+    startCheckout(Math.round(val))
   }
 
   return (
@@ -111,53 +83,46 @@ export default function SpendenClientPage() {
 
       <section className="py-20 bg-white">
         <div className="mx-auto max-w-4xl px-6">
-          <div className="text-center mb-14">
+          {/* Bewusst ohne Betragsstufen. Hanna hat am 22.07.2026 verfuegt, dass
+              keine Geldbetraege in den Texten stehen (#10); die frueheren
+              Stufen 10/25/50/100 EUR und ihre Verwendungszwecke waren ein
+              Redaktionsvorschlag und vom Verein nie freigegeben. Am 13.09.2026
+              komplett entfernt, es bleibt der frei waehlbare Wunschbetrag.
+              Die Saetze hier stammen aus "Website - Text Spenden.docx". */}
+          <div className="text-center mb-10">
             <h2 className="text-4xl font-bold text-[#212529] mb-6">
               {t('Was deine Spende bewirkt', 'What your donation achieves')}
             </h2>
-          </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-            {amounts.map((item) => (
-              <div
-                key={item.amount}
-                className="rounded-2xl border-2 p-8 hover:shadow-lg transition-all hover:-translate-y-1 flex flex-col"
-                style={{ borderColor: item.color + '30' }}
-              >
-                <p className="text-4xl font-bold mb-3" style={{ color: item.color }}>
-                  {item.label}
-                </p>
-                <p className="text-gray-700 leading-relaxed flex-1">
-                  <span style={item.unconfirmed ? PHInline : undefined}>{item.impact}</span>
-                </p>
-                <button
-                  onClick={() => startCheckout(item.amount, item.amount)}
-                  disabled={loadingKey !== null}
-                  className="mt-6 w-full rounded-full py-3 font-semibold text-white transition-all disabled:opacity-60 disabled:cursor-not-allowed hover:opacity-90"
-                  style={{ backgroundColor: item.color }}
-                >
-                  {loadingKey === item.amount
-                    ? t('Weiterleitung...', 'Redirecting...')
-                    : t(`${item.label} spenden`, `Donate ${item.label}`)}
-                </button>
-              </div>
-            ))}
+            <p className="text-lg text-gray-600 leading-relaxed">
+              {t(
+                'Wir möchten Kindern und Jugendlichen in Südafrika einen sicheren Ort bieten, an dem sie lernen, wachsen und einfach Kind sein dürfen. Ubuntu bedeutet für uns, füreinander da zu sein und gemeinsam Perspektiven zu schaffen. Mit deiner Spende unterstützt du Bildung, Gemeinschaft und die Entwicklung junger Menschen – und hilfst dabei, echte Zukunftschancen zu ermöglichen.',
+                'We want to give children and young people in South Africa a safe place where they can learn, grow and simply be children. For us, Ubuntu means being there for one another and creating perspectives together. With your donation you support education, community and the development of young people – and help make real opportunities possible.'
+              )}
+            </p>
+            <p className="mt-4 text-gray-600 leading-relaxed">
+              {t(
+                'Du entscheidest selbst, mit welchem Betrag du uns unterstützt. Jeder Beitrag, egal wie klein er auf den ersten Blick erscheinen mag, hilft uns enorm weiter und macht einen echten Unterschied.',
+                'You decide for yourself how much you would like to give. Every contribution, however small it may seem at first, helps us enormously and makes a real difference.'
+              )}
+            </p>
           </div>
 
           {/* Custom amount */}
           <div className="mt-10 bg-gray-50 rounded-2xl p-8 border border-gray-100">
             <h3 className="text-xl font-bold text-[#212529] mb-4">
-              {t('Anderen Betrag eingeben', 'Enter a different amount')}
+              {t('Wunschbetrag spenden', 'Donate an amount of your choice')}
             </h3>
             <div className="flex gap-3">
               <div className="relative flex-1">
                 <span className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 font-semibold">€</span>
                 <input
                   type="number"
+                  inputMode="decimal"
                   min="1"
                   step="1"
                   value={customAmount}
                   onChange={(e) => setCustomAmount(e.target.value)}
-                  placeholder="25"
+                  placeholder={t('Betrag', 'Amount')}
                   className="w-full rounded-xl border border-gray-200 pl-9 pr-4 py-3 text-[#212529] focus:border-[#11aed1] focus:outline-none focus:ring-2 focus:ring-[#11aed1]/20 transition-all"
                 />
               </div>
@@ -248,11 +213,10 @@ export default function SpendenClientPage() {
               'Every euro you donate to our association account reaches our South African partner NGO without detours. The board in Germany works entirely on a voluntary basis – nobody here receives a salary from your donation, so nothing is deducted for running the association either.'
             )}
           </p>
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-8">
+          <div className="mx-auto grid max-w-xl grid-cols-1 sm:grid-cols-2 gap-8">
             {[
-              // Der Anteil ist noch unbelegt – fuer einen gemeinnuetzigen Verein ist
-              // das eine pruefbare Aussage, siehe GitHub #13.
-              { value: <PHNumber was="100%" />, label: t('deiner Spende geht in die Projekte', 'of your donation goes into the projects') },
+              // Eine Prozentangabe stand hier bis 13.09.2026 als durchgestrichener
+              // Platzhalter – der Anteil ist unbelegt und muss aus #13 kommen.
               { value: t('kein Abzug', 'no deduction'), label: t('für Gehälter oder Verwaltung in Deutschland', 'for salaries or administration in Germany') },
               { value: t('seit 2008', 'since 2008'), label: t('Erfahrung vor Ort', 'experience on the ground') },
             ].map((stat, i) => (

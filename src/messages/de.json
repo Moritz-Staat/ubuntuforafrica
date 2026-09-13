@@ -26,11 +26,7 @@
   "donate": {
     "title": "Jetzt spenden",
     "subtitle": "Jeder Beitrag macht einen Unterschied",
-    "10": "Deckt eine Woche Aftercare-Material",
-    "25": "Ermöglicht 1 Monat Schulpatenschaft",
-    "50": "Finanziert ein Yoga-/Therapieprogramm",
-    "100": "Trägt zum Container-Bau bei",
-    "custom": "Anderen Betrag eingeben",
+    "custom": "Wunschbetrag spenden",
     "btn": "Spenden"
   },
   "footer": {
