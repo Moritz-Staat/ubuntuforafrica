@@ -23,7 +23,7 @@ export default async function ImpressumPage({ params }: { params: Promise<{ loca
       <section className="py-24 bg-[#212529] text-white">
         <div className="mx-auto max-w-4xl px-6">
           <h1 className="text-4xl font-bold mb-3">{t('Impressum', 'Legal Notice')}</h1>
-          <p className="text-gray-400">{t('Angaben gemäß § 5 TMG', 'Information according to § 5 TMG')}</p>
+          <p className="text-gray-400">{t('Angaben gemäß § 5 DDG', 'Information according to § 5 DDG')}</p>
         </div>
       </section>
 
@@ -37,10 +37,9 @@ export default async function ImpressumPage({ params }: { params: Promise<{ loca
               <div className="text-gray-700 leading-relaxed space-y-1">
                 <p className="font-semibold">UBUNTU for Africa Kinder, Jugend- und Familienhilfe e.V.</p>
                 <p>{t('Eingetragener gemeinnütziger Verein', 'Registered non-profit association')}</p>
-                {/* TODO: Vereinsadresse eintragen */}
-                <p className="mt-3 text-sm text-amber-700 bg-amber-50 border border-amber-200 rounded-lg px-4 py-2 inline-block">
-                  {t('Vereinsadresse wird nach Bekanntgabe eingetragen.', 'Association address to be added upon notification.')}
-                </p>
+                {/* Bewusst ohne Strasse: Die Vereinsadresse ist Birgittas
+                    Privatadresse (#14, 06.11.2026). Rechtlich offen, siehe #14. */}
+                <p>{t('Sitz: Hamburg', 'Registered office: Hamburg, Germany')}</p>
               </div>
             </div>
 
@@ -60,11 +59,9 @@ export default async function ImpressumPage({ params }: { params: Promise<{ loca
               <h2 className="text-2xl font-bold text-[#212529] mb-4">{t('Registereintrag', 'Register Entry')}</h2>
               <div className="text-gray-700 space-y-1">
                 <p>
-                  {t('Eingetragen im Vereinsregister.', 'Registered in the association register.')}
+                  {t('Vereinsregister des Amtsgerichts Hamburg', 'Register of associations, Local Court (Amtsgericht) Hamburg')}
                 </p>
-                <p className="text-sm text-amber-700 bg-amber-50 border border-amber-200 rounded-lg px-4 py-2 inline-block mt-2">
-                  {t('Registernummer und Registergericht werden nachgetragen.', 'Register number and court to be added.')}
-                </p>
+                <p>{t('Registernummer', 'Register number')}: VR 25961</p>
               </div>
             </div>
 

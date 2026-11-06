@@ -133,8 +133,8 @@ export default function KontaktClientPage() {
                   icon: '🏛️',
                   label: t('Vereinssitz', 'Registered office'),
                   value: t(
-                    'Deutschland (eingetragener gemeinnütziger Verein)',
-                    'Germany (registered non-profit association)'
+                    'Hamburg (eingetragener gemeinnütziger Verein)',
+                    'Hamburg, Germany (registered non-profit association)'
                   ),
                 },
               ].map((item) => (

@@ -46,8 +46,8 @@ export async function POST(req: NextRequest) {
             name: productName,
             description:
               locale === 'en'
-                ? 'Your donation supports children and families in Imizamo Yethu, Hout Bay, Cape Town.'
-                : 'Deine Spende unterstützt Kinder und Familien in Imizamo Yethu, Hout Bay, Kapstadt.',
+                ? 'Your donation supports children and young people in Imizamo Yethu, Hout Bay, Cape Town.'
+                : 'Deine Spende unterstützt Kinder und Jugendliche in Imizamo Yethu, Hout Bay, Kapstadt.',
             images: [`${BASE_URL}/ubuntu-logo.png`],
           },
           unit_amount: amount,

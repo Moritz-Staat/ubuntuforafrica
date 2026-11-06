@@ -161,15 +161,25 @@ export default function SpendenClientPage() {
             <div className="space-y-6">
               <div className="border-b border-gray-100 pb-5">
                 <p className="text-sm text-gray-500 mb-1">{t('Empfänger', 'Recipient')}</p>
+                {/* Kontoinhaber so, wie Moritz ihn am 06.11.2026 in #13 genannt
+                    hat. Seit Oktober 2025 gleichen Banken Name und IBAN ab, darum
+                    hier bewusst nicht der Vereinsname aus dem Impressum. */}
                 <p className="font-semibold text-[#212529] text-lg">
-                  UBUNTU for Africa Kinder, Jugend- und Familienhilfe e.V.
+                  Ubuntu for Africa - Kinder-Jugend- und Familienhilfe e.V.
                 </p>
               </div>
               <div className="border-b border-gray-100 pb-5">
                 <p className="text-sm text-gray-500 mb-1">IBAN</p>
                 <p className="font-mono font-semibold text-[#212529] text-lg tracking-wider">
-                  {t('wird in Kürze veröffentlicht', 'to be published shortly')}
+                  DE64 2019 0003 0000 3041 07
                 </p>
+              </div>
+              <div className="border-b border-gray-100 pb-5">
+                <p className="text-sm text-gray-500 mb-1">BIC</p>
+                <p className="font-mono font-semibold text-[#212529] text-lg tracking-wider">
+                  GENODEF1HH2
+                </p>
+                <p className="mt-1 text-sm text-gray-500">Hamburger Volksbank eG</p>
               </div>
               <div>
                 <p className="text-sm text-gray-500 mb-1">{t('Verwendungszweck', 'Reference')}</p>
