@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { Geist } from 'next/font/google';
+import { Rajdhani, Roboto } from 'next/font/google';
 import { NextIntlClientProvider } from 'next-intl';
 import { getMessages, setRequestLocale } from 'next-intl/server';
 import { notFound } from 'next/navigation';
@@ -9,7 +9,17 @@ import Footer from '@/components/layout/Footer';
 import CookieBanner from '@/components/CookieBanner';
 import '../globals.css';
 
-const geist = Geist({ subsets: ['latin'] });
+// Rajdhani ist keine variable Schrift, darum die Schnitte einzeln laden.
+const rajdhani = Rajdhani({
+  subsets: ['latin'],
+  weight: ['500', '600', '700'],
+  variable: '--font-rajdhani',
+});
+
+const roboto = Roboto({
+  subsets: ['latin'],
+  variable: '--font-roboto',
+});
 
 export const metadata: Metadata = {
   title: 'Ubuntu for Africa e.V. – Kinder, Jugend- und Familienhilfe e.V.',
@@ -38,8 +48,8 @@ export default async function LocaleLayout({ children, params }: Props) {
   const messages = await getMessages();
 
   return (
-    <html lang={locale}>
-      <body className={geist.className}>
+    <html lang={locale} className={`${roboto.variable} ${rajdhani.variable}`}>
+      <body>
         <NextIntlClientProvider messages={messages}>
           <Navbar />
           <main className="pt-16">
