@@ -21,7 +21,7 @@ Die Produktions-URL ist **ohne Login erreichbar**. Auf dem Vercel-Hobby-Plan lä
 
 ## Aufgabenverfolgung
 
-**GitHub Issues sind die führende Quelle:** https://github.com/Moritz-Staat/ubuntuforafrica/issues
+**GitHub Issues sind die führende Quelle:** https://github.com/Ubuntu4Africa/ubuntuforafrica/issues
 
 Vikunja (Projekt 11) bleibt als Übersicht für den Verein bestehen, wird aber nicht mehr gepflegt. Die Zuordnung steht in der Vikunja-Projektbeschreibung.
 
@@ -50,7 +50,7 @@ Labels: `blocked:extern` (wartet auf Hanna, Sylke oder den Verein) · `infra` ·
 ## Loslegen
 
 ```bash
-git clone https://github.com/Moritz-Staat/ubuntuforafrica.git
+git clone https://github.com/Ubuntu4Africa/ubuntuforafrica.git
 cd ubuntuforafrica
 npm install
 cp .env.local.example .env.local   # Sanity-Werte eintragen

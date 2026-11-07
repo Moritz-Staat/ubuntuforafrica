@@ -793,7 +793,7 @@ Stand: Mai 2026 | Vikunja Projekt-ID: 11
 | #94 | SEO Meta-Tags: generateMetadata DE/EN auf allen Seiten |
 | i18n | EN-Sprachschalter vollständig repariert (setRequestLocale, Footer i18n, Homepage async) |
 | NGINX | Domain ubuntu.staatsprojekte.uk für Testumgebung |
-| GitHub | Repo: github.com/Moritz-Staat/ubuntuforafrica, Branch: main |
+| GitHub | Repo: github.com/Ubuntu4Africa/ubuntuforafrica, Branch: main |
 
 ### Offen 🔲
 
@@ -840,7 +840,7 @@ Stand: Mai 2026 | Vikunja Projekt-ID: 11
 | Extern Dev-URL | https://ubuntu.staatsprojekte.uk |
 | Kontakt Spenden | pauline.schmiel@gmail.com |
 | Kontakt Volunteers | volunteers.ubuntuforafrica@gmx.de |
-| GitHub Repo | github.com/Moritz-Staat/ubuntuforafrica |
+| GitHub Repo | github.com/Ubuntu4Africa/ubuntuforafrica |
 
 ---
 
